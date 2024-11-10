@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import java.util.Date;
 
@@ -9,12 +9,15 @@ public class Donations {
     private Date date;
     private String method;
 
-    public Donations(double amount, Date date, String method, String donorId) {
+    private Person person;
+
+    public Donations(double amount, Date date, String method, String donorId, Person person) {
 
         this.amount=amount;
         this.date = date;
         this.method = method;
         this.donorId=donorId;
+        this.person=person;
 
 
     }

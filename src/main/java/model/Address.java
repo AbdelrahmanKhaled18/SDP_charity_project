@@ -1,15 +1,15 @@
-package controller;
+package model;
 
 public class Address {
 
     private String name;
     private int id;
-    private int parentId;
+    private Address parentAddress;
 
-    public Address(String name, int id, int parentId) {
+    public Address(String name, int id, Address parentAddress) {
         this.name = name;
         this.id = id;
-        this.parentId = parentId;
+        this.parentAddress = parentAddress;
     }
 
     public String getName() {
@@ -28,13 +28,12 @@ public class Address {
         this.id = id;
     }
 
-    public int getParentId() {
-        return parentId;
+
+    public Address getParentAddress() {
+        return parentAddress;
     }
 
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
+    public void setParentAddress(Address parentAddress) {
+        this.parentAddress = parentAddress;
     }
-
-
 }

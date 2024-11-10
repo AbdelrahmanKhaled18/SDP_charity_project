@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,8 +13,8 @@ public abstract class  Person {
     private String gender;
     private Date dateOfBirth;
     private boolean isActive;
-    private List<Donations> donationHistory;
-    private List<String> assignedTasks;
+    private ArrayList<Donations> donationHistory;
+    private ArrayList<Task> assignedTasks;
     private Address address;
 
     public Person(String name, String phoneNumber, String email, String nationalId, String gender, Date dateOfBirth) {
@@ -71,18 +71,18 @@ public abstract class  Person {
 
     public void makeDonations(double amount , String method){
 
-        Donations donations = new Donations(amount , new Date(), method , this.nationalId);
+        Donations donations = new Donations(amount , new Date(), method , this.nationalId,this);
         donationHistory.add(donations);
         System.out.println("Donation made successfully");
 
 
     }
 
-    public List<Donations> getDonationHistory() {
+    public ArrayList<Donations> getDonationHistory() {
         return donationHistory;
     }
 
-    public List<String> getAssignedTasks(){
+    public ArrayList<Task> getAssignedTasks(){
 
         return assignedTasks;
     }

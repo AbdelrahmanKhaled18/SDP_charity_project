@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,23 +11,21 @@ public class Staff extends Person{
     private int workingHours;
 
 
-    public Staff(String name, String phoneNumber, String email, String nationalId, String gender, Date dateOfBirth , String position,String department, int workingHours ) {
+    public Staff(String name, String phoneNumber, String email, String nationalId, String gender, Date dateOfBirth, String position, String department, int workingHours) {
         super(name, phoneNumber, email, nationalId, gender, dateOfBirth);
-
-        this.position=position;
-        this.department=department;
-        this.workingHours=workingHours;
-
+        this.position = position;
+        this.department = department;
+        this.workingHours = workingHours;
     }
 
-    public void assignTask(String task){
+    public void assignTask(Task task){
 
         super.getAssignedTasks().add(task);
         System.out.println("Task assigned: " + task);
 
     }
 
-    public List<String> getAssignedTasks(){
+    public ArrayList<Task> getAssignedTasks(){
         return super.getAssignedTasks();
     }
 

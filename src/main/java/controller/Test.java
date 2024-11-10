@@ -1,12 +1,17 @@
 package controller;
 
+import model.Address;
+import model.Donations;
+import model.Staff;
+import model.Volunteer;
+
 import java.util.Date;
 
 public class Test {
 
     public static void main (String [] args){
 
-        Address address = new Address("123 Main St", 1, 0);
+        Address address = new Address("123 Main St", 1, null);
         Staff staff = new Staff("John Doe", "123-456-7890", "john@example.com", "A123456", "Male", new Date(), "Manager", "Sales", 40);
 
         staff.makeDonations(50.9 , "credit card");
