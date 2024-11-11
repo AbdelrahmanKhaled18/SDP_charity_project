@@ -1,3 +1,5 @@
+package controller;
+
 public class NotifyByEmailObserver implements IObserver{
     private ISubject ISubjectRef;
     private String email;

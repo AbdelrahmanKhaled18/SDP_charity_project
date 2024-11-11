@@ -1,3 +1,5 @@
+package controller;
+
 public class ExtraFeesDecorator extends PaymentDecorator{
     private double serviceFee;
     public ExtraFeesDecorator(IPayment payment) {

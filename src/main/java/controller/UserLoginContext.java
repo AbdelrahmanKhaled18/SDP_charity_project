@@ -1,3 +1,5 @@
+package controller;
+
 public class UserLoginContext {
     private String email;
     private String password;

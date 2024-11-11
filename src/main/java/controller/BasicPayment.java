@@ -1,3 +1,5 @@
+package controller;
+
 public class BasicPayment implements IPayment {
     public double paymentAmount;
 

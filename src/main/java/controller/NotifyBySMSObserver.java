@@ -1,3 +1,5 @@
+package controller;
+
 public class NotifyBySMSObserver implements IObserver{
     private ISubject ISubjectRef;
     private String phoneNumber;

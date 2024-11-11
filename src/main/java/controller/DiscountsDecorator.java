@@ -1,3 +1,5 @@
+package controller;
+
 public class DiscountsDecorator extends PaymentDecorator{
     private double DiscountAmount;
     @Override
