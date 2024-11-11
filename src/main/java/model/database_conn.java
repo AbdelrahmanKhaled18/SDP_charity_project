@@ -24,10 +24,24 @@ public class database_conn {
         }
     }
 
-    public ResultSet executeQuery(String query) throws SQLException {
-        Statement statement = conn.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
-        return resultSet;
+    public ResultSet executeQuery(String query) {
+        try {
+            Statement statement = conn.createStatement();
+            return statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public int executeUpdate(String query) {
+        try {
+            Statement statement = conn.createStatement();
+            return statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     public static database_conn getInstance() {

@@ -1,5 +1,6 @@
 package model;
 
+
 public class Address {
 
     private String name;
@@ -35,5 +36,11 @@ public class Address {
 
     public void setParentAddress(Address parentAddress) {
         this.parentAddress = parentAddress;
+    }
+
+    public static void insertAddress(String name,int parent_id) {
+        database_conn conn = database_conn.getInstance();
+        conn.executeUpdate(String.format("INSERT INTO address (`name`, `parent_ID`) " +
+                "VALUES('%s',%d)", name, parent_id));
     }
 }

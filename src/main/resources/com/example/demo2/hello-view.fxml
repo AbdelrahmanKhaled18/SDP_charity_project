@@ -1,16 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.demo2.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<VBox alignment="CENTER" prefHeight="328.0" prefWidth="278.0" spacing="20.0" style="-fx-background-color: fefdfc;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.demo2.HelloController">
+   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="288.0" style="-fx-background-color: rgba(208,249,249,0.5);">
+      <children>
+         <Label contentDisplay="TOP" layoutX="33.0" layoutY="28.0" style="-fx-label-padding: 5;" text="Charity System">
+            <font>
+               <Font name="Times New Roman Bold" size="32.0" />
+            </font>
+            <textFill>
+               <LinearGradient endX="0.7393364928909952" endY="1.0" proportional="false">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color />
+                        </color>
+                     </Stop>
+                  </stops>
+               </LinearGradient>
+            </textFill>
+         </Label>
+         <Label contentDisplay="TOP" layoutX="100.0" layoutY="75.0" style="-fx-label-padding: 5;" text="Welcome">
+            <font>
+               <Font name="Times New Roman" size="20.0" />
+            </font>
+            <textFill>
+               <LinearGradient endX="0.7393364928909952" endY="1.0" proportional="false">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color />
+                        </color>
+                     </Stop>
+                  </stops>
+               </LinearGradient>
+            </textFill>
+         </Label>
+         <TextField layoutX="41.0" layoutY="140.0" prefHeight="33.0" prefWidth="205.0" promptText="Email address*" />
+         <PasswordField layoutX="42.0" layoutY="181.0" prefHeight="33.0" prefWidth="205.0" promptText="Password*" />
+         <Label contentDisplay="TOP" layoutX="9.0" layoutY="278.0" style="-fx-label-padding: 5;" text="Don't have an account?">
+            <font>
+               <Font name="Times New Roman" size="12.0" />
+            </font>
+            <textFill>
+               <LinearGradient endX="0.7393364928909952" endY="1.0" proportional="false">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color />
+                        </color>
+                     </Stop>
+                  </stops>
+               </LinearGradient>
+            </textFill>
+         </Label>
+         <Label contentDisplay="TOP" layoutX="94.0" layoutY="108.0" style="-fx-label-padding: 5;" text="Log in to continue">
+            <font>
+               <Font name="Times New Roman" size="12.0" />
+            </font>
+            <textFill>
+               <LinearGradient endX="0.7393364928909952" endY="1.0" proportional="false">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color />
+                        </color>
+                     </Stop>
+                  </stops>
+               </LinearGradient>
+            </textFill>
+         </Label>
+         <Button layoutX="41.0" layoutY="231.0" mnemonicParsing="false" onAction="#HomePage" prefHeight="33.0" prefWidth="205.0" style="-fx-background-color: rgba(42,0,255);" text="Continue">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Button>
+         <Label contentDisplay="TOP" layoutX="128.0" layoutY="283.0" onMouseClicked="#RegisterPage" text="Sign up" textFill="#2600ff">
+            <font>
+               <Font name="Times New Roman" size="12.0" />
+            </font>
+         </Label>
+      </children>
+   </AnchorPane>
 </VBox>
