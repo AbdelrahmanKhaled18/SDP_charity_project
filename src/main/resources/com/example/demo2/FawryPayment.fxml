@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="328.0" prefWidth="288.0" style="-fx-background-color: rgba(208,249,249,0.5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.charitygui.HelloController">
+<AnchorPane prefHeight="328.0" prefWidth="288.0" style="-fx-background-color: rgba(208,249,249,0.5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.HelloController">
    <children>
       <Label layoutX="37.0" layoutY="83.0" text="Your fawry code">
          <font>

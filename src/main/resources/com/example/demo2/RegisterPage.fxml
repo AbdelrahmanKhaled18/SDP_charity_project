@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="407.0" prefWidth="294.0" spacing="20.0" style="-fx-background-color: fefdfc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.charitygui.HelloController">
+<VBox alignment="CENTER" prefHeight="407.0" prefWidth="294.0" spacing="20.0" style="-fx-background-color: fefdfc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.HelloController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="295.0" style="-fx-background-color: rgba(208,249,249,0.5);">
          <children>
