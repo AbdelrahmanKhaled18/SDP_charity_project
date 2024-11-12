@@ -2,12 +2,12 @@ package model;
 
 import java.sql.*;
 
-public class database_conn {
+public class DatabaseConnection {
 
-    private static database_conn instance;
+    private static DatabaseConnection instance;
     private Connection conn;
 
-    private database_conn() {
+    private DatabaseConnection() {
         if (instance == null) {
             String username = "admin";
             String password = "123";
@@ -44,9 +44,9 @@ public class database_conn {
         }
     }
 
-    public static database_conn getInstance() {
+    public static DatabaseConnection getInstance() {
         if (instance == null) {
-            instance = new database_conn();
+            instance = new DatabaseConnection();
         }
         return instance;
     }

@@ -1,13 +1,9 @@
 package com.example.demo2;
 
-import java.sql.*;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Address;
-import model.database_conn;
 
 import java.io.IOException;
 
