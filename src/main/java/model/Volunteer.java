@@ -16,7 +16,7 @@ public class Volunteer extends Person{
     }
 
 
-    public void addskill(Skill skill){
+    public void addSkill(Skill skill){
         skills.add(skill);
         System.out.println("Added skill: " + skill);
 

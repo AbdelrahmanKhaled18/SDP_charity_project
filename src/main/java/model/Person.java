@@ -2,10 +2,10 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public abstract class  Person {
+public abstract class Person {
 
+    private int id;
     private String name;
     private String phoneNumber;
     private String email;
@@ -13,18 +13,18 @@ public abstract class  Person {
     private String gender;
     private Date dateOfBirth;
     private boolean isActive;
-    private ArrayList<Donations> donationHistory;
+    private ArrayList<Donation> donationHistory;
     private ArrayList<Task> assignedTasks;
     private Address address;
 
     public Person(String name, String phoneNumber, String email, String nationalId, String gender, Date dateOfBirth) {
-        this.name= name;
+        this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.nationalId = nationalId;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
-        this.isActive= false;
+        this.isActive = false;
         donationHistory = new ArrayList<>();
         assignedTasks = new ArrayList<>();
     }
@@ -37,7 +37,7 @@ public abstract class  Person {
         this.email = email;
     }
 
-    public boolean isActive(){
+    public boolean isActive() {
 
         return isActive;
     }
@@ -50,47 +50,53 @@ public abstract class  Person {
         this.address = address;
     }
 
-    public void updateContactInfo(String email , String phoneNumber){
+    public void updateContactInfo(String email, String phoneNumber) {
         setEmail(email);
         setPhoneNumber(phoneNumber);
 
     }
 
 
-    public void activateAccount(){
+    public void activateAccount() {
 
-        this.isActive= true;
-
-    }
-
-    public void deactivateAccount(){
-
-        this.isActive= false;
+        this.isActive = true;
 
     }
 
-    public void makeDonations(double amount , String method){
+    public void deactivateAccount() {
 
-        Donations donations = new Donations(amount , new Date(), method , this.nationalId,this);
+        this.isActive = false;
+
+    }
+
+    public void makeDonations(double amount, String method) {
+/*
+        Donation donations = new Donation(amount, new Date(), method, this.nationalId, this);
         donationHistory.add(donations);
         System.out.println("Donation made successfully");
-
+*/
 
     }
 
-    public ArrayList<Donations> getDonationHistory() {
+    public ArrayList<Donation> getDonationHistory() {
         return donationHistory;
     }
 
-    public ArrayList<Task> getAssignedTasks(){
+    public ArrayList<Task> getAssignedTasks() {
 
         return assignedTasks;
     }
 
 
+    public static Person retrievePerson(int id) {
+        return null;
+    }
 
+    public int getId() {
+        return id;
+    }
 
-
-
-
+    public void setId(int id) {
+        this.id = id;
+    }
 }

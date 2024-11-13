@@ -5,12 +5,22 @@ import java.sql.*;
 public class DatabaseConnection {
 
     private static DatabaseConnection instance;
+    public static DatabaseConnection getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnection();
+        }
+        return instance;
+    }
+
     private Connection conn;
+    public Connection getConnection() {
+        return conn;
+    }
 
     private DatabaseConnection() {
         if (instance == null) {
-            String username = "admin";
-            String password = "123";
+            String username = "root";
+            String password = "";
             String url = "jdbc:mysql://localhost:3306/charity_db";
 
             try {
@@ -22,32 +32,5 @@ public class DatabaseConnection {
                 System.out.println("MySQL JDBC driver not found. Please add the driver to your project.");
             }
         }
-    }
-
-    public ResultSet executeQuery(String query) {
-        try {
-            Statement statement = conn.createStatement();
-            return statement.executeQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public int executeUpdate(String query) {
-        try {
-            Statement statement = conn.createStatement();
-            return statement.executeUpdate(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    public static DatabaseConnection getInstance() {
-        if (instance == null) {
-            instance = new DatabaseConnection();
-        }
-        return instance;
     }
 }
