@@ -10,23 +10,9 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+
 public class HelloController {
 
-
-    @FXML
-    private void StartPage(javafx.scene.input.MouseEvent event) throws IOException {
-        // Load the StartPage.fxml file again
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-        Parent nextPageRoot = loader.load();
-
-        // Get the current stage
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Set the scene to the new page
-        stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Charity");
-        stage.show();
-    }
 
     @FXML
     public void RegisterPage(javafx.scene.input.MouseEvent event) throws IOException {
@@ -44,8 +30,6 @@ public class HelloController {
     }
 
 
-    /*Volunteer Pages*/
-
 
     @FXML
     private void HomePage(ActionEvent event) throws IOException {
@@ -59,6 +43,22 @@ public class HelloController {
         // Set the scene to the new page
         stage.setScene(new Scene(nextPageRoot));
         stage.setTitle("Home");
+        stage.show();
+    }
+
+
+    @FXML
+    private void StartPage(javafx.scene.input.MouseEvent event) throws IOException {
+        // Load the StartPage.fxml file again
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
+        Parent nextPageRoot = loader.load();
+
+        // Get the current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene to the new page
+        stage.setScene(new Scene(nextPageRoot));
+        stage.setTitle("Charity");
         stage.show();
     }
 
