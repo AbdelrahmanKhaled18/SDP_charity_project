@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-padding: 30; -fx-background-color: rgba(208,249,249,0.5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.VolunteerIntroController">
+
+    <!-- Buttons for Volunteering and Donating -->
+    <Button fx:id="volunteerButton" layoutX="245.0" layoutY="169.0" onAction="#VolunteerPage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Volunteer" />
+
+    <Button fx:id="donateButton" layoutX="245.0" layoutY="226.0" onAction="#DonatePage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #2196F3; -fx-text-fill: white;" text="Donate" />
+   <Label layoutX="43.0" layoutY="52.0" text="“The best way to find yourself is to lose yourself in the service of others.”">
+      <font>
+         <Font name="Times New Roman Bold" size="20.0" />
+      </font>
+   </Label>
+   <Label layoutX="128.0" layoutY="130.0" text="Make a difference by volunteering your time or donating to help those in need.">
+      <font>
+         <Font name="Times New Roman Bold" size="14.0" />
+      </font>
+   </Label>
+
+</AnchorPane>

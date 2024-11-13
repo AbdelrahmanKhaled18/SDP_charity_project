@@ -6,35 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
-
-public class MainController {
-    public ListView volunteersListView;
-
-
-    //Next button in Card Info
-
-
-
-
-
-
-
-
-    /*Staff pages*/
-
-
+public class VolunteerIntroController {
 
     @FXML
-    public void StaffHomePage(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewEvents&Volunteers.fxml"));
+    private void VolunteerPage(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Volunteer.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -42,16 +22,13 @@ public class MainController {
 
         // Set the scene to the new page
         stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Home Page");
+        stage.setTitle("Volunteering");
         stage.show();
-
     }
 
-
     @FXML
-    public void viewVolunteersButton(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffViewVolunteers.fxml"));
+    private void DonatePage(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerDonate.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -59,14 +36,7 @@ public class MainController {
 
         // Set the scene to the new page
         stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Volunteer View Page");
+        stage.setTitle("Donating");
         stage.show();
-
     }
-
-
-
-
-
-
 }
