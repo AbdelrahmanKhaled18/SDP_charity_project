@@ -38,8 +38,8 @@ public class Address {
         this.parentAddress = parentAddress;
     }
 
-    public static void insertAddress(String name,int parent_id) {
-        database_conn conn = database_conn.getInstance();
+    public static void insertAddress(String name, int parent_id) {
+        DatabaseConnection conn = DatabaseConnection.getInstance();
         conn.executeUpdate(String.format("INSERT INTO address (`name`, `parent_ID`) " +
                 "VALUES('%s',%d)", name, parent_id));
     }
