@@ -55,8 +55,8 @@ public class Task {
             boolean success = false;
             if (rs.next()) {
                 task.setId(rs.getInt(1));
+                success = true;
             }
-            rs.close();
             statement.close();
             return success;
         } catch (SQLException e) {
@@ -72,9 +72,9 @@ public class Task {
             statement.setString(1, task.getName());
             statement.setString(2, task.getDescription());
             statement.setInt(3, task.getId());
-            statement.executeUpdate();
+            boolean success = statement.executeUpdate() > 0;
             statement.close();
-            return true;
+            return success;
         } catch (SQLException e) {
             return false;
         }
@@ -86,9 +86,9 @@ public class Task {
         try {
             PreparedStatement statement = conn.prepareStatement(command);
             statement.setInt(1, taskId);
-            statement.executeUpdate();
+            boolean success = statement.executeUpdate() > 0;
             statement.close();
-            return true;
+            return success;
         } catch (SQLException e) {
             return false;
         }
@@ -108,7 +108,6 @@ public class Task {
                 String description = rs.getString("description");
                 task = new Task(id, name, description);
             }
-            rs.close();
             statement.close();
             return task;
         } catch (SQLException e) {
@@ -129,7 +128,6 @@ public class Task {
                 String description = rs.getString("description");
                 tasks.add(new Task(id, name, description));
             }
-            rs.close();
             statement.close();
             return tasks;
         } catch (SQLException e) {

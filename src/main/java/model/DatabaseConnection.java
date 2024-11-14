@@ -5,6 +5,7 @@ import java.sql.*;
 public class DatabaseConnection {
 
     private static DatabaseConnection instance;
+
     public static DatabaseConnection getInstance() {
         if (instance == null) {
             instance = new DatabaseConnection();
@@ -13,6 +14,7 @@ public class DatabaseConnection {
     }
 
     private Connection conn;
+
     public Connection getConnection() {
         return conn;
     }

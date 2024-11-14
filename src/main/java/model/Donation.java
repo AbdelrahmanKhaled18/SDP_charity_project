@@ -8,16 +8,16 @@ public class Donation {
     private int id;
     private double amount;
     private Date date;
-    private Person person;
+    private int personId;
 
-    public Donation(double amount, Date date, Person person) {
+    public Donation(double amount, Date date, int personId) {
         this.amount = amount;
         this.date = date;
-        this.person = person;
+        this.personId = personId;
     }
 
-    public Donation(int id, double amount, Date date, Person person) {
-        this(amount, date, person);
+    public Donation(int id, double amount, Date date, int personId) {
+        this(amount, date, personId);
         this.id = id;
     }
 
@@ -45,12 +45,12 @@ public class Donation {
         this.date = date;
     }
 
-    public Person getPerson() {
-        return person;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
 
@@ -61,7 +61,7 @@ public class Donation {
             PreparedStatement statement = conn.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
             statement.setDouble(1, donation.getAmount());
             statement.setDate(2, new java.sql.Date(donation.getDate().getTime()));
-            statement.setInt(3, donation.getPerson().getId());
+            statement.setInt(3, donation.getPersonId());
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
             boolean success = false;
@@ -69,7 +69,6 @@ public class Donation {
                 donation.setId(rs.getInt(1));
                 success = true;
             }
-            rs.close();
             statement.close();
             return success;
         } catch (SQLException e) {
@@ -84,11 +83,11 @@ public class Donation {
             PreparedStatement statement = conn.prepareStatement(command);
             statement.setDouble(1, donation.getAmount());
             statement.setDate(2, new java.sql.Date(donation.getDate().getTime()));
-            statement.setInt(3, donation.getPerson().getId());
+            statement.setInt(3, donation.getPersonId());
             statement.setInt(4, donation.getId());
-            statement.executeUpdate();
+            boolean success = statement.executeUpdate() > 0;
             statement.close();
-            return true;
+            return success;
         } catch (SQLException e) {
             return false;
         }
@@ -100,9 +99,9 @@ public class Donation {
         try {
             PreparedStatement statement = conn.prepareStatement(command);
             statement.setInt(1, donationId);
-            statement.executeUpdate();
+            boolean success = statement.executeUpdate() > 0;
             statement.close();
-            return true;
+            return success;
         } catch (SQLException e) {
             return false;
         }
@@ -120,12 +119,32 @@ public class Donation {
                 int id = rs.getInt("id");
                 double amount = rs.getDouble("amount");
                 Date date = new Date(rs.getDate("date").getTime());
-                Person person = Person.retrievePerson(rs.getInt("person_id"));
-                donation = new Donation(id, amount, date, person);
+                int personId = rs.getInt("person_id");
+                donation = new Donation(id, amount, date, personId);
             }
-            rs.close();
             statement.close();
             return donation;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public static ArrayList<Donation> retrievePersonDonations(int personId) {
+        String command = "SELECT * FROM donation WHERE person_id=?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setInt(1, personId);
+            ResultSet rs = statement.executeQuery();
+            ArrayList<Donation> donations = new ArrayList<>();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                double amount = rs.getDouble("amount");
+                Date date = new Date(rs.getDate("date").getTime());
+                donations.add(new Donation(id, amount, date, personId));
+            }
+            statement.close();
+            return donations;
         } catch (SQLException e) {
             return null;
         }
@@ -142,10 +161,9 @@ public class Donation {
                 int id = rs.getInt("id");
                 double amount = rs.getDouble("amount");
                 Date date = new Date(rs.getDate("date").getTime());
-                Person person = Person.retrievePerson(rs.getInt("person_id"));
-                donations.add(new Donation(id, amount, date, person));
+                int personId = rs.getInt("person_id");
+                donations.add(new Donation(id, amount, date, personId));
             }
-            rs.close();
             statement.close();
             return donations;
         } catch (SQLException e) {

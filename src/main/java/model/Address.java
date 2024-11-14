@@ -71,7 +71,6 @@ public class Address {
                 address.setId(rs.getInt(1));
                 success = true;
             }
-            rs.close();
             statement.close();
             return success;
         } catch (SQLException e) {
@@ -91,9 +90,9 @@ public class Address {
                 statement.setNull(2, Types.INTEGER);
             }
             statement.setInt(3, address.getId());
-            statement.executeUpdate();
+            boolean success = statement.executeUpdate() > 0;
             statement.close();
-            return true;
+            return success;
         } catch (SQLException e) {
             return false;
         }
@@ -105,9 +104,9 @@ public class Address {
         try {
             PreparedStatement statement = conn.prepareStatement(command);
             statement.setInt(1, addressId);
-            statement.executeUpdate();
+            boolean success = statement.executeUpdate() > 0;
             statement.close();
-            return true;
+            return success;
         } catch (SQLException e) {
             return false;
         }
@@ -131,7 +130,6 @@ public class Address {
                     address = new Address(id, name);
                 }
             }
-            rs.close();
             statement.close();
             return address;
         } catch (SQLException e) {

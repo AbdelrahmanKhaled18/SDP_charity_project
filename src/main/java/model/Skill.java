@@ -55,8 +55,8 @@ public class Skill {
             boolean success = false;
             if (rs.next()) {
                 skill.setId(rs.getInt(1));
+                success = true;
             }
-            rs.close();
             statement.close();
             return success;
         } catch (SQLException e) {
@@ -72,9 +72,9 @@ public class Skill {
             statement.setString(1, skill.getName());
             statement.setString(2, skill.getDescription());
             statement.setInt(3, skill.getId());
-            statement.executeUpdate();
+            boolean success = statement.executeUpdate() > 0;
             statement.close();
-            return true;
+            return success;
         } catch (SQLException e) {
             return false;
         }
@@ -86,9 +86,9 @@ public class Skill {
         try {
             PreparedStatement statement = conn.prepareStatement(command);
             statement.setInt(1, skillId);
-            statement.executeUpdate();
+            boolean success = statement.executeUpdate() > 0;
             statement.close();
-            return true;
+            return success;
         } catch (SQLException e) {
             return false;
         }
@@ -108,9 +108,31 @@ public class Skill {
                 String description = rs.getString("description");
                 skill = new Skill(id, name, description);
             }
-            rs.close();
             statement.close();
             return skill;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public static ArrayList<Skill> retrievePersonSkills(int personId) {
+        String command = "SELECT skill.id AS id, skill.name AS name, skill.description AS description " +
+                "FROM skill INNER JOIN volunteer_skills ON volunteer_skills.skill_id = skill.id " +
+                "WHERE volunteer_skills.person_id = ?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setInt(1, personId);
+            ResultSet rs = statement.executeQuery();
+            ArrayList<Skill> skills = new ArrayList<>();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                skills.add(new Skill(id, name, description));
+            }
+            statement.close();
+            return skills;
         } catch (SQLException e) {
             return null;
         }
@@ -129,7 +151,6 @@ public class Skill {
                 String description = rs.getString("description");
                 skills.add(new Skill(id, name, description));
             }
-            rs.close();
             statement.close();
             return skills;
         } catch (SQLException e) {
