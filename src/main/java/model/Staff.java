@@ -112,8 +112,8 @@ public class Staff extends Person {
         }
     }
 
-    public static ArrayList<Staff> retrieveAllPersons() {
-        String command = "SELECT * FROM person";
+    public static ArrayList<Staff> retrieveAllStaff() {
+        String command = "SELECT * FROM person JOIN staff on person.id = staff.person_id";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(command);
