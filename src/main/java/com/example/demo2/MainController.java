@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 
@@ -20,15 +21,7 @@ public class MainController {
 
     //Next button in Card Info
 
-
-
-
-
-
-
-
     /*Staff pages*/
-
 
 
     @FXML
@@ -63,10 +56,6 @@ public class MainController {
         stage.show();
 
     }
-
-
-
-
 
 
 }
