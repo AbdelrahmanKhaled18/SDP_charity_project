@@ -20,17 +20,17 @@ public class Volunteer extends Person {
         skills.add(skill);
     }
 
-    public Volunteer(String name, String gender, String phoneNumber, String email, String nationalId, Date dateOfBirth,
-                     boolean isActive, Address address, ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks,
-                     ArrayList<Skill> skills) {
-        super(name, gender, phoneNumber, email, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
+    public Volunteer(String name, String gender, String phoneNumber, String email, String password, String nationalId,
+                     Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
+                     ArrayList<Task> assignedTasks, ArrayList<Skill> skills) {
+        super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
         this.skills = skills;
     }
 
-    public Volunteer(int id, String name, String gender, String phoneNumber, String email, String nationalId, Date dateOfBirth,
-                     boolean isActive, Address address, ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks,
-                     ArrayList<Skill> skills) {
-        super(id, name, gender, phoneNumber, email, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
+    public Volunteer(int id, String name, String gender, String phoneNumber, String email, String password, String nationalId,
+                     Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
+                     ArrayList<Task> assignedTasks,ArrayList<Skill> skills) {
+        super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
         this.skills = skills;
     }
 
@@ -140,6 +140,7 @@ public class Volunteer extends Person {
             String gender = rs.getString("gender");
             String phoneNumber = rs.getString("phone_number");
             String email = rs.getString("email");
+            String password = rs.getString("password");
             String nationalId = rs.getString("national_id");
             Date dateOfBirth = new Date(rs.getDate("date_of_birth").getTime());
             boolean isActive = rs.getBoolean("is_active");
@@ -148,7 +149,7 @@ public class Volunteer extends Person {
             ArrayList<Donation> donationHistory = Donation.retrievePersonDonations(id);
             ArrayList<Task> assignedTasks = Person.retrievePersonTasks(id);
             ArrayList<Skill> skills = Volunteer.retrieveVolunteerSkills(id);
-            volunteers.add(new Volunteer(id, name, gender, phoneNumber, email, nationalId, dateOfBirth, isActive,
+            volunteers.add(new Volunteer(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive,
                     address, donationHistory, assignedTasks, skills));
         }
         return volunteers;

@@ -25,18 +25,18 @@ public class Staff extends Person {
         this.department = department;
     }
 
-    public Staff(String name, String gender, String phoneNumber, String email, String nationalId, Date dateOfBirth,
-                 boolean isActive, Address address, ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks,
-                 String position, String department) {
-        super(name, gender, phoneNumber, email, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
+    public Staff(String name, String gender, String phoneNumber, String email, String password, String nationalId,
+                 Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
+                 ArrayList<Task> assignedTasks, String position, String department) {
+        super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
         this.position = position;
         this.department = department;
     }
 
-    public Staff(int id, String name, String gender, String phoneNumber, String email, String nationalId, Date dateOfBirth,
-                 boolean isActive, Address address, ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks,
-                 String position, String department) {
-        super(id, name, gender, phoneNumber, email, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
+    public Staff(int id, String name, String gender, String phoneNumber, String email, String password, String nationalId,
+                 Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
+                 ArrayList<Task> assignedTasks, String position, String department) {
+        super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
         this.position = position;
         this.department = department;
     }
@@ -134,6 +134,7 @@ public class Staff extends Person {
             String gender = rs.getString("gender");
             String phoneNumber = rs.getString("phone_number");
             String email = rs.getString("email");
+            String password = rs.getString("password");
             String nationalId = rs.getString("national_id");
             Date dateOfBirth = new Date(rs.getDate("date_of_birth").getTime());
             boolean isActive = rs.getBoolean("is_active");
@@ -143,7 +144,7 @@ public class Staff extends Person {
             ArrayList<Task> assignedTasks = Person.retrievePersonTasks(id);
             String position = rs.getString("position");
             String department = rs.getString("department");
-            staffMembers.add(new Staff(id, name, gender, phoneNumber, email, nationalId, dateOfBirth, isActive,
+            staffMembers.add(new Staff(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive,
                     address, donationHistory, assignedTasks, position, department));
         }
         return staffMembers;
