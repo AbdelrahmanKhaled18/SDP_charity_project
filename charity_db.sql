@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2024 at 10:16 PM
+-- Generation Time: Nov 16, 2024 at 10:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,6 +32,13 @@ CREATE TABLE `address` (
   `name` varchar(255) NOT NULL,
   `parent_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`id`, `name`, `parent_ID`) VALUES
+(1, 'Egypt', NULL);
 
 -- --------------------------------------------------------
 
@@ -69,6 +76,7 @@ CREATE TABLE `person` (
   `gender` enum('Male','Female','Other') NOT NULL,
   `phone_number` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `national_id` varchar(255) NOT NULL,
   `date_of_birth` date NOT NULL,
   `is_active` tinyint(1) NOT NULL,
@@ -187,7 +195,7 @@ ALTER TABLE `volunteer_skills`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `donation`
@@ -199,19 +207,19 @@ ALTER TABLE `donation`
 -- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `skill`
 --
 ALTER TABLE `skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
