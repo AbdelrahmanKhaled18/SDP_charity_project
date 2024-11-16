@@ -11,6 +11,7 @@ public abstract class Person {
     private String gender;
     private String phoneNumber;
     private String email;
+    private String password;
     private String nationalId;
     private Date dateOfBirth;
     private boolean isActive;
@@ -20,12 +21,14 @@ public abstract class Person {
 
     private ArrayList<Task> assignedTasks;
 
-    public Person(String name, String gender, String phoneNumber, String email, String nationalId, Date dateOfBirth,
-                  boolean isActive, Address address, ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks) {
+    public Person(String name, String gender, String phoneNumber, String email, String password, String nationalId,
+                  Date dateOfBirth, boolean isActive, Address address,
+                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks) {
         this.name = name;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.password = password;
         this.nationalId = nationalId;
         this.dateOfBirth = dateOfBirth;
         this.isActive = isActive;
@@ -34,9 +37,10 @@ public abstract class Person {
         this.assignedTasks = assignedTasks;
     }
 
-    public Person(int id, String name, String gender, String phoneNumber, String email, String nationalId, Date dateOfBirth,
-                  boolean isActive, Address address, ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks) {
-        this(name, gender, phoneNumber, email, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
+    public Person(int id, String name, String gender, String phoneNumber, String email, String password,
+                  String nationalId, Date dateOfBirth, boolean isActive, Address address,
+                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks) {
+        this(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
         this.id = id;
     }
 
@@ -70,6 +74,14 @@ public abstract class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNationalId() {
@@ -152,8 +164,8 @@ public abstract class Person {
 
 
     public static boolean createPerson(Person person) {
-        String command = "INSERT INTO person (`name`, `gender`, `phone_number`, `email`, `national_id`," +
-                "`date_of_birth`, `is_active`, `address_id`) VALUES(?,?,?,?,?,?,?,?)";
+        String command = "INSERT INTO person (`name`, `gender`, `phone_number`, `email`, `password`, `national_id`," +
+                "`date_of_birth`, `is_active`, `address_id`) VALUES(?,?,?,?,?,?,?,?,?)";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
@@ -161,10 +173,11 @@ public abstract class Person {
             statement.setString(2, person.getGender());
             statement.setString(3, person.getPhoneNumber());
             statement.setString(4, person.getEmail());
-            statement.setString(5, person.getNationalId());
-            statement.setDate(6, new java.sql.Date(person.getDateOfBirth().getTime()));
-            statement.setBoolean(7, person.isActive());
-            statement.setInt(8, person.getAddress().getId());
+            statement.setString(5, person.getPassword());
+            statement.setString(6, person.getNationalId());
+            statement.setDate(7, new java.sql.Date(person.getDateOfBirth().getTime()));
+            statement.setBoolean(8, person.isActive());
+            statement.setInt(9, person.getAddress().getId());
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
             boolean success = false;
@@ -181,8 +194,8 @@ public abstract class Person {
 
 
     public static boolean updatePerson(Person person) {
-        String command = "UPDATE person SET name=?, gender=?, phone_number=?, email=?, national_id=?," +
-                "date_of_birth=?, is_active=?, address_id=? WHERE id=?";
+        String command = "UPDATE person SET name=?, gender=?, phone_number=?, email=?, password=?, " +
+                "national_id=?, date_of_birth=?, is_active=?, address_id=? WHERE id=?";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(command);
@@ -190,11 +203,12 @@ public abstract class Person {
             statement.setString(2, person.getGender());
             statement.setString(3, person.getPhoneNumber());
             statement.setString(4, person.getEmail());
-            statement.setString(5, person.getNationalId());
-            statement.setDate(6, new java.sql.Date(person.getDateOfBirth().getTime()));
-            statement.setBoolean(7, person.isActive());
-            statement.setInt(8, person.getAddress().getId());
-            statement.setInt(9, person.getId());
+            statement.setString(5, person.getPassword());
+            statement.setString(6, person.getNationalId());
+            statement.setDate(7, new java.sql.Date(person.getDateOfBirth().getTime()));
+            statement.setBoolean(8, person.isActive());
+            statement.setInt(9, person.getAddress().getId());
+            statement.setInt(10, person.getId());
             boolean success = statement.executeUpdate() > 0;
             statement.close();
             return success;
