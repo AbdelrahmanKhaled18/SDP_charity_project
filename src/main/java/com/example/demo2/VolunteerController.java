@@ -3,6 +3,9 @@ package com.example.demo2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -11,6 +14,8 @@ import javafx.stage.Stage;
 import model.Skill;
 import model.Task;
 import model.Volunteer;
+
+import java.io.IOException;
 
 
 public class VolunteerController {
@@ -120,6 +125,20 @@ public class VolunteerController {
         SkillDelete.showAndWait();
         
 
+    }
+
+    @FXML
+    private void goToVolunteerIntro(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntroPage.fxml"));
+        Parent nextPageRoot = loader.load();
+
+        // Get the current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene to the new page
+        stage.setScene(new Scene(nextPageRoot));
+        stage.setTitle("Volunteering");
+        stage.show();
     }
 
 

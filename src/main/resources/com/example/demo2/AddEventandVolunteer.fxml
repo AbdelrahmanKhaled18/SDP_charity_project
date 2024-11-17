@@ -24,6 +24,11 @@
                </font>
             </Button>
             <TextField fx:id="taskDescription" layoutX="50.0" layoutY="125.0" prefWidth="300.0" promptText="Task Description" />
+            <Button layoutX="12.0" layoutY="13.0" mnemonicParsing="false" onAction="#goToStaffIntro" prefHeight="25.0" prefWidth="19.0" style="-fx-background-color: rgba(0,174,255);" text="&lt;" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: rgba(208,249,249,0.5);">

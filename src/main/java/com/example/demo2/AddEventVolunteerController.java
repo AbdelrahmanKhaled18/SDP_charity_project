@@ -107,6 +107,19 @@ public class AddEventVolunteerController {
 
     }
 
+    @FXML
+    private void goToStaffIntro(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
+        Parent nextPageRoot = loader.load();
+
+        // Get the current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene to the new page
+        stage.setScene(new Scene(nextPageRoot));
+        stage.setTitle("Volunteering");
+        stage.show();
+    }
 
 
 }

@@ -53,7 +53,7 @@ public class LoginController {
     @FXML
     private void IntroPage(ActionEvent event) throws IOException {
         // Load the new FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntoPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntroPage.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -113,7 +113,7 @@ public class LoginController {
 
         } else if (answer.equals("volunteer")) {
             System.out.println("volu");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntoPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntroPage.fxml"));
             Parent nextPageRoot = loader.load();
             // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

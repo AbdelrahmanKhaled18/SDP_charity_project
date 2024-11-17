@@ -8,29 +8,34 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" spacing="1.0" style="-fx-background-color: fefdfc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.ViewEventsVolunteersController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="448.0" spacing="1.0" style="-fx-background-color: fefdfc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.ViewEventsVolunteersController">
     <children>
 
         <!-- View Events and Volunteers Section -->
-        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: rgba(208,249,249,0.5);">
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="450.0" style="-fx-background-color: rgba(208,249,249,0.5);">
             <children>
-                <Label layoutX="19.0" layoutY="12.0" text="View Events and Volunteers">
+                <Label layoutX="44.0" layoutY="27.0" text="View Events and Volunteers">
                     <font>
                         <Font name="Times New Roman Bold" size="30.0" />
                     </font>
                 </Label>
-                <ComboBox fx:id="TaskSelectionBox" layoutX="26.0" layoutY="67.0" prefHeight="27.0" prefWidth="216.0" promptText="Select tasks to view volunteers" style="-fx-background-color: rgba(0,174,255);" />
-                <Button fx:id="viewVolunteers" layoutX="265.0" layoutY="67.0" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: rgba(0,174,255);" text="View Volunteers" textFill="WHITE">
+                <ComboBox fx:id="TaskSelectionBox" layoutX="34.0" layoutY="94.0" prefHeight="27.0" prefWidth="216.0" promptText="Select tasks to view volunteers" style="-fx-background-color: rgba(0,174,255);" />
+                <Button fx:id="viewVolunteers" layoutX="297.0" layoutY="94.0" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: rgba(0,174,255);" text="View Volunteers" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-                <ListView fx:id="volunteersListView" layoutX="50.0" layoutY="105.0" prefHeight="80.0" prefWidth="300.0" />
-            <Button layoutX="26.0" layoutY="198.0" mnemonicParsing="false" onAction="#AddEventVolunteersButton" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Add Event/Volunteer" textFill="WHITE">
+                <ListView fx:id="volunteersListView" layoutX="75.0" layoutY="135.0" prefHeight="80.0" prefWidth="300.0" />
+            <Button layoutX="34.0" layoutY="225.0" mnemonicParsing="false" onAction="#AddEventVolunteersButton" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Add Event/Volunteer" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="224.0" layoutY="198.0" mnemonicParsing="false" onAction="#EditAndRemoveTasksButton" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Edit/Remove Tasks" textFill="WHITE">
+            <Button layoutX="276.0" layoutY="225.0" mnemonicParsing="false" onAction="#EditAndRemoveTasksButton" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Edit/Remove Tasks" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="7.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToStaffIntro" prefHeight="25.0" prefWidth="19.0" style="-fx-background-color: rgba(0,174,255);" text="&lt;" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
