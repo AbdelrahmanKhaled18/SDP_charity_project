@@ -80,7 +80,8 @@ public class ViewEventsVolunteersController {
 
     @FXML
     private void EditAndRemoveTasksButton(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Edit&RemoveTasks.fxml"));
+        // Use the correct path relative to the package
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Edit_RemoveTasks.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -88,9 +89,10 @@ public class ViewEventsVolunteersController {
 
         // Set the scene to the new page
         stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Volunteering");
+        stage.setTitle("Edit and Remove Tasks");
         stage.show();
     }
+
 
     @FXML
     private void goToStaffIntro(javafx.event.ActionEvent event) throws IOException {

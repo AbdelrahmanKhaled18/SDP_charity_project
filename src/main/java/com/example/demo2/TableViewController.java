@@ -16,6 +16,7 @@ import model.Task;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class TableViewController implements Initializable {
@@ -31,6 +32,7 @@ public class TableViewController implements Initializable {
 
     private final ObservableList<Task> taskList = FXCollections.observableArrayList();
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize the table and load tasks
@@ -40,7 +42,7 @@ public class TableViewController implements Initializable {
 
     private void initializeTable() {
         // Set up the columns
-        taskColumn.setCellValueFactory(new PropertyValueFactory<>("taskName"));
+        taskColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         // Make columns editable
@@ -66,10 +68,22 @@ public class TableViewController implements Initializable {
     }
 
     private void loadTasks() {
-        // Example: Load tasks from the database
-        taskList.clear();
-        taskList.addAll(Task.retrieveAllTasks()); // Replace with your database call
+        try {
+            ArrayList<Task> tasks = Task.retrieveAllTasks();
+            if (tasks != null) {
+                System.out.println("Retrieved tasks: " + tasks.size());
+                tasks.forEach(task -> System.out.println(task.getName() + ": " + task.getDescription()));
+                taskList.clear();
+                taskList.addAll(tasks);
+            } else {
+                System.err.println("Failed to load tasks: No tasks retrieved.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("An error occurred while loading tasks: " + e.getMessage());
+        }
     }
+
 
     @FXML
     private void deleteSelectedTask() {

@@ -15,5 +15,7 @@ module com.example.demo2 {
     requires java.desktop;
 
     opens com.example.demo2 to javafx.fxml;
+    opens model to javafx.base;
+
     exports com.example.demo2;
 }
