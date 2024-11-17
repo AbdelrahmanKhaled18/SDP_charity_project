@@ -37,33 +37,16 @@ public class LoginController {
 
 
     @FXML
-    public void RegisterPage(MouseEvent event) throws IOException {
-
+    public void RegisterPage(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterPage.fxml"));
         Parent nextPageRoot = loader.load();
-        // Get the current stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Set the scene to the new page
         stage.setScene(new Scene(nextPageRoot));
         stage.setTitle("Register Page");
         stage.show();
     }
 
-    @FXML
-    private void IntroPage(ActionEvent event) throws IOException {
-        // Load the new FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntroPage.fxml"));
-        Parent nextPageRoot = loader.load();
 
-        // Get the current stage
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Set the scene to the new page
-        stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Credit Card Payment");
-        stage.show();
-    }
 
     @FXML
     private void setPhoneNumberStrategy(ActionEvent event) {
@@ -100,7 +83,6 @@ public class LoginController {
         String answer = userLoginContext.authenticate();
         System.out.println(answer);
         if (answer.equals("staff")) {
-            System.out.println("staff");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
             Parent nextPageRoot = loader.load();
             // Get the current stage
@@ -112,26 +94,19 @@ public class LoginController {
             stage.show();
 
         } else if (answer.equals("volunteer")) {
-            System.out.println("volu");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntroPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntoPage.fxml"));
             Parent nextPageRoot = loader.load();
             // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
             // Set the scene to the new page
             stage.setScene(new Scene(nextPageRoot));
             stage.setTitle("Volunteer Page");
             stage.show();
-
-
         } else {
             System.out.println("Login failed!");
             LoginEmail.clear();
             LoginPassword.clear();
             LoginEmail.setPromptText("Invalid credentials. Try again!");
         }
-
     }
-
-
 }
