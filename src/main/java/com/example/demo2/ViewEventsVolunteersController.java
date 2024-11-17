@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Person;
 import model.Skill;
 import model.Task;
 import model.Volunteer;
@@ -19,6 +20,7 @@ import model.Volunteer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ViewEventsVolunteersController {
 
@@ -30,8 +32,13 @@ public class ViewEventsVolunteersController {
     ObservableList<Volunteer> volunteerlist = FXCollections.observableArrayList();
 
     public void initialize() {
-    TaskSelectionBox.setItems(tasksList);
+        // Load tasks into the observable list
+        tasksList.addAll(Task.retrieveAllTasks());
 
+        // Bind tasksList to the ComboBox
+        TaskSelectionBox.setItems(tasksList);
+
+        // Set the cell factory for displaying the name of the task in the drop-down list
         TaskSelectionBox.setCellFactory(lv -> new ListCell<Task>() {
             @Override
             protected void updateItem(Task task, boolean empty) {
@@ -40,9 +47,14 @@ public class ViewEventsVolunteersController {
             }
         });
 
-        tasksList.addAll(Task.retrieveAllTasks());
-
-
+        // Set the button cell factory to display the selected task's name in the ComboBox
+        TaskSelectionBox.setButtonCell(new ListCell<Task>() {
+            @Override
+            protected void updateItem(Task task, boolean empty) {
+                super.updateItem(task, empty);
+                setText(empty || task == null ? "" : task.getName());
+            }
+        });
     }
 
     @FXML
@@ -76,6 +88,27 @@ public class ViewEventsVolunteersController {
         stage.setScene(new Scene(nextPageRoot));
         stage.setTitle("Volunteering");
         stage.show();
+    }
+
+    @FXML
+    private void viewVolunteersByTask(javafx.event.ActionEvent event) {
+        // Get the selected task from the dropdown menu
+        Task selectedTask = (Task) TaskSelectionBox.getSelectionModel().getSelectedItem();
+
+        if (selectedTask != null) {
+            // Retrieve the persons assigned to the selected task
+            ArrayList<Person> assignedVolunteers = Person.retrievePersonsByTaskId(selectedTask.getId());
+
+            // Populate the ListView with the retrieved volunteers
+            volunteersListView.getItems().clear();
+            for (Person person : assignedVolunteers) {
+                volunteersListView.getItems().add(person.getName());
+            }
+        } else {
+            // Handle case where no task is selected
+            volunteersListView.getItems().clear();
+            volunteersListView.getItems().add("No task selected!");
+        }
     }
 
     @FXML
