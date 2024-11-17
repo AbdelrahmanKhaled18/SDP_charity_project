@@ -41,6 +41,7 @@ public class VolunteerDonateController {
             Scene scene = new Scene(layout, 250, 150);
             paymentStage.setScene(scene);
             paymentStage.showAndWait();
+            return;
         }
 
         Stage paymentStage = new Stage();
