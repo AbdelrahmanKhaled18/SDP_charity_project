@@ -19,13 +19,18 @@
                         <Font name="Times New Roman Bold" size="30.0" />
                     </font>
                 </Label>
-                <ComboBox fx:id="eventSelectionBox" layoutX="26.0" layoutY="67.0" prefHeight="27.0" prefWidth="216.0" promptText="Select Event to View Volunteers" style="-fx-background-color: rgba(0,174,255);" />
+                <ComboBox fx:id="TaskSelectionBox" layoutX="26.0" layoutY="67.0" prefHeight="27.0" prefWidth="216.0" promptText="Select tasks to view volunteers" style="-fx-background-color: rgba(0,174,255);" />
                 <Button fx:id="viewVolunteers" layoutX="265.0" layoutY="67.0" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: rgba(0,174,255);" text="View Volunteers" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
                 <ListView fx:id="volunteersListView" layoutX="50.0" layoutY="105.0" prefHeight="80.0" prefWidth="300.0" />
-            <Button layoutX="116.0" layoutY="198.0" mnemonicParsing="false" onAction="#AddEventVolunteersButton" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Add Event/Volunteer" textFill="WHITE">
+            <Button layoutX="26.0" layoutY="198.0" mnemonicParsing="false" onAction="#AddEventVolunteersButton" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Add Event/Volunteer" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="224.0" layoutY="198.0" mnemonicParsing="false" onAction="#EditAndRemoveTasksButton" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Edit/Remove Tasks" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

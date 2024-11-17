@@ -34,6 +34,8 @@ public class LoginController {
         LoginEmail.setPromptText("Enter your email address"); // Default placeholder
     }
 
+
+
     @FXML
     public void RegisterPage(MouseEvent event) throws IOException {
 
