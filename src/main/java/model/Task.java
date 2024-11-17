@@ -126,7 +126,6 @@ public class Task {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String description = rs.getString("description");
-                System.out.println("Task retrieved: " + id + ", " + name + ", " + description);
                 tasks.add(new Task(id, name, description));
             }
             statement.close();
