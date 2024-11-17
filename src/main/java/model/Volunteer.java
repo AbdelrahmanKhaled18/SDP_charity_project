@@ -22,15 +22,15 @@ public class Volunteer extends Person {
 
     public Volunteer(String name, String gender, String phoneNumber, String email, String password, String nationalId,
                      Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
-                     ArrayList<Task> assignedTasks, ArrayList<Skill> skills) {
-        super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
+                     ArrayList<Task> assignedTasks, UserType userType, ArrayList<Skill> skills) {
+        super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
         this.skills = skills;
     }
 
     public Volunteer(int id, String name, String gender, String phoneNumber, String email, String password, String nationalId,
                      Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
-                     ArrayList<Task> assignedTasks,ArrayList<Skill> skills) {
-        super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
+                     ArrayList<Task> assignedTasks, UserType userType, ArrayList<Skill> skills) {
+        super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
         this.skills = skills;
     }
 
@@ -51,19 +51,22 @@ public class Volunteer extends Person {
     }
 
     public static boolean addVolunteerSkill(int personId, int skillId) {
-        String command = "INSERT INTO volunteer_skills ('person_id', 'skill_id') VALUES (?,?)";
+        // Corrected query: Removed single quotes around column names
+        String command = "INSERT INTO volunteer_skills (person_id, skill_id) VALUES (?, ?)";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(command);
-            statement.setInt(1, personId);
-            statement.setInt(2, skillId);
-            boolean success = statement.executeUpdate() > 0;
-            statement.close();
-            return success;
+            statement.setInt(1, personId); // Set the person_id parameter
+            statement.setInt(2, skillId); // Set the skill_id parameter
+            boolean success = statement.executeUpdate() > 0; // Execute and check if rows were affected
+            statement.close(); // Close the statement
+            return success; // Return success status
         } catch (SQLException e) {
-            return false;
+            e.printStackTrace(); // Log the exception for debugging
+            return false; // Return failure status
         }
     }
+
 
     public static ArrayList<Skill> retrieveVolunteerSkills(int personId) {
         String command = "SELECT skill.id AS id, skill.name AS name, skill.description AS description " +
@@ -148,9 +151,10 @@ public class Volunteer extends Person {
             Address address = Address.retrieveAddress(addressId);
             ArrayList<Donation> donationHistory = Donation.retrievePersonDonations(id);
             ArrayList<Task> assignedTasks = Person.retrievePersonTasks(id);
+            UserType userType = UserType.valueOf(rs.getString("user_type"));
             ArrayList<Skill> skills = Volunteer.retrieveVolunteerSkills(id);
             volunteers.add(new Volunteer(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive,
-                    address, donationHistory, assignedTasks, skills));
+                    address, donationHistory, assignedTasks, userType, skills));
         }
         return volunteers;
     }

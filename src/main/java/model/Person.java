@@ -4,7 +4,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public abstract class Person {
+
+    public enum UserType {
+        volunteer, staff;
+    }
 
     private int id;
     private String name;
@@ -16,6 +21,7 @@ public abstract class Person {
     private Date dateOfBirth;
     private boolean isActive;
     private Address address;
+    private UserType userType;
 
     private ArrayList<Donation> donationHistory;
 
@@ -23,7 +29,7 @@ public abstract class Person {
 
     public Person(String name, String gender, String phoneNumber, String email, String password, String nationalId,
                   Date dateOfBirth, boolean isActive, Address address,
-                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks) {
+                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks,UserType userType) {
         this.name = name;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
@@ -35,12 +41,13 @@ public abstract class Person {
         this.address = address;
         this.donationHistory = donationHistory;
         this.assignedTasks = assignedTasks;
+        this.userType = userType;
     }
 
     public Person(int id, String name, String gender, String phoneNumber, String email, String password,
                   String nationalId, Date dateOfBirth, boolean isActive, Address address,
-                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks) {
-        this(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
+                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks,UserType userType) {
+        this(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks,userType);
         this.id = id;
     }
 
@@ -118,6 +125,14 @@ public abstract class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public UserType getUserType() {
+        return userType; // Getter for enum
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType; // Setter for enum
     }
 
     public void setAddress(Address address) {
@@ -269,6 +284,65 @@ public abstract class Person {
         } catch (SQLException e) {
             return false;
         }
+    }
+
+    public static ArrayList<Person> retrievePersonsByTaskId(int taskId) {
+        String query = "SELECT p.id, p.name, p.gender, p.phone_number, p.email, p.national_id, p.date_of_birth, " +
+                "p.is_active, p.user_type, p.address_id, " +
+                "s.position AS staff_position, s.department AS staff_department " +
+                "FROM person p " +
+                "LEFT JOIN staff s ON p.id = s.person_id " +
+                "INNER JOIN assigned_tasks at ON p.id = at.person_id " +
+                "WHERE at.task_id = ?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        ArrayList<Person> persons = new ArrayList<>();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, taskId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                // Common fields for all persons
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String gender = rs.getString("gender");
+                String phoneNumber = rs.getString("phone_number");
+                String email = rs.getString("email");
+                String nationalId = rs.getString("national_id");
+                Date dateOfBirth = rs.getDate("date_of_birth");
+                boolean isActive = rs.getBoolean("is_active");
+                int addressId = rs.getInt("address_id");
+                Address address = (addressId > 0) ? Address.retrieveAddress(addressId) : null;
+                Person.UserType userType = Person.UserType.valueOf(rs.getString("user_type"));
+
+                // Determine if the person is a staff or volunteer
+                if (userType == Person.UserType.staff) {
+                    // Fetch staff-specific fields
+                    String position = rs.getString("staff_position");
+                    String department = rs.getString("staff_department");
+                    persons.add(new Staff(
+                            id, name, gender, phoneNumber, email, null, nationalId,
+                            dateOfBirth, isActive, address,
+                            new ArrayList<>(), // Donation history can be fetched if needed
+                            Person.retrievePersonTasks(id), // Fetch tasks
+                            userType, position, department
+                    ));
+                } else if (userType == Person.UserType.volunteer) {
+                    // Fetch volunteer-specific fields
+                    ArrayList<Skill> skills = Volunteer.retrieveVolunteerSkills(id);
+                    persons.add(new Volunteer(
+                            id, name, gender, phoneNumber, email, null, nationalId,
+                            dateOfBirth, isActive, address,
+                            new ArrayList<>(), // Donation history can be fetched if needed
+                            Person.retrievePersonTasks(id), // Fetch tasks
+                            userType, skills
+                    ));
+                }
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return persons;
     }
 
     public static boolean addPersonTask(int personId, int taskId) {

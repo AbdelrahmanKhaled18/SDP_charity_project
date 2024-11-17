@@ -26,8 +26,7 @@ public class NotificationService implements ISubject{
 
     @Override
     public void notifyObservers() {
-        for (int i = 0; i < listOfObservers.size(); i++) {
-            IObserver observer =  listOfObservers.get(i);
+        for (IObserver observer : listOfObservers) {
             observer.update();
         }
     }

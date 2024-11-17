@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="328.0" prefWidth="278.0" spacing="20.0" style="-fx-background-color: fefdfc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.LoginController">
-   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="288.0" style="-fx-background-color: rgba(208,249,249,0.5);">
+<VBox alignment="CENTER" prefHeight="328.0" prefWidth="278.0" spacing="20.0" style="-fx-background-color: fefdfc;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.LoginController">
+   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="288.0" style="-fx-background-color: rgba(208,249,249,0.5);">
       <children>
          <Label contentDisplay="TOP" layoutX="33.0" layoutY="28.0" style="-fx-label-padding: 5;" text="Charity System">
             <font>
@@ -58,7 +52,7 @@
          </Label>
          <TextField fx:id="LoginEmail" layoutX="41.0" layoutY="140.0" prefHeight="33.0" prefWidth="205.0" promptText="Email address*" />
          <PasswordField fx:id="LoginPassword" layoutX="42.0" layoutY="181.0" prefHeight="33.0" prefWidth="205.0" promptText="Password*" />
-         <Label contentDisplay="TOP" layoutX="9.0" layoutY="278.0" style="-fx-label-padding: 5;" text="Don't have an account?">
+         <Label contentDisplay="TOP" layoutX="33.0" layoutY="395.0" style="-fx-label-padding: 5;" text="Don't have an account?">
             <font>
                <Font name="Times New Roman" size="12.0" />
             </font>
@@ -100,16 +94,27 @@
                </LinearGradient>
             </textFill>
          </Label>
-         <Button fx:id="countinueLoginButton" layoutX="41.0" layoutY="231.0" mnemonicParsing="false" onAction="#IntroPage" prefHeight="33.0" prefWidth="205.0" style="-fx-background-color: rgba(0,174,255);" text="Continue">
+         <Button fx:id="countinueLoginButton" layoutX="52.0" layoutY="231.0" mnemonicParsing="false" onAction="#performLogin" prefHeight="34.0" prefWidth="180.0" style="-fx-background-color: rgba(0,174,255);" text="Login">
             <font>
                <Font name="System Bold" size="12.0" />
             </font>
          </Button>
-         <Label fx:id="SignupLabel" contentDisplay="TOP" layoutX="128.0" layoutY="283.0" onMouseClicked="#RegisterPage" text="Sign up" textFill="#2600ff">
+         <Label fx:id="SignupLabel" contentDisplay="TOP" layoutX="164.0" layoutY="400.0" onMouseClicked="#RegisterPage" text="Sign up" textFill="#2600ff">
             <font>
                <Font name="Times New Roman" size="12.0" />
             </font>
          </Label>
+         <Button fx:id="phoneNumberLoginButton" layoutX="51.0" layoutY="276.0" mnemonicParsing="false" onAction="#setPhoneNumberStrategy" prefHeight="34.0" prefWidth="180.0" style="-fx-background-color: rgba(0,174,255);" text="Login With Phone Number">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Button>
+
+         <Button fx:id="usernameLoginButton" layoutX="51.0" layoutY="325.0" mnemonicParsing="false" onAction="#setUsernameStrategy" prefHeight="34.0" prefWidth="180.0" style="-fx-background-color: rgba(0,174,255);" text="Login With username">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Button>
       </children>
    </AnchorPane>
 </VBox>

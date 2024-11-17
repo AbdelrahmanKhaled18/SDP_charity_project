@@ -21,8 +21,8 @@ public class DatabaseConnection {
 
     private DatabaseConnection() {
         if (instance == null) {
-            String username = "root";
-            String password = "";
+            String username = "admin";
+            String password = "123";
             String url = "jdbc:mysql://localhost:3306/charity_db";
 
             try {

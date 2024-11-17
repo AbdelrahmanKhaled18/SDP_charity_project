@@ -123,19 +123,21 @@ public class Address {
             if (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                int parentId = rs.getInt("parent_id");
-                if (parentId != 0) {
-                    address = new Address(id, name, retrieveAddress(parentId));
-                } else {
-                    address = new Address(id, name);
+                Integer parentId = rs.getObject("parent_id") != null ? rs.getInt("parent_id") : null; // Handle null parent_id
+                Address parentAddress = null;
+                if (parentId != null) {
+                    parentAddress = retrieveAddress(parentId); // Recursive call
                 }
+                address = new Address(id, name, parentAddress);
             }
             statement.close();
             return address;
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
     }
+
 
     public static ArrayList<Address> retrieveAllAddresses() {
         String command = "SELECT * FROM address";

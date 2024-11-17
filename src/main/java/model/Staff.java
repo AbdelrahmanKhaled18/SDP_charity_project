@@ -27,16 +27,16 @@ public class Staff extends Person {
 
     public Staff(String name, String gender, String phoneNumber, String email, String password, String nationalId,
                  Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
-                 ArrayList<Task> assignedTasks, String position, String department) {
-        super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
+                 ArrayList<Task> assignedTasks,UserType userType, String position, String department) {
+        super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks,userType);
         this.position = position;
         this.department = department;
     }
 
     public Staff(int id, String name, String gender, String phoneNumber, String email, String password, String nationalId,
                  Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
-                 ArrayList<Task> assignedTasks, String position, String department) {
-        super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
+                 ArrayList<Task> assignedTasks,UserType userType, String position, String department) {
+        super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks,userType);
         this.position = position;
         this.department = department;
     }
@@ -144,8 +144,9 @@ public class Staff extends Person {
             ArrayList<Task> assignedTasks = Person.retrievePersonTasks(id);
             String position = rs.getString("position");
             String department = rs.getString("department");
+            UserType userType= UserType.valueOf(rs.getString("user_type"));
             staffMembers.add(new Staff(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive,
-                    address, donationHistory, assignedTasks, position, department));
+                    address, donationHistory, assignedTasks,userType, position, department));
         }
         return staffMembers;
     }

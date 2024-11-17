@@ -7,20 +7,26 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class RegisterController {
-
+    @FXML
     public TextField RegisterFirstname;
+    @FXML
     public TextField RegisterLastname;
+    @FXML
     public TextField RegisterEmail;
+    @FXML
     public PasswordField RegisterNewpassword;
+    @FXML
     public PasswordField RegisterReEnterPassword;
+    @FXML
+    private RadioButton StaffRadioButton;
+    @FXML
+    private RadioButton VolunteerRadioButton;
 
 
     @FXML
@@ -39,7 +45,7 @@ public class RegisterController {
     }
 
     @FXML
-    private void LoginPage(javafx.scene.input.MouseEvent event) throws IOException {
+    private void LoginPage(ActionEvent event) throws IOException {
         // Load the StartPage.fxml file again
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         Parent nextPageRoot = loader.load();
@@ -51,6 +57,13 @@ public class RegisterController {
         stage.setScene(new Scene(nextPageRoot));
         stage.setTitle("Login Page");
         stage.show();
+    }
+
+
+    @FXML
+    private void RegisterUser(ActionEvent event) throws IOException {
+
+
     }
 
 }
