@@ -6,13 +6,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.*;
+
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class RegisterController {
+    public String selectedGender ;
+    public String selectedRole;
+    Date dateOfBirth;
     @FXML
     public TextField RegisterFirstname;
     @FXML
@@ -24,36 +34,48 @@ public class RegisterController {
     @FXML
     public PasswordField RegisterReEnterPassword;
     @FXML
+    public TextField nationalId;
+    @FXML
+    private RadioButton genderMale;
+    @FXML
+    private RadioButton genderFemale;
+    @FXML
+    private RadioButton genderOther;
+    @FXML
     private RadioButton StaffRadioButton;
     @FXML
     private RadioButton VolunteerRadioButton;
-
-
     @FXML
-    private void IntroPage(ActionEvent event) throws IOException {
-        // Load the new FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntoPage.fxml"));
-        Parent nextPageRoot = loader.load();
+    private TextField RegisterPhoneNumber;
+    @FXML
+    private DatePicker RegisterDateOfBirth;
 
-        // Get the current stage
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    public void initialize() {
+        genderMale.setOnAction(event -> handleGenderSelection(genderMale));
+        genderFemale.setOnAction(event -> handleGenderSelection(genderFemale));
+        genderOther.setOnAction(event -> handleGenderSelection(genderOther));
+        StaffRadioButton.setOnAction(event -> handleRoleSelection(StaffRadioButton));
+        VolunteerRadioButton.setOnAction(event -> handleRoleSelection(VolunteerRadioButton));
+    }
 
-        // Set the scene to the new page
-        stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Credit Card Payment");
-        stage.show();
+    private void handleRoleSelection(RadioButton selectedRadioButton) {
+        StaffRadioButton.setSelected(selectedRadioButton == StaffRadioButton);
+        VolunteerRadioButton.setSelected(selectedRadioButton == VolunteerRadioButton);
+        selectedRole = selectedRadioButton.getText();
+    }
+
+    private void handleGenderSelection(RadioButton selectedRadioButton) {
+        genderMale.setSelected(selectedRadioButton == genderMale);
+        genderFemale.setSelected(selectedRadioButton == genderFemale);
+        genderOther.setSelected(selectedRadioButton == genderOther);
+        selectedGender = selectedRadioButton.getText();
     }
 
     @FXML
     private void LoginPage(ActionEvent event) throws IOException {
-        // Load the StartPage.fxml file again
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         Parent nextPageRoot = loader.load();
-
-        // Get the current stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Set the scene to the new page
         stage.setScene(new Scene(nextPageRoot));
         stage.setTitle("Login Page");
         stage.show();
@@ -61,9 +83,59 @@ public class RegisterController {
 
 
     @FXML
-    private void RegisterUser(ActionEvent event) throws IOException {
-
-
+    private void getDate(ActionEvent event) {
+        LocalDate birthDate = RegisterDateOfBirth.getValue();
+        dateOfBirth = Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
+    @FXML
+    private void RegisterUser(ActionEvent event) throws IOException {
+        Address staffAddress = Address.retrieveAddress(5);
+        System.out.println(selectedRole);
+        if(RegisterNewpassword.getText() == RegisterReEnterPassword.getText()){
+            if(selectedRole == "Staff"){
+                Staff staff = new Staff(
+                    RegisterFirstname.getText() + RegisterLastname.getText(),
+                    selectedGender,
+                    RegisterPhoneNumber.getText(),
+                    RegisterEmail.getText(),
+                    RegisterNewpassword.getText(),
+                    nationalId.getText(),
+                    dateOfBirth,
+                    true,
+                    staffAddress,
+                    new ArrayList<>(),
+                    new ArrayList<>(),
+                    Person.UserType.staff,
+                    selectedRole,
+                    "Operations" //Default Staff Department
+                );
+                Staff.createStaff(staff);
+            }
+            else{
+                Volunteer volunteer = new Volunteer(
+                    RegisterFirstname.getText() + RegisterLastname.getText(),
+                    selectedGender,
+                    RegisterPhoneNumber.getText(),
+                    RegisterEmail.getText(),
+                    RegisterNewpassword.getText(),
+                    nationalId.getText(),
+                    dateOfBirth,
+                    true,
+                    staffAddress,
+                    new ArrayList<>(),
+                    new ArrayList<>(),
+                    Person.UserType.staff,
+                    new ArrayList<>()
+                    );
+                Volunteer.createVolunteer(volunteer);
+            }
+        }
+        else {
+            RegisterNewpassword.clear();
+            RegisterReEnterPassword.clear();
+            RegisterNewpassword.setPromptText("Passwords must match");
+            RegisterNewpassword.setPromptText("Passwords must match");
+        }
+    }
 }

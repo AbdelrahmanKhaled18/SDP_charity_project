@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -56,6 +57,7 @@ public class Staff extends Person {
             statement.close();
             return success;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }

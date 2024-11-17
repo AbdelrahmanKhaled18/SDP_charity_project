@@ -203,6 +203,7 @@ public abstract class Person {
             statement.close();
             return success;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }

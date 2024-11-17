@@ -50,11 +50,11 @@
                </LinearGradient>
             </textFill>
          </Label>
-         <TextField fx:id="LoginEmail" layoutX="41.0" layoutY="140.0" prefHeight="33.0" prefWidth="205.0" promptText="Email address*" />
-         <PasswordField fx:id="LoginPassword" layoutX="42.0" layoutY="181.0" prefHeight="33.0" prefWidth="205.0" promptText="Password*" />
+         <TextField fx:id="LoginEmail" layoutX="24.0" layoutY="147.0" prefHeight="34.0" prefWidth="239.0" promptText="Email address*" />
+         <PasswordField fx:id="LoginPassword" layoutX="25.0" layoutY="196.0" prefHeight="34.0" prefWidth="239.0" promptText="Password*" />
          <Label contentDisplay="TOP" layoutX="33.0" layoutY="395.0" style="-fx-label-padding: 5;" text="Don't have an account?">
             <font>
-               <Font name="Times New Roman" size="12.0" />
+               <Font name="Times New Roman" size="14.0" />
             </font>
             <textFill>
                <LinearGradient endX="0.7393364928909952" endY="1.0" proportional="false">
@@ -94,25 +94,25 @@
                </LinearGradient>
             </textFill>
          </Label>
-         <Button fx:id="countinueLoginButton" layoutX="52.0" layoutY="231.0" mnemonicParsing="false" onAction="#performLogin" prefHeight="34.0" prefWidth="180.0" style="-fx-background-color: rgba(0,174,255);" text="Login">
+         <Button fx:id="countinueLoginButton" layoutX="44.0" layoutY="244.0" mnemonicParsing="false" onAction="#performLogin" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: rgba(0,174,255);" text="Login" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="System Bold" size="12.0" />
             </font>
          </Button>
-         <Label fx:id="SignupLabel" contentDisplay="TOP" layoutX="164.0" layoutY="400.0" onMouseClicked="#RegisterPage" text="Sign up" textFill="#2600ff">
-            <font>
-               <Font name="Times New Roman" size="12.0" />
-            </font>
-         </Label>
-         <Button fx:id="phoneNumberLoginButton" layoutX="51.0" layoutY="276.0" mnemonicParsing="false" onAction="#setPhoneNumberStrategy" prefHeight="34.0" prefWidth="180.0" style="-fx-background-color: rgba(0,174,255);" text="Login With Phone Number">
+         <Button fx:id="phoneNumberLoginButton" layoutX="44.0" layoutY="294.0" mnemonicParsing="false" onAction="#setPhoneNumberStrategy" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: rgba(0,174,255);" text="Login With Phone Number" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="System Bold" size="12.0" />
             </font>
          </Button>
 
-         <Button fx:id="usernameLoginButton" layoutX="51.0" layoutY="325.0" mnemonicParsing="false" onAction="#setUsernameStrategy" prefHeight="34.0" prefWidth="180.0" style="-fx-background-color: rgba(0,174,255);" text="Login With username">
+         <Button fx:id="usernameLoginButton" layoutX="44.0" layoutY="343.0" mnemonicParsing="false" onAction="#setUsernameStrategy" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: rgba(0,174,255);" text="Login With username" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="System Bold" size="12.0" />
+            </font>
+         </Button>
+         <Button fx:id="RegisterLabel" contentDisplay="TOP" layoutX="180.0" layoutY="397.0" onAction="#RegisterPage" style="-fx-background-color: rgba(0,174,255);" text="Register" textFill="#281799">
+            <font>
+               <Font name="Times New Roman" size="13.0" />
             </font>
          </Button>
       </children>

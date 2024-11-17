@@ -4,8 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Address;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainApp extends Application {
     @Override
@@ -18,7 +20,8 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-
+        ArrayList<Address> addresses = Address.retrieveAllAddresses();
+        System.out.println(addresses.getFirst().getParentAddress());
         launch();
     }
 }
