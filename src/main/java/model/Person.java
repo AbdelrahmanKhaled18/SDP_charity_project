@@ -356,17 +356,12 @@ public abstract class Person {
             statement.setInt(2, taskId); // Bind task_id
 
             // Log the SQL query
-            System.out.println("Executing SQL: INSERT INTO assigned_tasks (person_id, task_id) VALUES ("
-                    + volunteerId + ", " + taskId + ")");
 
             int rowsInserted = statement.executeUpdate(); // Execute the query
-            System.out.println("Rows inserted: " + rowsInserted); // Log rows inserted
 
             statement.close();
             return rowsInserted > 0; // Return true if insertion was successful
         } catch (SQLException e) {
-            System.err.println("SQL Error Code: " + e.getErrorCode());
-            System.err.println("SQL State: " + e.getSQLState());
             e.printStackTrace(); // Log the exception for debugging
             return false; // Return false if there was an error
         }
