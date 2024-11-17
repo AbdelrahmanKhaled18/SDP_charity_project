@@ -14,11 +14,6 @@
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="252.0" prefWidth="400.0" style="-fx-background-color: rgba(208,249,249,0.5);">
             <children>
                 <TextField fx:id="donationAmount" layoutX="126.0" layoutY="136.0" promptText="Enter amount" />
-                <Button fx:id="CardButton" layoutX="49.0" layoutY="174.0" onAction="#DonateWithCreditCard" prefHeight="27.0" prefWidth="155.0" style="-fx-background-color: rgba(0,174,255);" text="Donate with credit card" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
             <Label layoutX="65.0" layoutY="21.0" text="Donate to the charity">
                <font>
                   <Font name="Times New Roman Bold" size="30.0" />
@@ -29,7 +24,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="fawryButton" layoutX="222.0" layoutY="174.0" onAction="#DonateWithfawry" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Donate with fawry" textFill="WHITE">
+            <Button fx:id="fawryButton" layoutX="126.0" layoutY="172.0" onAction="#DonateWithfawry" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Donate with fawry" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

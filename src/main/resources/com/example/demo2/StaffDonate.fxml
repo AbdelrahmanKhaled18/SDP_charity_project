@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.StaffDonateController">
    <children>
       <AnchorPane layoutX="3.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: rgba(208,249,249,0.5);">
@@ -17,12 +16,7 @@
                </font>
             </Label>
             <TextField fx:id="donationAmountField" layoutX="126.0" layoutY="126.0" promptText="Enter amount" />
-            <Button layoutX="28.0" layoutY="164.0" onAction="#DonateWithCreditCardStaff" prefHeight="27.0" prefWidth="155.0" style="-fx-background-color: rgba(0,174,255);" text="Donate with credit card" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button layoutX="222.0" layoutY="164.0" onAction="#DonateWithfawryStaff" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Donate with Fawry" textFill="WHITE">
+            <Button layoutX="126.0" layoutY="163.0" onAction="#DonateWithfawryStaff" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Donate with Fawry" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

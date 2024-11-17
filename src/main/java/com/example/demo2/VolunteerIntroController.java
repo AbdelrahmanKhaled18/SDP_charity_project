@@ -14,6 +14,7 @@ public class VolunteerIntroController {
 
     @FXML
     private void VolunteerPage(ActionEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Volunteer.fxml"));
         Parent nextPageRoot = loader.load();
 
