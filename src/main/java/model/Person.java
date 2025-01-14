@@ -24,12 +24,11 @@ public abstract class Person {
     private UserType userType;
 
     private ArrayList<Donation> donationHistory;
-
     private ArrayList<Task> assignedTasks;
 
     public Person(String name, String gender, String phoneNumber, String email, String password, String nationalId,
                   Date dateOfBirth, boolean isActive, Address address,
-                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks,UserType userType) {
+                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks, UserType userType) {
         this.name = name;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
@@ -46,8 +45,8 @@ public abstract class Person {
 
     public Person(int id, String name, String gender, String phoneNumber, String email, String password,
                   String nationalId, Date dateOfBirth, boolean isActive, Address address,
-                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks,UserType userType) {
-        this(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks,userType);
+                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks, UserType userType) {
+        this(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
         this.id = id;
     }
 

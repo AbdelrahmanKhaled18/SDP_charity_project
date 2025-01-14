@@ -1,9 +1,9 @@
 package com.example.demo2;
 
-import controller.Strategy.EmailLogin;
-import controller.Strategy.MobileNumberLogin;
-import controller.Strategy.UserLoginContext;
-import controller.Strategy.UserNameLogin;
+import model.DesignPatterns.EmailLogin;
+import model.DesignPatterns.MobileNumberLogin;
+import model.DesignPatterns.UserLoginContext;
+import model.DesignPatterns.UserNameLogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;

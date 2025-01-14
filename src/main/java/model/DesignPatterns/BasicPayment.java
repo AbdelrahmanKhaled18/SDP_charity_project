@@ -1,4 +1,4 @@
-package controller;
+package model.DesignPatterns;
 
 public class BasicPayment implements IPayment {
     public double paymentAmount;

@@ -1,12 +1,11 @@
-package controller.Strategy;
+package model.DesignPatterns;
 
 public class UserLoginContext {
     private ILogin loginStrategyRef;
 
-    public UserLoginContext( ILogin loginStrategyRef) {
-        this.loginStrategyRef =loginStrategyRef;
+    public UserLoginContext(ILogin loginStrategyRef) {
+        this.loginStrategyRef = loginStrategyRef;
     }
-
 
 
     public void setLoginStrategyRef(ILogin loginStrategyRef) {
@@ -14,8 +13,7 @@ public class UserLoginContext {
     }
 
 
-
-    public String authenticate(){
+    public String authenticate() {
         return loginStrategyRef.login();
     }
 

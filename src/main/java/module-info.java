@@ -13,6 +13,7 @@ module com.example.demo2 {
     requires java.sql;
     requires mysql.connector.java;
     requires java.desktop;
+    requires jakarta.mail;
 
     opens com.example.demo2 to javafx.fxml;
     opens model to javafx.base;

@@ -1,4 +1,4 @@
-package controller;
+package model.DesignPatterns;
 
 public class ExtraFeesDecorator extends PaymentDecorator{
     private double serviceFee;
