@@ -4,21 +4,11 @@ import java.util.Date;
 
 public class MoneyDonation extends Donation{
 
-    private String currencyType;
     private double amount;
 
-    public MoneyDonation(Date date, int personId, String currencyType,double amount) {
+    public MoneyDonation(Date date, int personId, double amount) {
         super(date, personId);
-        this.currencyType = currencyType;
         this.amount = amount;
-    }
-
-    public String getCurrencyType() {
-        return currencyType;
-    }
-
-    public void setCurrencyType(String currencyType) {
-        this.currencyType = currencyType;
     }
 
     public double getAmount() {
