@@ -19,4 +19,5 @@ module com.example.demo2 {
     opens model to javafx.base;
 
     exports com.example.demo2;
+    opens model.DesignPatterns to javafx.base;
 }

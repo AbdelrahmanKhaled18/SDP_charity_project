@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.sql.*;
 
-public class Donation {
+abstract class Donation {
     private int id;
     private double amount;
     private Date date;
@@ -52,6 +52,26 @@ public class Donation {
     public void setPersonId(int personId) {
         this.personId = personId;
     }
+
+
+    public Boolean performDonation(Donation donation) {
+
+        if (!validateDonation(donation)) {
+            return false;
+        }
+
+        if (saveDonation(donation)) {
+            notifyDonor();
+            return true;
+        }
+
+        return false;
+    }
+
+    abstract boolean validateDonation(Donation donation);
+    abstract boolean saveDonation(Donation donation);
+    public void notifyDonor(){}
+
 
 
     public static boolean createDonation(Donation donation) {
