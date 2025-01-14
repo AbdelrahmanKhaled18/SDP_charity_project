@@ -4,9 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.DesignPatterns.NotifyByEmailObserver;
+import model.*;
+import model.DesignPatterns.IObserver;
+import model.DesignPatterns.VolunteerObserver;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class MainApp extends Application {
     @Override
@@ -19,6 +23,25 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-      launch();
+        RealCampaign realCampaign = new RealCampaign(1 , new Staff(
+                "Mohaemd Khaled",
+                "Male",
+                "01050209620",
+                "Testing@gmail.com",
+                "123",
+                "12345678910",
+                new Date(),
+                true,
+                new Address("Cairo"),
+                new ArrayList<>(),
+                new ArrayList<>(),
+                Person.UserType.staff,
+                "Alo",
+                "Operations" //Default Staff Department
+        ));
+        IObserver volunteerObserver = new VolunteerObserver(realCampaign , "medo20333883@gmail.com");
+        IObserver newVolunteerObserver = new VolunteerObserver(realCampaign , "abdalrahmank2000@gmail.com");
+        realCampaign.notifyObservers();
+        launch(args);
     }
 }

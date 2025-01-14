@@ -14,7 +14,7 @@ public class RealCampaign implements Campaign, ISubject {
         FINISHED
     }
 
-    private String campaignId;
+    private int campaignId;
     private String title;
     private String description;
     private double goalAmount;
@@ -24,11 +24,35 @@ public class RealCampaign implements Campaign, ISubject {
 
     private CampaignStatus status;
     private ArrayList<Volunteer> assignedVolunteers = new ArrayList<>();
-    private ArrayList<IObserver> observers = new ArrayList<>();
+    private ArrayList<IObserver> observers;
     private Staff creator;
 //    private List<Beneficiary> beneficiaries = new ArrayList<>();
 
-    public RealCampaign(String campaignId, Staff creator) {
+    public void registerObservers(IObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObservers(IObserver observer) {
+        int index = observers.indexOf(observer);
+        if (index >= 0) {
+            observers.remove(observer);
+        }
+    }
+
+    public void notifyObservers() {
+        for (IObserver observer : observers) {
+            observer.update(collectedAmount);
+        }
+    }
+
+    public RealCampaign(Staff creator) {
+        observers = new ArrayList<>();
+        this.creator = creator;
+        this.status = CampaignStatus.INITIATED;
+    }
+
+    public RealCampaign(int campaignId, Staff creator) {
+        observers = new ArrayList<>();
         this.campaignId = campaignId;
         this.creator = creator;
         this.status = CampaignStatus.INITIATED;
@@ -65,22 +89,5 @@ public class RealCampaign implements Campaign, ISubject {
 
     public ArrayList<Volunteer> getAssignedVolunteers() {
         return assignedVolunteers;
-    }
-
-    public void registerObservers(IObserver x) {
-        observers.add(x);
-    }
-
-    public void removeObservers(IObserver x) {
-        int index = observers.indexOf(x);
-        if (index >= 0) {
-            observers.remove(x);
-        }
-    }
-
-    public void notifyObservers() {
-        for (IObserver observer : observers) {
-            observer.update(this);
-        }
     }
 }

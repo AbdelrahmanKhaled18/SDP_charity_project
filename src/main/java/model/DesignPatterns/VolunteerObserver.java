@@ -8,17 +8,20 @@ import model.RealCampaign;
 
 import java.util.Properties;
 
-public class NotifyByEmailObserver implements IObserver {
+public class VolunteerObserver implements IObserver {
     private ISubject ISubjectRef;
+    private String EmailAddress;
 
-    public NotifyByEmailObserver(ISubject x) {
-        this.ISubjectRef = x;
+    public VolunteerObserver(ISubject subject, String EmailAddress) {
+        this.EmailAddress = EmailAddress;
+        this.ISubjectRef = subject;
         ISubjectRef.registerObservers(this);
     }
 
     @Override
-    public void update(RealCampaign campaign) {
-//        sendEmail();
+    public void update(double currentCollectedAmount) {
+        sendEmail(this.EmailAddress, "Collected Amount Update", "Total Collected Amount : "
+                + currentCollectedAmount);
     }
 
     private void sendEmail(String to, String subject, String body) {
