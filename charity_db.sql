@@ -112,7 +112,7 @@ CREATE TABLE `donation` (
                             `id` int NOT NULL AUTO_INCREMENT,
                             `date` date NOT NULL,
                             `person_id` int NOT NULL,
-                            `donation_type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+                            `donation_type` varchar(255) COLLATE utf8mb4_general_ci,
                             PRIMARY KEY (`id`),
                             KEY `person_id` (`person_id`),
                             CONSTRAINT `donation_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`) ON DELETE CASCADE
@@ -136,11 +136,11 @@ DROP TABLE IF EXISTS `in_kind_donation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `in_kind_donation` (
-                                    `id` int NOT NULL AUTO_INCREMENT,
+                                    `donation_id` int NOT NULL,
                                     `quantity` int NOT NULL,
                                     `type` varchar(255) NOT NULL,
                                     `address_id` int DEFAULT NULL,
-                                    PRIMARY KEY (`id`),
+                                    PRIMARY KEY (`donation_id`),
                                     KEY `in_kind_donation_address_id_fk` (`address_id`),
                                     CONSTRAINT `in_kind_donation_address_id_fk` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -163,9 +163,9 @@ DROP TABLE IF EXISTS `money_donation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `money_donation` (
-                                  `id` int NOT NULL AUTO_INCREMENT,
+                                  `donation_id` int NOT NULL,
                                   `amount` double DEFAULT NULL,
-                                  PRIMARY KEY (`id`)
+                                  PRIMARY KEY (`donation_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

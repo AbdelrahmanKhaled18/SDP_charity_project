@@ -10,7 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Donation;
+import model.DesignPatterns.template.Donation;
+import model.DesignPatterns.template.MoneyDonation;
 
 import java.io.IOException;
 import java.util.Date;
@@ -23,7 +24,7 @@ public class VolunteerDonateController {
     private void DonateWithfawry() throws IOException {
 
         double Amount = Double.parseDouble(donationAmount.getText());
-        boolean success = Donation.createDonation(new Donation(Amount,new Date(),1));
+        boolean success = Donation.createDonation(new MoneyDonation(new Date(), 1, Amount));
 
         if (!success) {
             Stage paymentStage = new Stage();

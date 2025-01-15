@@ -32,13 +32,13 @@ public class EmailLogin implements ILogin {
         ArrayList<Volunteer> volunteers = Volunteer.retrieveAllVolunteers();
         for (Staff staff : staffMembers) {
             if (staff.getEmail().equals(email) && staff.getPassword().equals(password)
-                    && staff.getUserType() == Person.UserType.staff) {
+                    && staff.getUserType().equals("staff")) {
                 return "staff";
             }
         }
         for (Volunteer volunteer : volunteers) {
             if (volunteer.getEmail().equals(email) && volunteer.getPassword().equals(password)
-                    && volunteer.getUserType() == Person.UserType.volunteer) {
+                    && volunteer.getUserType().equals("volunteer")) {
 
                 return "volunteer";
 

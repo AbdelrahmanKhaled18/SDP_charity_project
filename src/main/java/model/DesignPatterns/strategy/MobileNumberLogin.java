@@ -36,13 +36,13 @@ public class MobileNumberLogin implements ILogin {
         ArrayList<Volunteer> volunteers = Volunteer.retrieveAllVolunteers();
         for (Staff staff : staffMembers) {
             if (staff.getPhoneNumber().equals(phoneNumber) && staff.getPassword().equals(password)
-                    && staff.getUserType() == Person.UserType.staff) {
+                    && staff.getUserType().equals("staff")) {
                 return "staff";
             }
         }
         for (Volunteer volunteer : volunteers) {
             if (volunteer.getPhoneNumber().equals(phoneNumber) && volunteer.getPassword().equals(password)
-                    && volunteer.getUserType() == Person.UserType.volunteer) {
+                    && volunteer.getUserType().equals("volunteer")) {
                 return "volunteer";
 
             }

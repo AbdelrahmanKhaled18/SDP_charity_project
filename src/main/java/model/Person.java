@@ -1,5 +1,6 @@
 package model;
 
+import model.DesignPatterns.template.Donation;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
