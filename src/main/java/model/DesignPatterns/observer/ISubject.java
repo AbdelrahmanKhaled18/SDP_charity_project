@@ -1,4 +1,4 @@
-package model.DesignPatterns;
+package model.DesignPatterns.observer;
 
 public interface ISubject {
      void registerObservers(IObserver observer);

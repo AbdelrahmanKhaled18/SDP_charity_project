@@ -1,7 +1,5 @@
-package model.DesignPatterns;
+package model.DesignPatterns.observer;
 
-
-import model.RealCampaign;
 
 public interface IObserver {
     public void update(double currentCollectedAmount);

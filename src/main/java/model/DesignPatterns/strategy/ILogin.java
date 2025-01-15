@@ -1,4 +1,4 @@
-package model.DesignPatterns;
+package model.DesignPatterns.strategy;
 
 public interface ILogin {
     String login();

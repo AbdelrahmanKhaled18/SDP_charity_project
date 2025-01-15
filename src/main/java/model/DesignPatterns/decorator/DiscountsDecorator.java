@@ -1,4 +1,4 @@
-package model.DesignPatterns;
+package model.DesignPatterns.decorator;
 
 public class DiscountsDecorator extends PaymentDecorator{
     private double DiscountAmount;

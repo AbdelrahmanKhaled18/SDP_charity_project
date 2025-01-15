@@ -1,9 +1,9 @@
 package com.example.demo2;
 
-import model.DesignPatterns.EmailLogin;
-import model.DesignPatterns.MobileNumberLogin;
-import model.DesignPatterns.UserLoginContext;
-import model.DesignPatterns.UserNameLogin;
+import model.DesignPatterns.strategy.EmailLogin;
+import model.DesignPatterns.strategy.MobileNumberLogin;
+import model.DesignPatterns.strategy.UserLoginContext;
+import model.DesignPatterns.strategy.UserNameLogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

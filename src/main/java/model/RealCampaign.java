@@ -1,7 +1,7 @@
 package model;
 
-import model.DesignPatterns.IObserver;
-import model.DesignPatterns.ISubject;
+import model.DesignPatterns.observer.IObserver;
+import model.DesignPatterns.observer.ISubject;
 
 import java.util.ArrayList;
 import java.util.Date;

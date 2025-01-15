@@ -1,4 +1,4 @@
-package model.DesignPatterns;
+package model.DesignPatterns.strategy;
 
 import model.Person;
 import model.Staff;

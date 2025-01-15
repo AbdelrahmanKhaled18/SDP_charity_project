@@ -1,4 +1,4 @@
-package model.DesignPatterns;
+package model.DesignPatterns.strategy;
 
 public class UserLoginContext {
     private ILogin loginStrategyRef;

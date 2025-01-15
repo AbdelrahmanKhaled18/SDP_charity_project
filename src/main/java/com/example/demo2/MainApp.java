@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.*;
-import model.DesignPatterns.IObserver;
-import model.DesignPatterns.VolunteerObserver;
 
 import java.io.IOException;
 import java.util.ArrayList;
