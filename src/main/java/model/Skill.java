@@ -3,18 +3,9 @@ package model;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Skill {
-    private int id;
+public class Skill extends Entity {
     private String name;
     private String description;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -39,7 +30,7 @@ public class Skill {
 
     public Skill(int id, String name, String description) {
         this(name, description);
-        this.id = id;
+        setId(id);
     }
 
 

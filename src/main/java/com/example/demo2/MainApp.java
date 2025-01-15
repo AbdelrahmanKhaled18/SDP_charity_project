@@ -21,7 +21,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-        RealCampaign realCampaign = new RealCampaign(1 , new Staff(
+        Campaign realCampaign = new Campaign(1 , new Staff(
                 "Mohaemd Khaled",
                 "Male",
                 "01050209620",

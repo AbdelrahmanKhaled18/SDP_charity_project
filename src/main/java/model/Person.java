@@ -5,13 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public abstract class Person {
-
-    public enum UserType {
-        volunteer, staff;
-    }
-
-    private int id;
+public abstract class Person extends Entity {
     private String name;
     private String gender;
     private String phoneNumber;
@@ -21,14 +15,14 @@ public abstract class Person {
     private Date dateOfBirth;
     private boolean isActive;
     private Address address;
-    private UserType userType;
+    private String userType;
 
     private ArrayList<Donation> donationHistory;
     private ArrayList<Task> assignedTasks;
 
     public Person(String name, String gender, String phoneNumber, String email, String password, String nationalId,
                   Date dateOfBirth, boolean isActive, Address address,
-                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks, UserType userType) {
+                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks, String userType) {
         this.name = name;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
@@ -45,17 +39,9 @@ public abstract class Person {
 
     public Person(int id, String name, String gender, String phoneNumber, String email, String password,
                   String nationalId, Date dateOfBirth, boolean isActive, Address address,
-                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks, UserType userType) {
+                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks, String userType) {
         this(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        setId(id);
     }
 
     public String getName() {
@@ -126,11 +112,11 @@ public abstract class Person {
         return address;
     }
 
-    public UserType getUserType() {
+    public String getUserType() {
         return userType; // Getter for enum
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(String userType) {
         this.userType = userType; // Setter for enum
     }
 
@@ -169,11 +155,6 @@ public abstract class Person {
     public void updateContactInfo(String email, String phoneNumber) {
         setEmail(email);
         setPhoneNumber(phoneNumber);
-    }
-
-    public void makeDonation(double amount) {
-        Donation donation = new Donation(amount, new Date(), id);
-        donationHistory.add(donation);
     }
 
 
@@ -311,10 +292,10 @@ public abstract class Person {
                 boolean isActive = rs.getBoolean("is_active");
                 int addressId = rs.getInt("address_id");
                 Address address = (addressId > 0) ? Address.retrieveAddress(addressId) : null;
-                Person.UserType userType = Person.UserType.valueOf(rs.getString("user_type"));
+                String userType = rs.getString("user_type");
 
                 // Determine if the person is a staff or volunteer
-                if (userType == Person.UserType.staff) {
+                if (userType.equals("staff")) {
                     // Fetch staff-specific fields
                     String position = rs.getString("staff_position");
                     String department = rs.getString("staff_department");
@@ -325,7 +306,7 @@ public abstract class Person {
                             Person.retrievePersonTasks(id), // Fetch tasks
                             userType, position, department
                     ));
-                } else if (userType == Person.UserType.volunteer) {
+                } else if (userType.equals("volunteer")) {
                     // Fetch volunteer-specific fields
                     ArrayList<Skill> skills = Volunteer.retrieveVolunteerSkills(id);
                     persons.add(new Volunteer(

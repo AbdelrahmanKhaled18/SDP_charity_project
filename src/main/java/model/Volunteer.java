@@ -22,14 +22,14 @@ public class Volunteer extends Person {
 
     public Volunteer(String name, String gender, String phoneNumber, String email, String password, String nationalId,
                      Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
-                     ArrayList<Task> assignedTasks, UserType userType, ArrayList<Skill> skills) {
+                     ArrayList<Task> assignedTasks, String userType, ArrayList<Skill> skills) {
         super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
         this.skills = skills;
     }
 
     public Volunteer(int id, String name, String gender, String phoneNumber, String email, String password, String nationalId,
                      Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
-                     ArrayList<Task> assignedTasks, UserType userType, ArrayList<Skill> skills) {
+                     ArrayList<Task> assignedTasks, String userType, ArrayList<Skill> skills) {
         super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
         this.skills = skills;
     }
@@ -96,6 +96,18 @@ public class Volunteer extends Person {
         if (!Person.createPerson(volunteer))
             return false;
 
+        String command = "INSERT INTO staff (`person_id`, `position`, `department`) VALUES (?,?,?)";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+
+        try {
+            PreparedStatement userTypeStatement = conn.prepareStatement("UPDATE person SET user_type='volunteer' WHERE id=?");
+            userTypeStatement.setInt(1, volunteer.getId());
+        }
+
+        catch (SQLException e) {
+            return false;
+        }
+
         for (Skill skill : volunteer.getSkills()) {
             if (Volunteer.addVolunteerSkill(volunteer.getId(), skill.getId()))
                 return false;
@@ -151,7 +163,7 @@ public class Volunteer extends Person {
             Address address = Address.retrieveAddress(addressId);
             ArrayList<Donation> donationHistory = Donation.retrievePersonDonations(id);
             ArrayList<Task> assignedTasks = Person.retrievePersonTasks(id);
-            UserType userType = UserType.valueOf(rs.getString("user_type"));
+            String userType = rs.getString("user_type");
             ArrayList<Skill> skills = Volunteer.retrieveVolunteerSkills(id);
             volunteers.add(new Volunteer(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive,
                     address, donationHistory, assignedTasks, userType, skills));

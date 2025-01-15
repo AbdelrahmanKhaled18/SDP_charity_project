@@ -3,8 +3,7 @@ package model;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Address {
-    private int id;
+public class Address extends Entity{
     private String name;
     private Address parentAddress;
 
@@ -14,7 +13,7 @@ public class Address {
 
     public Address(int id, String name) {
         this(name);
-        this.id = id;
+        setId(id);
     }
 
     public Address(String name, Address parentAddress) {
@@ -25,7 +24,7 @@ public class Address {
 
     public Address(int id, String name, Address parentAddress) {
         this(name, parentAddress);
-        this.id = id;
+        setId(id);
     }
 
     public String getName() {
@@ -34,14 +33,6 @@ public class Address {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Address getParentAddress() {

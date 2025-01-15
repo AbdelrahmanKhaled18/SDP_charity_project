@@ -27,16 +27,16 @@ public class Staff extends Person {
 
     public Staff(String name, String gender, String phoneNumber, String email, String password, String nationalId,
                  Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
-                 ArrayList<Task> assignedTasks,UserType userType, String position, String department) {
-        super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks,userType);
+                 ArrayList<Task> assignedTasks, String userType, String position, String department) {
+        super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
         this.position = position;
         this.department = department;
     }
 
     public Staff(int id, String name, String gender, String phoneNumber, String email, String password, String nationalId,
                  Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
-                 ArrayList<Task> assignedTasks,UserType userType, String position, String department) {
-        super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks,userType);
+                 ArrayList<Task> assignedTasks, String userType, String position, String department) {
+        super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
         this.position = position;
         this.department = department;
     }
@@ -48,6 +48,9 @@ public class Staff extends Person {
         String command = "INSERT INTO staff (`person_id`, `position`, `department`) VALUES (?,?,?)";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
+            PreparedStatement userTypeStatement = conn.prepareStatement("UPDATE person SET user_type='staff' WHERE id=?");
+            userTypeStatement.setInt(1, staff.getId());
+            userTypeStatement.executeUpdate();
             PreparedStatement statement = conn.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, staff.getId());
             statement.setString(2, staff.getPosition());
@@ -144,9 +147,9 @@ public class Staff extends Person {
             ArrayList<Task> assignedTasks = Person.retrievePersonTasks(id);
             String position = rs.getString("position");
             String department = rs.getString("department");
-            UserType userType= UserType.valueOf(rs.getString("user_type"));
+            String userType = rs.getString("user_type");
             staffMembers.add(new Staff(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive,
-                    address, donationHistory, assignedTasks,userType, position, department));
+                    address, donationHistory, assignedTasks, userType, position, department));
         }
         return staffMembers;
     }
