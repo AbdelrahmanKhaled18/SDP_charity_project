@@ -49,13 +49,24 @@ public class InKindDonation extends Donation {
 
     @Override
     boolean validateDonation(Donation donation) {
+
         if (!(donation instanceof InKindDonation)) {
+            System.out.println("Invalid donation type.");
             return false;
         }
 
         InKindDonation inKindDonation = (InKindDonation) donation;
 
-        return inKindDonation.getQuantity() > 0 && ("food".equalsIgnoreCase(inKindDonation.getType()) || "clothes".equalsIgnoreCase(inKindDonation.getType()) || "medical supplies".equalsIgnoreCase(inKindDonation.getType()));
+        if (inKindDonation.getQuantity() <= 0) {
+            return false;
+        }
+
+        String type = inKindDonation.getType();
+        if (type == null || type.isEmpty() || type.matches("\\d+")) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override

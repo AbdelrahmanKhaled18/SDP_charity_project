@@ -8,25 +8,30 @@
 
 <AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.StaffDonateController">
    <children>
-      <AnchorPane layoutX="3.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: rgba(208,249,249,0.5);">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="451.0" style="-fx-background-color: rgba(208,249,249,0.5);">
          <children>
-            <Label layoutX="65.0" layoutY="14.0" text="Donate to the charity">
+            <Label layoutX="90.0" layoutY="16.0" text="Donate to the charity">
                <font>
                   <Font name="Times New Roman Bold" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="donationAmountField" layoutX="126.0" layoutY="126.0" promptText="Enter amount" />
-            <Button layoutX="126.0" layoutY="163.0" onAction="#DonateWithfawryStaff" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Donate with Fawry" textFill="WHITE">
+            <TextField fx:id="donationAmountField" layoutX="109.0" layoutY="123.0" prefHeight="25.0" prefWidth="190.0" promptText="Enter amount" />
+            <Button layoutX="136.0" layoutY="167.0" onAction="#DonateWithfawryStaff" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Donate with fawry" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Label layoutX="169.0" layoutY="65.0" prefHeight="67.0" prefWidth="62.0" text="Donate">
+            <Button layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#goToStaffIntro" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="12.0" />
                </font>
-            </Label>
-            <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#goToStaffIntro" prefHeight="25.0" prefWidth="19.0" style="-fx-background-color: rgba(0,174,255);" text="&lt;" textFill="WHITE">
+            </Button>
+            <Button fx:id="UndoDonationButton" layoutX="136.0" layoutY="204.0" onAction="#DonateWithfawryStaff" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Undo Donation" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="DiscountButton" layoutX="309.0" layoutY="122.0" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #4CAF50;" text="Apply Discount" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
