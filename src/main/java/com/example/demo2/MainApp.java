@@ -39,9 +39,9 @@ public class MainApp extends Application {
                 "Alo",
                 "Operations" //Default Staff Department
         ));
-        IObserver volunteerObserver = new VolunteerObserver(realCampaign , "medo20333883@gmail.com");
-        IObserver newVolunteerObserver = new VolunteerObserver(realCampaign , "abdalrahmank2000@gmail.com");
-        realCampaign.notifyObservers();
+//        IObserver volunteerObserver = new VolunteerObserver(realCampaign , "medo20333883@gmail.com");
+//        IObserver newVolunteerObserver = new VolunteerObserver(realCampaign , "abdalrahmank2000@gmail.com");
+//        realCampaign.notifyObservers();
         launch(args);
     }
 }
