@@ -23,7 +23,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-        RealCampaign realCampaign = new RealCampaign(1 , new Staff(
+        Campaign campaign = new Campaign(1 , new Staff(
                 "Mohaemd Khaled",
                 "Male",
                 "01050209620",
@@ -39,9 +39,10 @@ public class MainApp extends Application {
                 "Alo",
                 "Operations" //Default Staff Department
         ));
-        IObserver volunteerObserver = new VolunteerObserver(realCampaign , "medo20333883@gmail.com");
-        IObserver newVolunteerObserver = new VolunteerObserver(realCampaign , "abdalrahmank2000@gmail.com");
-        realCampaign.notifyObservers();
+        IObserver volunteerObserver = new VolunteerObserver(campaign, "medo20333883@gmail.com");
+        // will get Email from volunteer object that will subscribe to Campaign
+        IObserver newVolunteerObserver = new VolunteerObserver(campaign, "abdalrahmank2000@gmail.com");
+        campaign.notifyObservers();
         launch(args);
     }
 }

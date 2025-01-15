@@ -3,7 +3,6 @@ package model.DesignPatterns;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
-import model.RealCampaign;
 
 
 import java.util.Properties;
