@@ -6,18 +6,16 @@ import java.sql.*;
 
 abstract class Donation {
     private int id;
-    private double amount;
     private Date date;
     private int personId;
 
-    public Donation(double amount, Date date, int personId) {
-        this.amount = amount;
+    public Donation( Date date, int personId) {
         this.date = date;
         this.personId = personId;
     }
 
     public Donation(int id, double amount, Date date, int personId) {
-        this(amount, date, personId);
+        this(date, personId);
         this.id = id;
     }
 
@@ -27,14 +25,6 @@ abstract class Donation {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
     }
 
     public Date getDate() {

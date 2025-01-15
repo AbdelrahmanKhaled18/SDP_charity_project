@@ -4,21 +4,21 @@ import java.util.Date;
 
 public class InKindDonation extends Donation {
 
-    private String Type;
+    private String type;
     private int quantity;
 
-    public InKindDonation(double amount, Date date, int personId, String Type, int quantity) {
-        super(0.0, date, personId);
-        this.Type = Type;
+    public InKindDonation(Date date, int personId, String Type, int quantity) {
+        super(date, personId);
+        this.type = Type;
         this.quantity = quantity;
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String Type) {
-        this.Type = Type;
+        this.type = Type;
     }
 
     public int getQuantity() {
