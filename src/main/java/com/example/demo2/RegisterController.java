@@ -107,7 +107,7 @@ public class RegisterController {
                     staffAddress,
                     new ArrayList<>(),
                     new ArrayList<>(),
-                    Person.UserType.staff,
+                    "staff",
                     selectedRole,
                     "Operations" //Default Staff Department
             );
@@ -125,7 +125,7 @@ public class RegisterController {
                     staffAddress,
                     new ArrayList<>(),
                     new ArrayList<>(),
-                    Person.UserType.staff,
+                    "volunteer",
                     new ArrayList<>()
             );
             Volunteer.createVolunteer(volunteer);
