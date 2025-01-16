@@ -2,6 +2,7 @@ package model.DesignPatterns.template;
 
 import java.sql.*;
 import java.util.Date;
+
 import model.Address;
 import model.DatabaseConnection;
 
@@ -72,6 +73,37 @@ public class InKindDonation extends Donation {
     @Override
     boolean saveDonation(Donation donation) {
         return createInKindDonation((InKindDonation) donation);
+    }
+
+    @Override
+    public boolean undoDonation(Donation donation) {
+        if (!(donation instanceof InKindDonation)) {
+            return false;
+        }
+
+        InKindDonation inKindDonation = (InKindDonation) donation;
+        return deleteInKindDonation(inKindDonation);
+    }
+
+    private static boolean deleteInKindDonation(InKindDonation donation) {
+        String deleteMoneyDonationCommand = "DELETE FROM in_kind_donation WHERE donation_id=?";
+        String deleteDonationCommand = "DELETE FROM donation WHERE id=?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement moneyDonationStatement = conn.prepareStatement(deleteMoneyDonationCommand);
+            moneyDonationStatement.setInt(1, donation.getId());
+            moneyDonationStatement.executeUpdate();
+            moneyDonationStatement.close();
+            PreparedStatement donationStatement = conn.prepareStatement(deleteDonationCommand);
+            donationStatement.setInt(1, donation.getId());
+            donationStatement.executeUpdate();
+            donationStatement.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error while deleting donation: " + e.getMessage());
+            return false;
+        }
     }
 
 

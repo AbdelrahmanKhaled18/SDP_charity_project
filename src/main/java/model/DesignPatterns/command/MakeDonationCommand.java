@@ -20,6 +20,6 @@ public class MakeDonationCommand implements ICommand {
     @Override
     public void unExecute() {
         donation.undoDonation(donation);
-}
+    }
 
 }

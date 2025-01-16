@@ -57,6 +57,8 @@ public abstract class Donation extends Entity {
 
     abstract boolean saveDonation(Donation donation);
 
+    public abstract boolean undoDonation(Donation donation);
+
     public void notifyDonor() {
     }
 

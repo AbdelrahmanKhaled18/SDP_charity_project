@@ -2,9 +2,10 @@ package model.DesignPatterns.template;
 
 import java.sql.*;
 import java.util.Date;
+
 import model.DatabaseConnection;
 
-public class MoneyDonation extends Donation{
+public class MoneyDonation extends Donation {
 
     private double amount;
 
@@ -40,6 +41,37 @@ public class MoneyDonation extends Donation{
     @Override
     boolean saveDonation(Donation donation) {
         return createMoneyDonation((MoneyDonation) donation);
+    }
+
+    @Override
+    public boolean undoDonation(Donation donation) {
+        if (!(donation instanceof MoneyDonation)) {
+            return false;
+        }
+
+        MoneyDonation moneyDonation = (MoneyDonation) donation;
+        return(deleteMoneyDonation(moneyDonation));
+    }
+
+    private static boolean deleteMoneyDonation(MoneyDonation donation) {
+        String deleteMoneyDonationCommand = "DELETE FROM money_donation WHERE donation_id=?";
+        String deleteDonationCommand = "DELETE FROM donation WHERE id=?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement moneyDonationStatement = conn.prepareStatement(deleteMoneyDonationCommand);
+            moneyDonationStatement.setInt(1, donation.getId());
+            moneyDonationStatement.executeUpdate();
+            moneyDonationStatement.close();
+            PreparedStatement donationStatement = conn.prepareStatement(deleteDonationCommand);
+            donationStatement.setInt(1, donation.getId());
+            donationStatement.executeUpdate();
+            donationStatement.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error while deleting donation: " + e.getMessage());
+            return false;
+        }
     }
 
     public static boolean createMoneyDonation(MoneyDonation donation) {
