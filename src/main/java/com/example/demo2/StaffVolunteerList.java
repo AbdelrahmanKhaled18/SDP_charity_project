@@ -9,20 +9,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Person;
-import model.Skill;
 import model.Task;
 import model.Volunteer;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ViewEventsVolunteersController {
+public class StaffVolunteerList {
 
     public ListView volunteersListView;
     public ComboBox TaskSelectionBox;
@@ -128,8 +124,8 @@ public class ViewEventsVolunteersController {
 
 
     @FXML
-    private void goToAssignVolunteersPage(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffAssignVolunteer.fxml"));
+    private void goToStaffIntro(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

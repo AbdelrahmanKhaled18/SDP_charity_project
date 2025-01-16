@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -52,12 +53,7 @@
       <DatePicker fx:id="startDate" layoutX="31.0" layoutY="202.0" prefHeight="25.0" prefWidth="215.0" promptText="Start date" />
       <DatePicker fx:id="endDate" layoutX="31.0" layoutY="255.0" prefHeight="25.0" prefWidth="215.0" promptText="End date" />
       <ChoiceBox fx:id="campaignState" layoutX="31.0" layoutY="311.0" prefWidth="150.0" />
-      <Button fx:id="createCampaignButton" layoutX="255.0" layoutY="319.0" mnemonicParsing="false" onAction="#createCampaign" style="-fx-background-color: rgba(0,174,255);" text="Create Campaign" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="assignTaskButton" layoutX="255.0" layoutY="355.0" mnemonicParsing="false" onAction="#assignTaskButton" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: rgba(0,174,255);" text="Assign Task" textFill="WHITE">
+      <Button fx:id="createCampaignButton" layoutX="246.0" layoutY="336.0" mnemonicParsing="false" onAction="#createCampaign" prefHeight="34.0" prefWidth="123.0" style="-fx-background-color: rgba(0,174,255);" text="Create Campaign" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -67,5 +63,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <Separator layoutX="200.0" layoutY="59.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

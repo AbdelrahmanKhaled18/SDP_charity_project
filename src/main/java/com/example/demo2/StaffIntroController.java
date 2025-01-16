@@ -53,4 +53,46 @@ public class StaffIntroController {
         stage.show();
     }
 
+    @FXML
+    private void viewCampaignPage(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffCampaignList.fxml"));
+        Parent nextPageRoot = loader.load();
+
+        // Get the current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene to the new page
+        stage.setScene(new Scene(nextPageRoot));
+        stage.setTitle("Add Event/Volunteer Page");
+        stage.show();
+    }
+
+    @FXML
+    private void createTaskPage(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffCreateTask.fxml"));
+        Parent nextPageRoot = loader.load();
+
+        // Get the current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene to the new page
+        stage.setScene(new Scene(nextPageRoot));
+        stage.setTitle("Add Event/Volunteer Page");
+        stage.show();
+    }
+
+    @FXML
+    private void assignVolunteersPage(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffAssignVolunteer.fxml"));
+        Parent nextPageRoot = loader.load();
+
+        // Get the current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene to the new page
+        stage.setScene(new Scene(nextPageRoot));
+        stage.setTitle("Add Event/Volunteer Page");
+        stage.show();
+    }
+
 }

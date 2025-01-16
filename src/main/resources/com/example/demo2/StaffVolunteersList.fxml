@@ -4,22 +4,23 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.ViewEventsVolunteersController">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.StaffVolunteerList">
    <children>
 
               <!-- View Events and Volunteers Section -->
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgba(208,249,249,0.5);">
             <children>
-                <Label layoutX="194.0" layoutY="25.0" text="View Volunteers">
+                <Label layoutX="194.0" layoutY="22.0" text="View Volunteers">
                     <font>
                         <Font name="Times New Roman Bold" size="30.0" />
                     </font>
                 </Label>
                 <ComboBox fx:id="TaskSelectionBox" layoutX="190.0" layoutY="77.0" prefHeight="27.0" prefWidth="216.0" promptText="Select Task" style="-fx-background-color: rgba(0,174,255);" />
-                <Button fx:id="viewVolunteers" layoutX="244.0" layoutY="316.0" onAction="#viewVolunteersByTask" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: rgba(0,174,255);" text="View Volunteers" textFill="WHITE">
+                <Button fx:id="viewVolunteers" layoutX="224.0" layoutY="317.0" onAction="#viewVolunteersByTask" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="View Volunteers" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -30,12 +31,13 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <Button fx:id="Back" layoutX="31.0" layoutY="28.0" mnemonicParsing="false" onAction="#goToStaffIntro" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Separator layoutX="201.0" layoutY="54.0" prefWidth="200.0" />
             </children>
         </AnchorPane>
-      <Button fx:id="Back" layoutX="35.0" layoutY="31.0" mnemonicParsing="false" onAction="#goToAssignVolunteersPage" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

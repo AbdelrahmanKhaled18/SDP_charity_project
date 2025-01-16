@@ -10,11 +10,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StaffAddTasktoCampaignController {
+public class StaffCreateTask {
 
     @FXML
-    private void goToStaffCreateCampaign(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffCreateCampaign.fxml"));
+    private void goToStaffIntro(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -37,17 +37,4 @@ public class StaffAddTasktoCampaignController {
 
     }
 
-    @FXML
-    private void assignVolunteerButton(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffAssignVolunteer.fxml"));
-        Parent nextPageRoot = loader.load();
-
-        // Get the current stage
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Set the scene to the new page
-        stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Volunteering");
-        stage.show();
-    }
 }

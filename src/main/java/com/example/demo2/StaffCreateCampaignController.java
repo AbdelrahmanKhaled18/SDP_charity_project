@@ -39,7 +39,7 @@ public class StaffCreateCampaignController {
 
     @FXML
     private void assignTaskButton(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffAddTasktoCampaign.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffCreateTask.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
