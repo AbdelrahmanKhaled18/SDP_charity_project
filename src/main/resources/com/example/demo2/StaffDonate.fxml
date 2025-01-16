@@ -26,12 +26,12 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="UndoDonationButton" layoutX="136.0" layoutY="204.0" onAction="#DonateWithfawryStaff" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Undo Donation" textFill="WHITE">
+            <Button fx:id="UndoDonationButton" layoutX="136.0" layoutY="204.0" onAction="#UndoDonation" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Undo Donation" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="DiscountButton" layoutX="309.0" layoutY="122.0" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #4CAF50;" text="Apply Discount" textFill="WHITE">
+            <Button fx:id="DiscountButton" layoutX="309.0" layoutY="122.0" onAction="#applyDiscount" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #4CAF50;" text="Apply Discount" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

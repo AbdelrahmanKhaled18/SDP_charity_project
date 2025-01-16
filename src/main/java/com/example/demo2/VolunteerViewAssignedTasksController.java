@@ -18,7 +18,7 @@ import model.Volunteer;
 import java.io.IOException;
 
 
-public class VolunteerController {
+public class VolunteerViewAssignedTasksController {
 
 
     public ListView SkillsList;

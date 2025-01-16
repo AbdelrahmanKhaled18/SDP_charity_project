@@ -23,7 +23,7 @@
          <font>
             <Font name="Times New Roman Bold" size="16.0" />
          </font></Label>
-      <Button fx:id="Back" layoutX="35.0" layoutY="31.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
+      <Button fx:id="Back" layoutX="35.0" layoutY="31.0" mnemonicParsing="false" onAction="#goToCreateTaskPage" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -33,12 +33,12 @@
             <Font name="Times New Roman Bold" size="16.0" />
          </font></Label>
       <ComboBox fx:id="selectCampaign" layoutX="127.0" layoutY="124.0" prefWidth="150.0" promptText="Select Campaign" />
-      <Button fx:id="addVolunteer" layoutX="246.0" layoutY="318.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: rgba(0,174,255);" text="Add Volunteer" textFill="WHITE">
+      <Button fx:id="addVolunteer" layoutX="246.0" layoutY="318.0" mnemonicParsing="false" onAction="#assignVolunteer" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: rgba(0,174,255);" text="Add Volunteer" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="addVolunteer1" layoutX="247.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: rgba(0,174,255);" text="View Volunteers" textFill="WHITE">
+      <Button fx:id="addVolunteer1" layoutX="247.0" layoutY="353.0" mnemonicParsing="false" onAction="#viewVolunteersPage" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: rgba(0,174,255);" text="View Volunteers" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
