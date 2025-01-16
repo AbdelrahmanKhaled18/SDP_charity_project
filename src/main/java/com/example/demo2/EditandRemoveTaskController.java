@@ -106,7 +106,7 @@ public class EditandRemoveTaskController implements Initializable {
 
         // Set the scene to the new page
         stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Volunteering");
+        stage.setTitle("Volunteers List");
         stage.show();
     }
 }
