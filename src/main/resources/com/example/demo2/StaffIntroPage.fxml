@@ -10,7 +10,7 @@
     <!-- Buttons for Donating and Viewing Events/Volunteers -->
     <Button fx:id="MoneyDonation" layoutX="273.0" layoutY="160.0" onAction="#StaffDonatePage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Money Donation" />
 
-    <Button fx:id="viewEventsButton" layoutX="273.0" layoutY="283.0" onAction="#ViewEventsVolunteersButton" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #2196F3; -fx-text-fill: white;" text="View Events/Volunteers" />
+    <Button fx:id="viewEventsButton" layoutX="273.0" layoutY="283.0" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #2196F3; -fx-text-fill: white;" text="Create Campaign" />
 
     <Label layoutX="13.0" layoutY="43.0" text="“Leadership is not about being in charge. It's about taking care of those in your charge.”">
         <font>

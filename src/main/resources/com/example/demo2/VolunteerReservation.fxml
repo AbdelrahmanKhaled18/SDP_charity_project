@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="610.0" prefWidth="400.0" style="-fx-background-color: rgba(208,249,249,0.5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.VolunteerReservationController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgba(208,249,249,0.5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.VolunteerReservationController">
    <children>
       <Label layoutX="14.0" layoutY="89.0" text="Full name*">
          <font>
@@ -36,12 +36,12 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="354.0" text="Previous experience*">
+      <Label layoutX="315.0" layoutY="88.0" text="Previous experience*">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="105.0" layoutY="34.0" text="Volunteer Info">
+      <Label layoutX="205.0" layoutY="21.0" text="Volunteer Info">
          <font>
             <Font name="Times New Roman Bold" size="30.0" />
          </font>
@@ -51,13 +51,13 @@
       <TextField fx:id="volunteerEmailaddress" layoutX="14.0" layoutY="208.0" prefHeight="25.0" prefWidth="271.0" />
       <DatePicker fx:id="DateAvailable" layoutX="14.0" layoutY="259.0" prefHeight="25.0" prefWidth="271.0" />
       <ChoiceBox fx:id="ShiftPreference" layoutX="14.0" layoutY="312.0" prefHeight="25.0" prefWidth="111.0" />
-      <TextArea fx:id="VolunteerExperience" layoutX="14.0" layoutY="371.0" prefHeight="101.0" prefWidth="271.0" />
-      <Button layoutX="65.0" layoutY="500.0" mnemonicParsing="false" onAction="#VolunteerAcceptance" prefHeight="35.0" prefWidth="271.0" style="-fx-background-color: rgba(0,174,255);" text="Next" textFill="WHITE">
+      <TextArea fx:id="VolunteerExperience" layoutX="315.0" layoutY="105.0" prefHeight="177.0" prefWidth="271.0" />
+      <Button layoutX="271.0" layoutY="318.0" mnemonicParsing="false" onAction="#VolunteerAcceptance" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: rgba(0,174,255);" text="Next" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="65.0" layoutY="543.0" mnemonicParsing="false" onAction="#VolunteerPage" prefHeight="35.0" prefWidth="271.0" style="-fx-background-color: rgba(0,174,255);" text="Cancel" textFill="WHITE">
+      <Button layoutX="271.0" layoutY="351.0" mnemonicParsing="false" onAction="#VolunteerPage" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: rgba(0,174,255);" text="Skip" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

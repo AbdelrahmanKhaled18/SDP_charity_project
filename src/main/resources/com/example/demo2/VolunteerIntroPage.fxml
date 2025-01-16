@@ -8,7 +8,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.0" prefWidth="781.0" style="-fx-padding: 30; -fx-background-color: rgba(208,249,249,0.5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.VolunteerIntroController">
 
     <!-- Buttons for Volunteering and Donating -->
-    <Button fx:id="volunteerButton" layoutX="273.0" layoutY="283.0" onAction="#VolunteerPage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #2196F3; -fx-text-fill: white;" text="Volunteer" />
+    <Button fx:id="volunteerButton" layoutX="273.0" layoutY="283.0" onAction="#VolunteerPage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #2196F3; -fx-text-fill: white;" text="Volunteer Info" />
 
     <Button fx:id="MoneyDonationButton" layoutX="273.0" layoutY="160.0" onAction="#DonatePage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Money Donation" />
    <Label layoutX="80.0" layoutY="39.0" text="“The best way to find yourself is to lose yourself in the service of others.”">

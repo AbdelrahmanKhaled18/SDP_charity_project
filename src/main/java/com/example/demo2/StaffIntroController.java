@@ -27,7 +27,7 @@ public class StaffIntroController {
 
     @FXML
     private void ViewEventsVolunteersButton(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewEventsVolunteers.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewEventsAndVolunteers.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
