@@ -92,7 +92,7 @@ public class LoginController {
             stage.show();
 
         } else if (answer.equals("volunteer")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntoPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntroPage.fxml"));
             Parent nextPageRoot = loader.load();
             // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

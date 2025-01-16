@@ -10,7 +10,7 @@
     <!-- Buttons for Volunteering and Donating -->
     <Button fx:id="volunteerButton" layoutX="273.0" layoutY="283.0" onAction="#VolunteerInfoPage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #2196F3; -fx-text-fill: white;" text="Volunteer Registration" />
 
-    <Button fx:id="MoneyDonationButton" layoutX="273.0" layoutY="160.0" onAction="#DonatePage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Money Donation" />
+    <Button fx:id="MoneyDonationButton" layoutX="273.0" layoutY="160.0" onAction="#DonateMoneyPage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Money Donation" />
    <Label layoutX="80.0" layoutY="39.0" text="“The best way to find yourself is to lose yourself in the service of others.”">
       <font>
          <Font name="Times New Roman Bold" size="20.0" />
@@ -21,6 +21,6 @@
          <Font name="Times New Roman Bold" size="14.0" />
       </font>
    </Label>
-   <Button fx:id="inKindDonationButton" layoutX="273.0" layoutY="221.0" onAction="#DonatePage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="In-Kind Donation" />
+   <Button fx:id="inKindDonationButton" layoutX="273.0" layoutY="221.0" onAction="#DonateInKindPage" prefHeight="45.0" prefWidth="235.0" style="-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="In-Kind Donation" />
 
 </AnchorPane>

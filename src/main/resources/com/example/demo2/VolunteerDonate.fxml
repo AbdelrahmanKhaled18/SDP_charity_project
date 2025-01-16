@@ -20,7 +20,7 @@
                   <Font name="Times New Roman Bold" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="fawryButton" layoutX="227.0" layoutY="262.0" onAction="#DonateWithfawry" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Donate with fawry" textFill="WHITE">
+            <Button fx:id="fawryButton" layoutX="227.0" layoutY="262.0" onAction="#DonateWithFawry" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Donate with fawry" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

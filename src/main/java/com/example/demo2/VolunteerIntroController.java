@@ -28,8 +28,23 @@ public class VolunteerIntroController {
     }
 
     @FXML
-    private void DonatePage(ActionEvent event) throws IOException {
+    private void DonateMoneyPage(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerDonate.fxml"));
+        Parent nextPageRoot = loader.load();
+
+        // Get the current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the scene to the new page
+        stage.setScene(new Scene(nextPageRoot));
+        stage.setTitle("Donating");
+        stage.show();
+    }
+
+
+    @FXML
+    private void DonateInKindPage(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerInKindDonate.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
