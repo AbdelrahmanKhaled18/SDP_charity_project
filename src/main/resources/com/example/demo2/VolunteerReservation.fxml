@@ -52,12 +52,12 @@
       <DatePicker fx:id="DateAvailable" layoutX="14.0" layoutY="259.0" prefHeight="25.0" prefWidth="271.0" />
       <ChoiceBox fx:id="ShiftPreference" layoutX="14.0" layoutY="312.0" prefHeight="25.0" prefWidth="111.0" />
       <TextArea fx:id="VolunteerExperience" layoutX="315.0" layoutY="105.0" prefHeight="177.0" prefWidth="271.0" />
-      <Button layoutX="271.0" layoutY="318.0" mnemonicParsing="false" onAction="#VolunteerAcceptance" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: rgba(0,174,255);" text="Next" textFill="WHITE">
+      <Button layoutX="271.0" layoutY="318.0" mnemonicParsing="false" onAction="#VolunteerAcceptance" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: rgba(0,174,255);" text="Save Info" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="271.0" layoutY="351.0" mnemonicParsing="false" onAction="#VolunteerPage" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: rgba(0,174,255);" text="Skip" textFill="WHITE">
+      <Button layoutX="271.0" layoutY="351.0" mnemonicParsing="false" onAction="#VolunteerPage" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: rgba(0,174,255);" text="Next" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

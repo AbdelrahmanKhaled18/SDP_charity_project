@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class TableViewController implements Initializable {
+public class EditandRemoveTaskController implements Initializable {
 
     @FXML
     private TableView<Task> tasksTable;
@@ -97,8 +97,8 @@ public class TableViewController implements Initializable {
     }
 
     @FXML
-    private void goToStaffIntro(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
+    private void goToViewVolunteers(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewEventsAndVolunteers.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

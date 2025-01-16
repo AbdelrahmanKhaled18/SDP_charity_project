@@ -52,17 +52,17 @@
       <DatePicker fx:id="startDate" layoutX="31.0" layoutY="202.0" prefHeight="25.0" prefWidth="215.0" promptText="Start date" />
       <DatePicker fx:id="endDate" layoutX="31.0" layoutY="255.0" prefHeight="25.0" prefWidth="215.0" promptText="End date" />
       <ChoiceBox fx:id="campaignState" layoutX="31.0" layoutY="311.0" prefWidth="150.0" />
-      <Button fx:id="createCampaignButton" layoutX="255.0" layoutY="319.0" mnemonicParsing="false" style="-fx-background-color: rgba(0,174,255);" text="Create Campaign" textFill="WHITE">
+      <Button fx:id="createCampaignButton" layoutX="255.0" layoutY="319.0" mnemonicParsing="false" onAction="#createCampaign" style="-fx-background-color: rgba(0,174,255);" text="Create Campaign" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="assignTaskButton" layoutX="255.0" layoutY="355.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: rgba(0,174,255);" text="Assign Task" textFill="WHITE">
+      <Button fx:id="assignTaskButton" layoutX="255.0" layoutY="355.0" mnemonicParsing="false" onAction="#assignTaskButton" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: rgba(0,174,255);" text="Assign Task" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="Back" layoutX="27.0" layoutY="30.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
+      <Button fx:id="Back" layoutX="27.0" layoutY="30.0" mnemonicParsing="false" onAction="#goToStaffIntro" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

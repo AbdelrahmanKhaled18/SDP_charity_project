@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="451.0" style="-fx-background-color: rgba(208,249,249,0.5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.StaffPaymentConfirmationController">
    <children>
-      <Button fx:id="cancelPaymentConfirmation" layoutX="402.0" layoutY="33.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" style="-fx-background-color: rgba(208,249,249,0.2);" text="X">
+      <Button fx:id="cancelPaymentConfirmation" layoutX="402.0" layoutY="33.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToStaffDonate" style="-fx-background-color: rgba(208,249,249,0.2);" text="X">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

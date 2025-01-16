@@ -128,8 +128,8 @@ public class ViewEventsVolunteersController {
 
 
     @FXML
-    private void goToStaffIntro(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
+    private void goToAssignVolunteersPage(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffAssignVolunteer.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

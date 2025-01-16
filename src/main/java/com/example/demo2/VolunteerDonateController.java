@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -21,45 +22,39 @@ public class VolunteerDonateController {
     public javafx.scene.control.TextField donationAmount;
 
     @FXML
-    private void DonateWithfawry() throws IOException {
+    private void DonateWithFawry(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerPaymentConfirmation.fxml"));
+        Parent nextPageRoot = loader.load();
 
-        double Amount = Double.parseDouble(donationAmount.getText());
-        boolean success = Donation.createDonation(new MoneyDonation(new Date(), 1, Amount));
+        // Get the current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        if (!success) {
-            Stage paymentStage = new Stage();
-            paymentStage.initModality(Modality.APPLICATION_MODAL); // Block interaction with other windows
-            paymentStage.setTitle("Payment Code");
+        // Set the scene to the new page
+        stage.setScene(new Scene(nextPageRoot));
+        stage.setTitle("Volunteering");
+        stage.show();
+    }
 
-            // Content of the popup window
-            Label paymentLabel = new Label("Donation failed");
-            Button closeButton = new Button("Close");
-            closeButton.setOnAction(e -> paymentStage.close());
 
-            VBox layout = new VBox(10, paymentLabel, closeButton);
-            layout.setStyle("-fx-alignment: center; -fx-padding: 20;");
+    @FXML
+    private void applyDiscount(javafx.event.ActionEvent event) throws IOException{
 
-            Scene scene = new Scene(layout, 250, 150);
-            paymentStage.setScene(scene);
-            paymentStage.showAndWait();
-            return;
-        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Discount Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText("Discount Applied!");
+        alert.showAndWait();
 
-        Stage paymentStage = new Stage();
-        paymentStage.initModality(Modality.APPLICATION_MODAL); // Block interaction with other windows
-        paymentStage.setTitle("Payment Code");
+    }
+    @FXML
+    private void undoDiscount(javafx.event.ActionEvent event) throws IOException{
 
-        // Content of the popup window
-        Label paymentLabel = new Label("Your Payment Code: ABC12345");
-        Button closeButton = new Button("Close");
-        closeButton.setOnAction(e -> paymentStage.close());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Undo Donation");
+        alert.setHeaderText(null);
+        alert.setContentText("Donation Deleted!");
+        alert.showAndWait();
 
-        VBox layout = new VBox(10, paymentLabel, closeButton);
-        layout.setStyle("-fx-alignment: center; -fx-padding: 20;");
-
-        Scene scene = new Scene(layout, 250, 150);
-        paymentStage.setScene(scene);
-        paymentStage.showAndWait();
     }
 
     @FXML

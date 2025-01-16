@@ -12,6 +12,7 @@ module com.example.demo2 {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires mysql.connector.java;
+    requires jakarta.mail;
     requires java.desktop;
     //requires jakarta.mail;
 

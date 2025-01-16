@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="472.0" prefWidth="557.0" style="-fx-background-color: rgba(208,249,249,0.5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.TableViewController">
+<AnchorPane prefHeight="472.0" prefWidth="557.0" style="-fx-background-color: rgba(208,249,249,0.5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.EditandRemoveTaskController">
    <TableView fx:id="tasksTable" editable="true" layoutX="16.0" layoutY="69.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="335.0" prefWidth="528.0">
       <columns>
          <TableColumn fx:id="taskColumn" minWidth="180.0" text="Task Name" />
@@ -23,7 +23,7 @@
          <Font name="Times New Roman Bold" size="30.0" />
       </font>
    </Label>
-   <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onAction="#goToStaffIntro" prefHeight="25.0" prefWidth="19.0" style="-fx-background-color: rgba(0,174,255);" text="&lt;" textFill="WHITE">
+   <Button fx:id="Back" layoutX="32.0" layoutY="18.0" mnemonicParsing="false" onAction="#goToViewVolunteers" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
       <font>
          <Font name="System Bold" size="12.0" />
       </font>

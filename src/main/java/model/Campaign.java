@@ -245,13 +245,13 @@ public class Campaign extends Entity implements ISubject {
         ArrayList<Campaign> campaigns = new ArrayList<>();
         while (rs.next()) {
             int id = rs.getInt("id");
-            String title = rs.getString("name");
-            String description = rs.getString("gender");
-            double goalAmount = rs.getDouble("phone_number");
-            double collectedAmount = rs.getDouble("email");
-            Date startDate = new Date(rs.getDate("date_of_birth").getTime());
-            Date endDate = new Date(rs.getDate("date_of_birth").getTime());
-            String status = rs.getString("address_id");
+            String title = rs.getString("title");
+            String description = rs.getString("description");
+            double goalAmount = rs.getDouble("goal_amount");
+            double collectedAmount = rs.getDouble("collected_amount");
+            Date startDate = new Date(rs.getDate("start_date").getTime());
+            Date endDate = new Date(rs.getDate("end_date").getTime());
+            String status = rs.getString("status");
 
             int creatorId = rs.getInt("creator");
             Staff creator = Staff.retrieveStaff(creatorId);
