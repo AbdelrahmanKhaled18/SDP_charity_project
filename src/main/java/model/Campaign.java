@@ -2,6 +2,7 @@ package model;
 
 import model.DesignPatterns.observer.IObserver;
 import model.DesignPatterns.observer.ISubject;
+import model.DesignPatterns.state.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,10 +17,9 @@ public class Campaign extends Entity implements ISubject {
     private Date startDate;
     private Date endDate;
 
-    private String status;
+    private CampaignState campaignState;
     private ArrayList<IObserver> observers;
     private Staff creator;
-
 
     public Campaign(Staff creator, String title, String description, double goalAmount, Date startDate, Date endDate) {
         observers = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Campaign extends Entity implements ISubject {
         this.collectedAmount = 0;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.status = "started";
+        this.campaignState = new InitiateCampaignState();
     }
 
     public Campaign(int id, Staff creator, String title, String description, double goalAmount, Date startDate, Date endDate) {
@@ -42,7 +42,7 @@ public class Campaign extends Entity implements ISubject {
                     double collectedAmount, String status) {
         this(id, creator, title, description, goalAmount, startDate, endDate);
         this.collectedAmount = collectedAmount;
-        this.status = status;
+        this.campaignState = map(status);
     }
 
 
@@ -94,12 +94,12 @@ public class Campaign extends Entity implements ISubject {
         this.endDate = endDate;
     }
 
-    public String getStatus() {
-        return status;
+    public String getCampaignState() {
+        return map(campaignState);
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCampaignState(CampaignState campaignState) {
+        this.campaignState = campaignState;
     }
 
     public ArrayList<IObserver> getObservers() {
@@ -135,12 +135,36 @@ public class Campaign extends Entity implements ISubject {
         }
     }
 
-
     public void addDonation(double amount) {
         this.collectedAmount += amount;
         Campaign.updateCampaign(this);
     }
 
+    public void executeHandleState() {
+        campaignState.NextState(this);
+    }
+
+    public CampaignState map(String state) {
+        return switch (state) {
+            case "InitiateCampaignState" -> new InitiateCampaignState();
+            case "PendingAcceptanceState" -> new PendingAcceptanceState();
+            case "PlannedState" -> new PlannedState();
+            case "ActivateState" -> new ActivateState();
+            case "CompletedState" -> new CompletedState();
+            default -> null;
+        };
+    }
+
+    public String map(CampaignState state) {
+        return switch (state) {
+            case InitiateCampaignState initiateCampaignState -> "InitiateCampaignState";
+            case PendingAcceptanceState pendingAcceptanceState -> "PendingAcceptanceState";
+            case PlannedState plannedState -> "PlannedState";
+            case ActivateState activateState -> "ActivateState";
+            case CompletedState completedState -> "CompletedState";
+            case null, default -> null;
+        };
+    }
 
     public static boolean createCampaign(Campaign campaign) {
         String command = "INSERT INTO campaign (`title`, `description`, `goal_amount`, " +
@@ -154,7 +178,7 @@ public class Campaign extends Entity implements ISubject {
             statement.setDouble(4, campaign.getCollectedAmount());
             statement.setDate(5, new java.sql.Date(campaign.getStartDate().getTime()));
             statement.setDate(6, new java.sql.Date(campaign.getEndDate().getTime()));
-            statement.setString(7, campaign.getStatus());
+            statement.setString(7, campaign.getCampaignState());
             statement.setInt(8, campaign.getCreator().getId());
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
@@ -182,7 +206,7 @@ public class Campaign extends Entity implements ISubject {
             statement.setDouble(4, campaign.getCollectedAmount());
             statement.setDate(5, new java.sql.Date(campaign.getStartDate().getTime()));
             statement.setDate(6, new java.sql.Date(campaign.getEndDate().getTime()));
-            statement.setString(7, campaign.getStatus());
+            statement.setString(7, campaign.getCampaignState());
             statement.setInt(8, campaign.getCreator().getId());
             statement.setInt(9, campaign.getId());
             boolean success = statement.executeUpdate() > 0;
