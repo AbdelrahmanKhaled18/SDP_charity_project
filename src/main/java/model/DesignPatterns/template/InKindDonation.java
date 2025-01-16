@@ -52,7 +52,6 @@ public class InKindDonation extends Donation {
     boolean validateDonation(Donation donation) {
 
         if (!(donation instanceof InKindDonation)) {
-            System.out.println("Invalid donation type.");
             return false;
         }
 
@@ -101,7 +100,6 @@ public class InKindDonation extends Donation {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("Error while deleting donation: " + e.getMessage());
             return false;
         }
     }

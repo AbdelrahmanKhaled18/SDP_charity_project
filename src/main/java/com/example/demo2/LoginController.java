@@ -80,7 +80,6 @@ public class LoginController {
         }
 
         String answer = userLoginContext.authenticate();
-        System.out.println(answer);
         if (answer.equals("staff")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
             Parent nextPageRoot = loader.load();
@@ -102,7 +101,6 @@ public class LoginController {
             stage.setTitle("Volunteer Page");
             stage.show();
         } else {
-            System.out.println("Login failed!");
             LoginEmail.clear();
             LoginPassword.clear();
             LoginEmail.setPromptText("Invalid credentials. Try again!");

@@ -69,7 +69,6 @@ public class MoneyDonation extends Donation {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("Error while deleting donation: " + e.getMessage());
             return false;
         }
     }

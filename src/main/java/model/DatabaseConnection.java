@@ -29,9 +29,9 @@ public class DatabaseConnection {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection(url, username, password);
             } catch (SQLException e) {
-                e.printStackTrace(); // Print stack trace for detailed error info
+                e.printStackTrace();
             } catch (ClassNotFoundException e) {
-                System.out.println("MySQL JDBC driver not found. Please add the driver to your project.");
+                e.printStackTrace();
             }
         }
     }

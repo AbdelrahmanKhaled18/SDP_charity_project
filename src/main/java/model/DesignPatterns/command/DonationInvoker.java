@@ -15,8 +15,6 @@ public class DonationInvoker {
         if (!commandHistory.isEmpty()) {
             ICommand lastCommand = commandHistory.pop();
             lastCommand.unExecute();
-        } else {
-            System.out.println("No commands to undo.");
         }
     }
 }

@@ -48,10 +48,8 @@ public class VolunteerObserver implements IObserver {
             message.setText(body);
 
             Transport.send(message);
-            System.out.println("Email sent successfully to: " + to);
         } catch (MessagingException e) {
             e.printStackTrace();
-            System.out.println("Failed to send email to: " + to);
         }
     }
 }
