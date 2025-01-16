@@ -21,7 +21,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-        Campaign realCampaign = new Campaign(1 , new Staff(
+        /*Campaign realCampaign = new Campaign(1 , new Staff(
                 "Mohaemd Khaled",
                 "Male",
                 "01050209620",
@@ -36,7 +36,7 @@ public class MainApp extends Application {
                 Person.UserType.staff,
                 "Alo",
                 "Operations" //Default Staff Department
-        ));
+        ));*/
 //        IObserver volunteerObserver = new VolunteerObserver(realCampaign , "medo20333883@gmail.com");
 //        IObserver newVolunteerObserver = new VolunteerObserver(realCampaign , "abdalrahmank2000@gmail.com");
 //        realCampaign.notifyObservers();
