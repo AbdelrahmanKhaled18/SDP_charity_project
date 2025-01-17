@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgba(208,249,249,0.5);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.staff.StaffReviewPendingCampaigns">
+    <children>
+        <Label layoutX="194.0" layoutY="22.0" text="View Campaigns">
+            <font>
+                <Font name="Times New Roman Bold" size="30.0" />
+            </font>
+        </Label>
+        <ListView fx:id="campaignList" layoutX="143.0" layoutY="68.0" prefHeight="231.0" prefWidth="315.0" />
+        <Separator layoutX="200.0" layoutY="55.0" prefWidth="200.0" />
+        <Button fx:id="Back" layoutX="37.0" layoutY="26.0" mnemonicParsing="false" onAction="#goToStaffIntro" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+      <Button fx:id="Back1" layoutX="178.0" layoutY="330.0" mnemonicParsing="false" onAction="#acceptCampaignIdea" prefHeight="46.0" prefWidth="93.0" style="-fx-background-color: rgb(50,205,50);" text="Accept" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="Back11" layoutX="353.0" layoutY="330.0" mnemonicParsing="false" onAction="#rejectCampaignIdea" prefHeight="46.0" prefWidth="94.0" style="-fx-background-color: rgb(220,20,60);" text="Reject" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>

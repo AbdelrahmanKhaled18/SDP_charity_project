@@ -16,7 +16,7 @@ public class CampaignStateManagementProxy implements IProxy {
 
     @Override
     public boolean manageCampaigns(Staff staff) {
-        if (allowedPositions.contains(campaign.getCreator())) {
+        if (allowedPositions.contains(campaign.getCreator().getPosition())) {
             return true;
         } else {
             return false;

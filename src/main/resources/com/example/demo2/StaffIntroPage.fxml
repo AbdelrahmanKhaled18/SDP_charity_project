@@ -47,6 +47,6 @@
          <Font name="System Bold" size="12.0" />
       </font>
    </Button>
-   <Button fx:id="logoutButton" layoutX="34.0" layoutY="43.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+   <Button fx:id="logoutButton" layoutX="531.0" layoutY="363.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: rgb(233,150,122);" text="Logout" textFill="WHITE" />
 
 </AnchorPane>

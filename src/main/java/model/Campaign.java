@@ -107,6 +107,7 @@ public class Campaign extends Entity implements ISubject {
 
     public void setCampaignState(CampaignState campaignState) {
         this.campaignState = campaignState;
+        Campaign.updateCampaign(this);
     }
 
     public ArrayList<IObserver> getObservers() {
@@ -177,6 +178,7 @@ public class Campaign extends Entity implements ISubject {
 
     public void start() {
         scheduler.scheduleAtFixedRate(this::run, 0, 1, TimeUnit.SECONDS);
+        this.executeHandleState();
     }
 
     public void stop() {
@@ -205,7 +207,6 @@ public class Campaign extends Entity implements ISubject {
         }
     }
 
-
     private static boolean setNotificationSent(int campaignId) {
         String command = "UPDATE campaign SET notification_sent=? WHERE id = ?";
         Connection conn = DatabaseConnection.getInstance().getConnection();
@@ -220,7 +221,6 @@ public class Campaign extends Entity implements ISubject {
             return false;
         }
     }
-
 
     private static boolean sendMailToVolunteers(int campaignId) {
         String command = "SELECT email, title, goal_amount FROM campaign_volunteers " +
@@ -249,7 +249,6 @@ public class Campaign extends Entity implements ISubject {
             statement.close();
             return setNotificationSent(campaignId);
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -308,7 +307,6 @@ public class Campaign extends Entity implements ISubject {
             statement.close();
             return success;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -406,7 +404,6 @@ public class Campaign extends Entity implements ISubject {
             statement.close();
             return campaigns;
         } catch (SQLException e) {
-            e.printStackTrace();
             return null;
         }
     }

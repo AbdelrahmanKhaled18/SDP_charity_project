@@ -11,11 +11,10 @@ public class InitiateCampaignState implements CampaignState {
     public void NextState(Campaign campaign) {
         proxyInstance = new CampaignStateManagementProxy(campaign);
         boolean isAuthorized = proxyInstance.manageCampaigns(campaign.getCreator());
-
         if (isAuthorized) {
-            campaign.setCampaignState(new PendingAcceptanceState());
-        } else {
             campaign.setCampaignState(new PlannedState());
+        } else {
+            campaign.setCampaignState(new PendingAcceptanceState());
         }
     }
 }

@@ -11,19 +11,24 @@
             <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Label>
-      <Button fx:id="viewCampaign" layoutX="225.0" layoutY="317.0" onAction="#retrieveCampaigns" prefHeight="27.0" prefWidth="156.0" style="-fx-background-color: rgba(0,174,255);" text="View Campaigns" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
       <ListView fx:id="campaignList" layoutX="143.0" layoutY="68.0" prefHeight="231.0" prefWidth="315.0" />
-      <Button fx:id="editingCampaigns" layoutX="226.0" layoutY="353.0" mnemonicParsing="false" onAction="#editRemoveCampaign" prefHeight="27.0" prefWidth="156.0" style="-fx-background-color: rgba(0,174,255);" text="Edit/Remove Campaign" textFill="WHITE">
+      <Button fx:id="editingCampaigns" layoutX="222.0" layoutY="323.0" mnemonicParsing="false" onAction="#editRemoveCampaign" prefHeight="27.0" prefWidth="156.0" style="-fx-background-color: rgba(0,174,255);" text="Edit/Remove Campaign" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
       <Separator layoutX="200.0" layoutY="55.0" prefWidth="200.0" />
       <Button fx:id="Back" layoutX="37.0" layoutY="26.0" mnemonicParsing="false" onAction="#goToStaffIntro" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="showPendingCampaignButton" layoutX="214.0" layoutY="358.0" mnemonicParsing="false" onAction="#openPendingReviewCampaigns" prefHeight="27.0" prefWidth="172.0" style="-fx-background-color: rgba(0,174,255);" text="Review Pending Campaigns" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="Back1" layoutX="485.0" layoutY="358.0" mnemonicParsing="false" onAction="#registerStaffToCampaign" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: rgba(0,174,255);" text="Register" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
