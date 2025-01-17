@@ -41,7 +41,7 @@
       <TextField fx:id="goalAmount" layoutX="31.0" layoutY="154.0" prefHeight="17.0" prefWidth="215.0" promptText="Goal" />
       <DatePicker fx:id="startDate" layoutX="31.0" layoutY="202.0" onAction="#getDate" prefHeight="25.0" prefWidth="215.0" promptText="Start date" />
       <DatePicker fx:id="endDate" layoutX="31.0" layoutY="255.0" onAction="#getDate" prefHeight="25.0" prefWidth="215.0" promptText="End date" />
-      <Button fx:id="createCampaignButton" layoutX="246.0" layoutY="336.0" mnemonicParsing="false" onAction="#createCampaign" prefHeight="34.0" prefWidth="123.0" style="-fx-background-color: rgba(0,174,255);" text="Create Campaign" textFill="WHITE">
+      <Button fx:id="createCampaignButton" layoutX="246.0" layoutY="336.0" mnemonicParsing="false" onAction="#saveOrUpdateCampaign" prefHeight="34.0" prefWidth="123.0" style="-fx-background-color: rgba(0,174,255);" text="Create Campaign" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

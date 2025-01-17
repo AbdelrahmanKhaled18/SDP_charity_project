@@ -41,7 +41,7 @@ public class StaffIntroController {
 
     @FXML
     private void CreateCampaignPage(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffCreateCampaign.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffCreate_UpdateCampaign.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

@@ -10,12 +10,14 @@ public class CampaignStateManagementProxy implements IProxy {
     private Campaign campaign;
     private List<String> allowedPositions = List.of("Manager", "Admin");
 
+    public CampaignStateManagementProxy(Campaign campaign) {
+        this.campaign = campaign;
+    }
 
     @Override
     public boolean manageCampaigns(Staff staff) {
         if (allowedPositions.contains(campaign.getCreator())) {
             return true;
-            //System.out.println("Pending Confirmation From Higher Authority Staff Member: " + staff.getPosition() + " is pending confirmation" + campaign.getTitle());
         } else {
             return false;
         }
