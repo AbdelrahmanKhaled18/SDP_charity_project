@@ -13,7 +13,7 @@ public class VolunteerPaymentConfirmationController {
 
     @FXML
     private void goToVolunteerDonate(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerDonate.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/VolunteerDonate.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

@@ -74,7 +74,7 @@ public class StaffVolunteerList {
 
     @FXML
     private void AddEventVolunteersButton(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEventandVolunteer.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/AddEventandVolunteer.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -110,7 +110,7 @@ public class StaffVolunteerList {
     @FXML
     private void EditAndRemoveTasksButton(javafx.event.ActionEvent event) throws IOException {
         // Use the correct path relative to the package
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Edit_RemoveTasks.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/Edit_RemoveTasks.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -125,7 +125,7 @@ public class StaffVolunteerList {
 
     @FXML
     private void goToStaffIntro(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffIntroPage.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

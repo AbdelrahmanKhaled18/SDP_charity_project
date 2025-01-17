@@ -18,7 +18,7 @@ public class StaffDonateController {
 
     @FXML
     private void DonateWithfawryStaff(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffPaymentConfirmation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffPaymentConfirmation.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -31,7 +31,7 @@ public class StaffDonateController {
     }
     @FXML
     private void goToStaffIntro(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffIntroPage.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

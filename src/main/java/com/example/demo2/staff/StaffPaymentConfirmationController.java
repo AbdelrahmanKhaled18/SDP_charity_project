@@ -13,7 +13,7 @@ public class StaffPaymentConfirmationController {
 
     @FXML
     private void goToStaffDonate(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffDonate.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffDonate.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

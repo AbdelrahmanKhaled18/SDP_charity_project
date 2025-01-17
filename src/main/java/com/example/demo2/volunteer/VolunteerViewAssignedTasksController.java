@@ -129,7 +129,7 @@ public class VolunteerViewAssignedTasksController {
 
     @FXML
     private void goToVolunteerIntro(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntroPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/VolunteerIntroPage.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

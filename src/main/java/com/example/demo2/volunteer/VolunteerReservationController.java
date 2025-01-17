@@ -35,7 +35,7 @@ public class VolunteerReservationController {
 
     @FXML
     private void VolunteerPage(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerViewAssignedTasks.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/VolunteerViewAssignedTasks.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

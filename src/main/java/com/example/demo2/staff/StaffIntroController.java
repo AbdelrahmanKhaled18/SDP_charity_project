@@ -13,7 +13,7 @@ public class StaffIntroController {
 
     @FXML
     private void StaffDonatePage(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffDonate.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffDonate.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -27,7 +27,7 @@ public class StaffIntroController {
 
     @FXML
     private void StaffInKindDonatePage(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffInKindDonate.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffInKindDonate.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -41,7 +41,7 @@ public class StaffIntroController {
 
     @FXML
     private void CreateCampaignPage(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffCreateCampaign.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffCreateCampaign.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -55,7 +55,7 @@ public class StaffIntroController {
 
     @FXML
     private void viewCampaignPage(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffCampaignList.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffCampaignList.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -69,7 +69,7 @@ public class StaffIntroController {
 
     @FXML
     private void createTaskPage(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffCreateTask.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffCreateTask.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -83,7 +83,7 @@ public class StaffIntroController {
 
     @FXML
     private void assignVolunteersPage(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffAssignVolunteer.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffAssignVolunteer.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
