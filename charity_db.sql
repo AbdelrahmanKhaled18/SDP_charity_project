@@ -89,7 +89,7 @@ CREATE TABLE `campaign` (
                             PRIMARY KEY (`id`),
                             KEY `campaign_staff_person_id_fk` (`creator`),
                             CONSTRAINT `campaign_staff_person_id_fk` FOREIGN KEY (`creator`) REFERENCES `staff` (`person_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `in_kind_donation` (
                                     PRIMARY KEY (`donation_id`),
                                     KEY `in_kind_donation_address_id_fk` (`address_id`),
                                     CONSTRAINT `in_kind_donation_address_id_fk` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +169,7 @@ CREATE TABLE `money_donation` (
                                   PRIMARY KEY (`donation_id`),
                                   KEY `money_donation_campaign_id_fk` (`campaign_id`),
                                   CONSTRAINT `money_donation_campaign_id_fk` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
