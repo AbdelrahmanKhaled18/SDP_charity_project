@@ -165,7 +165,7 @@ public class Campaign extends Entity implements ISubject {
 
 
     public static boolean modifyCampaignCollected(int campaignId, double amount) {
-        String command = "UPDATE campaign SET goal_amount= goal_amount + ? WHERE id = ?";
+        String command = "UPDATE campaign SET collected_amount= collected_amount + ? WHERE id = ?";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(command);
