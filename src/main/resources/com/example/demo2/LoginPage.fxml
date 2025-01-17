@@ -5,7 +5,6 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-
 <VBox alignment="CENTER" prefHeight="328.0" prefWidth="278.0" spacing="20.0" style="-fx-background-color: fefdfc;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.LoginController">
    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="288.0" style="-fx-background-color: rgba(208,249,249,0.5);">
       <children>
@@ -101,12 +100,6 @@
             </font>
          </Button>
          <Button fx:id="phoneNumberLoginButton" layoutX="44.0" layoutY="294.0" mnemonicParsing="false" onAction="#setPhoneNumberStrategy" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: rgba(0,174,255);" text="Login With Phone Number" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="System Bold" size="12.0" />
-            </font>
-         </Button>
-
-         <Button fx:id="usernameLoginButton" layoutX="44.0" layoutY="343.0" mnemonicParsing="false" onAction="#setUsernameStrategy" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: rgba(0,174,255);" text="Login With username" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="System Bold" size="12.0" />
             </font>

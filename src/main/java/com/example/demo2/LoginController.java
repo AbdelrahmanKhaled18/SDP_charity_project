@@ -52,12 +52,7 @@ public class LoginController {
         LoginEmail.setPromptText("Enter your phone number");
     }
 
-    @FXML
-    private void setUsernameStrategy(ActionEvent event) {
-        // Change to UserNameLogin strategy
-        currentStrategy = "UserNameLogin";
-        LoginEmail.setPromptText("Enter your username");
-    }
+
 
 
     @FXML
