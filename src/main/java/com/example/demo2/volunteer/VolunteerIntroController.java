@@ -58,7 +58,7 @@ public class VolunteerIntroController {
 
     @FXML
     private void viewCampaignFunds(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/VolunteerTotalCampaignAmount.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/TotalCampaignAmount.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
