@@ -22,4 +22,8 @@ public class MakeDonationCommand implements ICommand {
         donation.undoDonation(donation);
     }
 
+    public Donation getDonation() {
+        return donation;
+    }
+
 }

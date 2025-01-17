@@ -61,19 +61,19 @@ public class VolunteerInKindDonateController {
         Integer quantity = amountofDonation.getValue();
 
         if (type == null || type.isEmpty()) {
-            showAlert("Validation Error", "Please enter a valid donation type.");
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please enter a valid donation type.");
             return;
         }
 
         if (quantity == null || quantity <= 0) {
-            showAlert("Validation Error", "Please enter a valid quantity greater than 0.");
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please enter a valid quantity greater than 0.");
             return;
         }
 
         // Get the logged-in user ID
         int personId = UserLoginContext.getInstance().getLoggedInUser().getId();
         if (personId == 0) {
-            showAlert("Error", "Unable to identify the logged-in user. Please log in again.");
+            showAlert(Alert.AlertType.ERROR, "Error", "Unable to identify the logged-in user. Please log in again.");
             return;
         }
 
@@ -86,23 +86,52 @@ public class VolunteerInKindDonateController {
         donationInvoker.executeCommand(command);
 
         // Show success message
-        showAlert("Success", "In-kind donation has been recorded successfully!");
+        showAlert(Alert.AlertType.INFORMATION, "Success", "In-kind donation has been recorded successfully!");
+        amountofDonation.getValueFactory().setValue(0);
+        typeOfDonation.setText("");
+
     }
 
 
     @FXML
-    private void UndoinKindDonation(javafx.event.ActionEvent event) throws IOException {
+    private void UndoinKindDonation(javafx.event.ActionEvent event) {
+        try {
+            // Check if there are any commands in the history
+            if (!donationInvoker.hasCommands()) {
+                showAlert(Alert.AlertType.ERROR, "Error", "No donations found to undo.");
+                return;
+            }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Undo Confirmation");
-        alert.setHeaderText(null);
-        alert.setContentText("Donation Deleted!");
-        alert.showAndWait();
+            // Retrieve the last command (the last executed in-kind donation)
+            MakeDonationCommand lastCommand = (MakeDonationCommand) donationInvoker.getLastCommand();
+            Donation lastDonation = lastCommand.getDonation(); // Get the donation from the command
 
+            // Ensure the donation is of type InKindDonation
+            if (lastDonation instanceof InKindDonation) {
+                InKindDonation inKindDonation = (InKindDonation) lastDonation;
+
+                // Set the type and quantity fields with the details of the undone donation
+                typeOfDonation.setText(inKindDonation.getType());
+                amountofDonation.getValueFactory().setValue(inKindDonation.getQuantity());
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Error", "The last donation is not an in-kind donation.");
+                return;
+            }
+
+            // Undo the last command
+            donationInvoker.unExecuteLastCommand();
+
+            // Notify the user
+            showAlert(Alert.AlertType.INFORMATION, "Success", "In-kind donation successfully undone.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "An unexpected error occurred while undoing the donation.");
+        }
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

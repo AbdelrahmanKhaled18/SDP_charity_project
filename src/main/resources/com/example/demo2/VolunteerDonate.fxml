@@ -26,7 +26,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="UndoDonationButton" layoutX="227.0" layoutY="298.0" onAction="#undoDiscount" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Undo Donation" textFill="WHITE">
+            <Button fx:id="UndoDonationButton" layoutX="227.0" layoutY="298.0" onAction="#undoDonation" prefHeight="27.0" prefWidth="149.0" style="-fx-background-color: rgba(0,174,255);" text="Undo Donation" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

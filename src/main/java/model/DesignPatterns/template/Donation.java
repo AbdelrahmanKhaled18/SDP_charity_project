@@ -115,6 +115,23 @@ public abstract class Donation extends Entity {
         }
     }
 
+    public static int getLatestDonationId(int personId) {
+        String command = "SELECT id FROM donation WHERE person_id = ? ORDER BY date DESC LIMIT 1";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setInt(1, personId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id"); // Return the latest donation ID
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // Return -1 if no donation is found
+    }
+
+
     public static Donation retrieveDonation(int donationId) {
         String command = "SELECT * FROM donation " +
                 "LEFT JOIN money_donation ON donation.id = money_donation.donation_id " +

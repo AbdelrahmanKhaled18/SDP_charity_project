@@ -42,6 +42,7 @@ public class VolunteerDonateController {
             donationInvoker.executeCommand(donationCommand);
 
             showAlert(Alert.AlertType.INFORMATION, "Donation Success", "Thank you for your donation of $" + amount + "!");
+            donationAmount.setText("");
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a numeric donation amount.");
         }
@@ -49,7 +50,7 @@ public class VolunteerDonateController {
 
 
     @FXML
-    private void applyDiscount(javafx.event.ActionEvent event) throws IOException{
+    private void applyDiscount(javafx.event.ActionEvent event) throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Discount Confirmation");
@@ -58,16 +59,38 @@ public class VolunteerDonateController {
         alert.showAndWait();
 
     }
+
     @FXML
-    private void undoDiscount(javafx.event.ActionEvent event) throws IOException{
+    private void undoDonation(javafx.event.ActionEvent event) {
+        try {
+            // Check if there is any command in the history
+            if (!donationInvoker.hasCommands()) {
+                showAlert(Alert.AlertType.ERROR, "Error", "No donations found to undo.");
+                return;
+            }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Undo Donation");
-        alert.setHeaderText(null);
-        alert.setContentText("Donation Deleted!");
-        alert.showAndWait();
+            // Retrieve the last command (the last executed donation)
+            MakeDonationCommand lastCommand = (MakeDonationCommand) donationInvoker.getLastCommand();
+            Donation lastDonation = lastCommand.getDonation(); // Get the donation from the command
 
+            // If the donation is MoneyDonation, set the amount in the text field before undoing
+            if (lastDonation instanceof MoneyDonation) {
+                MoneyDonation moneyDonation = (MoneyDonation) lastDonation;
+                donationAmount.setText(String.valueOf(moneyDonation.getAmount()));
+            }
+
+            donationInvoker.unExecuteLastCommand();
+
+            // Notify the user
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Donation successfully undone.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "An unexpected error occurred while undoing the donation.");
+        }
     }
+
+
+
 
     @FXML
     private void goToVolunteerIntro(javafx.event.ActionEvent event) throws IOException {

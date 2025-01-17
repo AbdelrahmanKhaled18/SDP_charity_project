@@ -17,4 +17,16 @@ public class DonationInvoker {
             lastCommand.unExecute();
         }
     }
+
+    public ICommand getLastCommand() {
+        if (!commandHistory.isEmpty()) {
+            return commandHistory.peek(); // Returns the last command without removing it
+        }
+        return null; // Returns null if the history is empty
+    }
+
+    // Check if there are any commands in the history
+    public boolean hasCommands() {
+        return !commandHistory.isEmpty();
+    }
 }
