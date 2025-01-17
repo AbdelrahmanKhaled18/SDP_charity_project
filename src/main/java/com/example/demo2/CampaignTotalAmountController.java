@@ -1,5 +1,6 @@
 package com.example.demo2;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CampaignTotalAmountController implements IObserver {
+    private Campaign currentCampaign;
     private CampaignTargetObserver campaignTargetObserver;
     private ArrayList<Campaign> retrievedCampaigns;
 
@@ -31,7 +33,7 @@ public class CampaignTotalAmountController implements IObserver {
 
     @FXML
     public void initialize() {
-        campaignTargetObserver = null;
+        currentCampaign = null;
         retrievedCampaigns = Campaign.retrieveAllCampaigns();
         ObservableList<String> observableCampaigns = FXCollections.observableArrayList();
         for (Campaign campaign : retrievedCampaigns) {
@@ -44,12 +46,15 @@ public class CampaignTotalAmountController implements IObserver {
     @FXML
     private void viewCampaign(javafx.event.ActionEvent event) throws IOException {
         if (campaignTargetObserver != null) {
+            currentCampaign.removeObservers(campaignTargetObserver);
             campaignTargetObserver.removeObservers(this);
+            currentCampaign.stop();
         }
         int selectedCampaignIndex = campaignToView.getSelectionModel().getSelectedIndex();
-        Campaign campaign = retrievedCampaigns.get(selectedCampaignIndex);
-        campaignTargetObserver = new CampaignTargetObserver(campaign);
+        currentCampaign = retrievedCampaigns.get(selectedCampaignIndex);
+        campaignTargetObserver = new CampaignTargetObserver(currentCampaign);
         campaignTargetObserver.registerObservers(this);
+        currentCampaign.start();
     }
 
 
@@ -78,6 +83,6 @@ public class CampaignTotalAmountController implements IObserver {
 
     @Override
     public void update(double currentCollectedAmount) {
-        totalAmount.setText(String.format("%.2f", currentCollectedAmount));
+        Platform.runLater(() -> this.totalAmount.setText(String.format("%.2f", currentCollectedAmount)));
     }
 }
