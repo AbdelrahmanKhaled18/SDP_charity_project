@@ -7,7 +7,7 @@ import java.util.Date;
 public class PlannedState implements CampaignState {
     @Override
     public void NextState(Campaign campaign) {
-        if (campaign.getStartDate().after(new Date()))
+        if (campaign.getStartDate().before(new Date()))
             campaign.setCampaignState(new ActivateState());
     }
 }

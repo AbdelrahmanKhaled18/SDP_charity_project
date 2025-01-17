@@ -41,6 +41,7 @@ public class StaffReviewPendingCampaigns {
         ObservableList<String> observableCampaigns = FXCollections.observableArrayList();
         for (int i = 0; i < campaigns.size(); i++) {
             Campaign campaign = campaigns.get(i);
+            campaign.executeHandleState();
             if ("PendingAcceptanceState".equals(campaign.getCampaignState())) {
                 observableCampaigns.add(campaign.getTitle() + " (" + campaign.getCampaignState() + ")");
                 originalIndices.add(i);
@@ -49,7 +50,6 @@ public class StaffReviewPendingCampaigns {
         campaignList.setItems(observableCampaigns);
         campaignList.getProperties().put("originalIndices", originalIndices);
     }
-
 
     @FXML
     private void acceptCampaignIdea(javafx.event.ActionEvent event) throws IOException {
@@ -64,16 +64,6 @@ public class StaffReviewPendingCampaigns {
         System.out.println(originalIndex + 1);
         Campaign campaign = Campaign.retrieveCampaign(originalIndex + 1);
         campaign.executeHandleState();
-    }
-
-    @FXML
-    private void rejectCampaignIdea(javafx.event.ActionEvent event) throws IOException {
-        int selectedCampaign = campaignList.getSelectionModel().getSelectedIndex();
-
-
-        if (selectedCampaign == -1) {
-            showAlert("Error", "No campaign selected", "Please select a campaign to edit.", Alert.AlertType.ERROR);
-        }
     }
 
     private void showAlert(String title, String header, String content, Alert.AlertType alertType) {
