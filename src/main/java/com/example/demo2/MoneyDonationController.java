@@ -46,8 +46,10 @@ public class MoneyDonationController {
     @FXML
     private void DonateWithFawry(javafx.event.ActionEvent event) throws IOException {
         try {
-            // Validate input
+            Donation donation;
             int selectedCampaignIndex = selectcampaignComboBox.getSelectionModel().getSelectedIndex();
+
+            // Validate input
             String amountText = donationAmount.getText();
             if (amountText.isEmpty() || Double.parseDouble(amountText) <= 0) {
                 showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a valid donation amount.");
@@ -60,13 +62,6 @@ public class MoneyDonationController {
             BasicPayment basicPayment = new BasicPayment();
             basicPayment.paymentAmount = originalAmount;
 
-            // Add Donation to Campaign
-            if (selectedCampaignIndex >= 0) {
-                Campaign campaign = retrievedCampaigns.get(selectedCampaignIndex);
-                campaign.addDonation(originalAmount);
-            }
-
-
             // Decorate the payment with extra fees
             ExtraFeesDecorator decoratedPayment = new ExtraFeesDecorator(basicPayment);
             decoratedPayment.setServiceFee(originalAmount * 0.05);
@@ -77,9 +72,15 @@ public class MoneyDonationController {
             // Show donation details in a dialog
             showDonationDetailsDialog(originalAmount, finalAmount);
 
-            // Create a donation instance with the decorated amount
-            Donation donation = new MoneyDonation(new Date(), UserLoginContext.getInstance().getLoggedInUser().getId(), finalAmount);
-
+            //Add Donation to Campaign
+            if (selectedCampaignIndex >= 0) {
+                Campaign campaign = retrievedCampaigns.get(selectedCampaignIndex);
+                campaign.addDonation(originalAmount);
+                donation = new MoneyDonation(new Date(), UserLoginContext.getInstance().getLoggedInUser().getId(), finalAmount, campaign.getId());
+            } else {
+                // Create a donation instance with the decorated amount
+                donation = new MoneyDonation(new Date(), UserLoginContext.getInstance().getLoggedInUser().getId(), finalAmount);
+            }
             // Create and execute the donation command
             MakeDonationCommand donationCommand = new MakeDonationCommand(donation);
             donationInvoker.executeCommand(donationCommand);
