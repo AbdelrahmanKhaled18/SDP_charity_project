@@ -106,35 +106,36 @@ public class MoneyDonation extends Donation {
 
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
+            // Update donation type
             PreparedStatement donationTypeStatement = conn.prepareStatement("UPDATE donation SET donation_type='money' WHERE id=?");
             donationTypeStatement.setInt(1, donation.getId());
             donationTypeStatement.executeUpdate();
             donationTypeStatement.close();
 
+            // Prepare command for inserting money donation
             String command;
             if (donation.campaignId != 0) {
                 command = "INSERT INTO money_donation (`donation_id`, `amount`, `campaign_id`) VALUES(?, ?, ?)";
             } else {
                 command = "INSERT INTO money_donation (`donation_id`, `amount`) VALUES(?, ?)";
             }
-            PreparedStatement statement = conn.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
+
+            PreparedStatement statement = conn.prepareStatement(command);
             statement.setInt(1, donation.getId());
             statement.setDouble(2, donation.getAmount());
             if (donation.campaignId != 0) {
                 statement.setInt(3, donation.campaignId);
             }
-            statement.executeUpdate();
-            ResultSet rs = statement.getGeneratedKeys();
-            boolean success = false;
-            if (rs.next()) {
-                donation.setId(rs.getInt(1));
-                success = true;
-            }
+            int rowsAffected = statement.executeUpdate(); // Count rows affected
             statement.close();
-            return success;
+
+            // If rows were affected, the operation was successful
+            return rowsAffected > 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
+
 }

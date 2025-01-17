@@ -5,6 +5,9 @@ import java.util.Date;
 import java.sql.*;
 
 import model.DatabaseConnection;
+import model.DesignPatterns.adapter.EmailAdapter;
+import model.DesignPatterns.adapter.EmailInterface;
+import model.DesignPatterns.strategy.UserLoginContext;
 import model.Entity;
 import model.Address;
 
@@ -44,7 +47,6 @@ public abstract class Donation extends Entity {
         if (!validateDonation(donation)) {
             return false;
         }
-
         if (saveDonation(donation)) {
             notifyDonor();
             return true;
@@ -60,6 +62,10 @@ public abstract class Donation extends Entity {
     public abstract boolean undoDonation(Donation donation);
 
     public void notifyDonor() {
+        System.out.println();
+        EmailAdapter emailAdapter = new EmailAdapter();
+        emailAdapter.sendEmail(UserLoginContext.getInstance().getLoggedInUser().getEmail(),
+                "Donation Confirmation", "Your donation has been received.");
     }
 
 
