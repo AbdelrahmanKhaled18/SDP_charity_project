@@ -26,6 +26,6 @@
          </font>
       </Label>
       <Label fx:id="totalAmount" layoutX="235.0" layoutY="166.0" prefHeight="21.0" prefWidth="161.0" text="0" />
-      <ComboBox fx:id="campaignToView" layoutX="241.0" layoutY="210.0" prefWidth="150.0" promptText="Select Campaign" />
+      <ComboBox fx:id="campaignToView" layoutX="241.0" layoutY="210.0" onAction="#viewCampaign" prefWidth="150.0" promptText="Select Campaign" />
    </children>
 </AnchorPane>
