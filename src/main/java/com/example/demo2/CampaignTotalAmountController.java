@@ -6,13 +6,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.DesignPatterns.observer.IObserver;
 import model.DesignPatterns.strategy.UserLoginContext;
 import model.Volunteer;
 
 import java.io.IOException;
 
-public class CampaignTotalAmountController {
-
+public class CampaignTotalAmountController implements IObserver {
     @FXML
     private void gotoMainPage(javafx.event.ActionEvent event) throws IOException {
         String pageTitle;
@@ -36,4 +36,8 @@ public class CampaignTotalAmountController {
         stage.show();
     }
 
+    @Override
+    public void update(double currentCollectedAmount) {
+
+    }
 }
