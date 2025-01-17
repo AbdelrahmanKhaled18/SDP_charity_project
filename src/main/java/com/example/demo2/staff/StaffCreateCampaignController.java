@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Address;
 import model.Campaign;
+import model.DesignPatterns.strategy.UserLoginContext;
+import model.Person;
 import model.Staff;
 
 import java.io.IOException;
@@ -51,24 +53,13 @@ public class StaffCreateCampaignController {
 
     @FXML
     private void createCampaign(javafx.event.ActionEvent event) throws IOException {
-        Campaign campaign = new Campaign(
-                new Staff(2,"Alice Johnson",
-                        "Female",
-                        "1122334455",
-                        "alice.johnson@example.com",
-                        "password789",
-                        "34567890123456",
-                        new Date(),
-                        true,
-                        new Address("Cairo"),
-                        new ArrayList<>(),
-                        new ArrayList<>(),
-                        "Manager",
-                        "Human Resources"
-                ) // Will be changed to current loggedIn user through UserLoginContext
-                , campaignTitle.getText(), campaignDescription.getText(),
-                Double.parseDouble(goalAmount.getText()), sDate, eDate);
-        Campaign.createCampaign(campaign);
+        System.out.println(UserLoginContext.getInstance().getLoggedInUser().getId());
+//        Campaign campaign = new Campaign(
+//                Staff.retrieveStaff()
+//                , campaignTitle.getText(), campaignDescription.getText(),
+//                Double.parseDouble(goalAmount.getText()), sDate, eDate);
+//        Campaign.createCampaign(campaign);
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Campaign Confirmation");
         alert.setHeaderText(null);

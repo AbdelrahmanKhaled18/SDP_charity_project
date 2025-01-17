@@ -45,9 +45,11 @@ public class PersonRSIterator implements Iterator<Person> {
             String userType = resultSet.getString("user_type");
             ArrayList<Donation> donations = Donation.retrievePersonDonations(id);
             ArrayList<Task> tasks = Task.retrievePersonTasks(id);
-
             PersonFactory pf = new PersonFactory(userType, name, gender, phoneNumber, email, password,
                     nationalId, dateOfBirth, isActive, address);
+            if (id > 0)
+                pf.setId(id);
+
             pf.setDonationHistory(donations);
             pf.setAssignedTasks(tasks);
 
