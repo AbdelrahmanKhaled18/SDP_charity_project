@@ -1,5 +1,6 @@
 package model;
 
+import model.DesignPatterns.iterator.PersonRSIterator;
 import model.DesignPatterns.template.Donation;
 
 import java.sql.*;
@@ -17,14 +18,13 @@ public abstract class Person extends Entity {
     private Date dateOfBirth;
     private boolean isActive;
     private Address address;
-    private String userType;
 
     private ArrayList<Donation> donationHistory;
     private ArrayList<Task> assignedTasks;
 
     public Person(String name, String gender, String phoneNumber, String email, String password, String nationalId,
                   Date dateOfBirth, boolean isActive, Address address,
-                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks, String userType) {
+                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks) {
         this.name = name;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
@@ -36,13 +36,12 @@ public abstract class Person extends Entity {
         this.address = address;
         this.donationHistory = donationHistory;
         this.assignedTasks = assignedTasks;
-        this.userType = userType;
     }
 
     public Person(int id, String name, String gender, String phoneNumber, String email, String password,
                   String nationalId, Date dateOfBirth, boolean isActive, Address address,
-                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks, String userType) {
-        this(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
+                  ArrayList<Donation> donationHistory, ArrayList<Task> assignedTasks) {
+        this(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
         setId(id);
     }
 
@@ -114,14 +113,6 @@ public abstract class Person extends Entity {
         return address;
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
     public void setAddress(Address address) {
         this.address = address;
     }
@@ -160,9 +151,9 @@ public abstract class Person extends Entity {
     }
 
 
-    public static boolean createPerson(Person person) {
+    protected static boolean createPerson(Person person) {
         String command = "INSERT INTO person (`name`, `gender`, `phone_number`, `email`, `password`, `national_id`," +
-                "`date_of_birth`, `is_active`, `address_id` , `user_type`) VALUES(?,?,?,?,?,?,?,?,?,?)";
+                "`date_of_birth`, `is_active`, `address_id`) VALUES(?,?,?,?,?,?,?,?,?)";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
@@ -175,7 +166,6 @@ public abstract class Person extends Entity {
             statement.setDate(7, new java.sql.Date(person.getDateOfBirth().getTime()));
             statement.setBoolean(8, person.isActive());
             statement.setInt(9, person.getAddress().getId());
-            statement.setString(10, person.getUserType());
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
             boolean success = false;
@@ -193,7 +183,7 @@ public abstract class Person extends Entity {
 
     public static boolean updatePerson(Person person) {
         String command = "UPDATE person SET name=?, gender=?, phone_number=?, email=?, password=?, " +
-                "national_id=?, date_of_birth=?, is_active=?, address_id=?, user_type=? WHERE id=?";
+                "national_id=?, date_of_birth=?, is_active=?, address_id=? WHERE id=?";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(command);
@@ -206,8 +196,7 @@ public abstract class Person extends Entity {
             statement.setDate(7, new java.sql.Date(person.getDateOfBirth().getTime()));
             statement.setBoolean(8, person.isActive());
             statement.setInt(9, person.getAddress().getId());
-            statement.setString(10, person.getUserType());
-            statement.setInt(11, person.getId());
+            statement.setInt(10, person.getId());
             boolean success = statement.executeUpdate() > 0;
             statement.close();
             return success;
@@ -229,31 +218,6 @@ public abstract class Person extends Entity {
             return false;
         }
     }
-
-
-    public static ArrayList<Task> retrievePersonTasks(int personId) {
-        String command = "SELECT task.id AS id, task.name AS name, task.description AS description " +
-                "FROM assigned_tasks INNER JOIN task ON assigned_tasks.task_id = task.id " +
-                "WHERE assigned_tasks.person_id = ?";
-        Connection conn = DatabaseConnection.getInstance().getConnection();
-        try {
-            PreparedStatement statement = conn.prepareStatement(command);
-            statement.setInt(1, personId);
-            ResultSet rs = statement.executeQuery();
-            ArrayList<Task> tasks = new ArrayList<>();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                tasks.add(new Task(id, name, description));
-            }
-            statement.close();
-            return tasks;
-        } catch (SQLException e) {
-            return null;
-        }
-    }
-
 
     public static boolean deletePersonTask(int personId, int taskId) {
         String command = "DELETE FROM assigned_tasks WHERE person_id=? AND task_id=?";
@@ -284,44 +248,11 @@ public abstract class Person extends Entity {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, taskId);
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                // Common fields for all persons
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String gender = rs.getString("gender");
-                String phoneNumber = rs.getString("phone_number");
-                String email = rs.getString("email");
-                String nationalId = rs.getString("national_id");
-                Date dateOfBirth = rs.getDate("date_of_birth");
-                boolean isActive = rs.getBoolean("is_active");
-                int addressId = rs.getInt("address_id");
-                Address address = (addressId > 0) ? Address.retrieveAddress(addressId) : null;
-                String userType = rs.getString("user_type");
-
-                // Determine if the person is a staff or volunteer
-                if (userType.equals("staff")) {
-                    // Fetch staff-specific fields
-                    String position = rs.getString("staff_position");
-                    String department = rs.getString("staff_department");
-                    persons.add(new Staff(
-                            id, name, gender, phoneNumber, email, null, nationalId,
-                            dateOfBirth, isActive, address,
-                            new ArrayList<>(), // Donation history can be fetched if needed
-                            Person.retrievePersonTasks(id), // Fetch tasks
-                            userType, position, department
-                    ));
-                } else if (userType.equals("volunteer")) {
-                    // Fetch volunteer-specific fields
-                    ArrayList<Skill> skills = Volunteer.retrieveVolunteerSkills(id);
-                    persons.add(new Volunteer(
-                            id, name, gender, phoneNumber, email, null, nationalId,
-                            dateOfBirth, isActive, address,
-                            new ArrayList<>(), // Donation history can be fetched if needed
-                            Person.retrievePersonTasks(id), // Fetch tasks
-                            userType, skills
-                    ));
-                }
+            PersonRSIterator rsIterator = new PersonRSIterator(rs);
+            while (rsIterator.hasNext()) {
+                persons.add(rsIterator.next());
             }
+
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -329,20 +260,17 @@ public abstract class Person extends Entity {
         return persons;
     }
 
-    public static boolean addPersonTask(int volunteerId, int taskId) {
+    public static boolean addPersonTask(int personId, int taskId) {
         // Use correct column names from the database schema
         String command = "INSERT INTO assigned_tasks (person_id, task_id) VALUES (?, ?)";
         Connection conn = DatabaseConnection.getInstance().getConnection();
 
         try {
             PreparedStatement statement = conn.prepareStatement(command);
-            statement.setInt(1, volunteerId); // Bind person_id
+            statement.setInt(1, personId); // Bind person_id
             statement.setInt(2, taskId); // Bind task_id
 
-            // Log the SQL query
-
             int rowsInserted = statement.executeUpdate(); // Execute the query
-
             statement.close();
             return rowsInserted > 0; // Return true if insertion was successful
         } catch (SQLException e) {
@@ -352,4 +280,44 @@ public abstract class Person extends Entity {
     }
 
 
+    public static Person retrievePersonByEmailAndPassword(String email, String password) {
+        String command = "SELECT * FROM person WHERE email=? AND password=?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setString(1, email);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+            PersonRSIterator rsIterator = new PersonRSIterator(rs);
+            if (!rsIterator.hasNext()) {
+                return null;
+            }
+            Person person = rsIterator.next();
+            statement.close();
+            return person;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+
+    public static Person retrievePersonByPhoneAndPassword(String phone, String password) {
+        String command = "SELECT * FROM person WHERE phone_number=? AND password=?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setString(1, phone);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+            PersonRSIterator rsIterator = new PersonRSIterator(rs);
+            if (!rsIterator.hasNext()) {
+                return null;
+            }
+            Person person = rsIterator.next();
+            statement.close();
+            return person;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }

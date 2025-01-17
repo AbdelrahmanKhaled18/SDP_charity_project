@@ -30,23 +30,8 @@ public class MobileNumberLogin implements ILogin {
     }
 
     @Override
-    public String login() {
-        if (!validateUserInput()) return "failed";
-        ArrayList<Staff> staffMembers = Staff.retrieveAllStaff();
-        ArrayList<Volunteer> volunteers = Volunteer.retrieveAllVolunteers();
-        for (Staff staff : staffMembers) {
-            if (staff.getPhoneNumber().equals(phoneNumber) && staff.getPassword().equals(password)
-                    && staff.getUserType().equals("staff")) {
-                return "staff";
-            }
-        }
-        for (Volunteer volunteer : volunteers) {
-            if (volunteer.getPhoneNumber().equals(phoneNumber) && volunteer.getPassword().equals(password)
-                    && volunteer.getUserType().equals("volunteer")) {
-                return "volunteer";
-
-            }
-        }
-        return "failed";
+    public Person login() {
+        if (!validateUserInput()) return null;
+        return Person.retrievePersonByPhoneAndPassword(phoneNumber, password);
     }
 }

@@ -3,7 +3,6 @@ package com.example.demo2;
 import model.DesignPatterns.strategy.EmailLogin;
 import model.DesignPatterns.strategy.MobileNumberLogin;
 import model.DesignPatterns.strategy.UserLoginContext;
-import model.DesignPatterns.strategy.UserNameLogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,10 +28,10 @@ public class LoginController {
     @FXML
     public void initialize() {
         // Default strategy: EmailLogin
-        userLoginContext = new UserLoginContext(new EmailLogin("", ""));
+        userLoginContext = UserLoginContext.getInstance();
+        userLoginContext.setLoginStrategyRef(new EmailLogin("", ""));
         LoginEmail.setPromptText("Enter your email address"); // Default placeholder
     }
-
 
 
     @FXML
@@ -44,7 +43,6 @@ public class LoginController {
         stage.setTitle("Register Page");
         stage.show();
     }
-
 
 
     @FXML
@@ -66,18 +64,13 @@ public class LoginController {
     private void performLogin(ActionEvent event) throws IOException {
 
         // Dynamically set the strategy based on the current input
-        switch (currentStrategy) {
-            case "MobileNumberLogin":
-                userLoginContext.setLoginStrategyRef(new MobileNumberLogin(LoginEmail.getText(), LoginPassword.getText()));
-                break;
-            case "UserNameLogin":
-                userLoginContext.setLoginStrategyRef(new UserNameLogin(LoginEmail.getText(), LoginPassword.getText()));
-                break;
-            default:
-                // Default to EmailLogin if no button was pressed
-                userLoginContext.setLoginStrategyRef(new EmailLogin(LoginEmail.getText(), LoginPassword.getText()));
-                break;
+        if (currentStrategy.equals("MobileNumberLogin")) {
+            userLoginContext.setLoginStrategyRef(new MobileNumberLogin(LoginEmail.getText(), LoginPassword.getText()));
+        } else {
+            // Default to EmailLogin if no button was pressed
+            userLoginContext.setLoginStrategyRef(new EmailLogin(LoginEmail.getText(), LoginPassword.getText()));
         }
+
 
         String answer = userLoginContext.authenticate();
         if (answer.equals("staff")) {

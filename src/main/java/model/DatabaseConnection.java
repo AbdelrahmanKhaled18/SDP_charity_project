@@ -13,9 +13,9 @@ public class DatabaseConnection {
         return instance;
     }
 
-    private static Connection conn;
+    private Connection conn;
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         return conn;
     }
 

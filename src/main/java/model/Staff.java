@@ -1,5 +1,6 @@
 package model;
 
+import model.DesignPatterns.iterator.PersonRSIterator;
 import model.DesignPatterns.template.Donation;
 
 import java.sql.*;
@@ -29,16 +30,16 @@ public class Staff extends Person {
 
     public Staff(String name, String gender, String phoneNumber, String email, String password, String nationalId,
                  Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
-                 ArrayList<Task> assignedTasks, String userType, String position, String department) {
-        super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
+                 ArrayList<Task> assignedTasks, String position, String department) {
+        super(name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
         this.position = position;
         this.department = department;
     }
 
     public Staff(int id, String name, String gender, String phoneNumber, String email, String password, String nationalId,
                  Date dateOfBirth, boolean isActive, Address address, ArrayList<Donation> donationHistory,
-                 ArrayList<Task> assignedTasks, String userType, String position, String department) {
-        super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks, userType);
+                 ArrayList<Task> assignedTasks, String position, String department) {
+        super(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive, address, donationHistory, assignedTasks);
         this.position = position;
         this.department = department;
     }
@@ -106,10 +107,12 @@ public class Staff extends Person {
             PreparedStatement statement = conn.prepareStatement(command);
             statement.setInt(1, personId);
             ResultSet rs = statement.executeQuery();
-            ArrayList<Staff> staffList = getStaffFromRS(rs);
-            Staff staff = null;
-            if (!staffList.isEmpty())
-                staff = staffList.getFirst();
+
+            PersonRSIterator rsIterator = new PersonRSIterator(rs);
+            if (!rsIterator.hasNext()) {
+                return null;
+            }
+            Staff staff = (Staff) rsIterator.next();
             statement.close();
             return staff;
         } catch (SQLException e) {
@@ -123,36 +126,16 @@ public class Staff extends Person {
         try {
             PreparedStatement statement = conn.prepareStatement(command);
             ResultSet rs = statement.executeQuery();
-            ArrayList<Staff> staffMembers = getStaffFromRS(rs);
+
+            PersonRSIterator rsIterator = new PersonRSIterator(rs);
+            ArrayList<Staff> staffMembers = new ArrayList<>();
+            while (rsIterator.hasNext()) {
+                staffMembers.add((Staff) rsIterator.next());
+            }
             statement.close();
             return staffMembers;
         } catch (SQLException e) {
             return null;
         }
-    }
-
-    private static ArrayList<Staff> getStaffFromRS(ResultSet rs) throws SQLException {
-        ArrayList<Staff> staffMembers = new ArrayList<>();
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            String name = rs.getString("name");
-            String gender = rs.getString("gender");
-            String phoneNumber = rs.getString("phone_number");
-            String email = rs.getString("email");
-            String password = rs.getString("password");
-            String nationalId = rs.getString("national_id");
-            Date dateOfBirth = new Date(rs.getDate("date_of_birth").getTime());
-            boolean isActive = rs.getBoolean("is_active");
-            int addressId = rs.getInt("address_id");
-            Address address = Address.retrieveAddress(addressId);
-            ArrayList<Donation> donationHistory = Donation.retrievePersonDonations(id);
-            ArrayList<Task> assignedTasks = Person.retrievePersonTasks(id);
-            String position = rs.getString("position");
-            String department = rs.getString("department");
-            String userType = rs.getString("user_type");
-            staffMembers.add(new Staff(id, name, gender, phoneNumber, email, password, nationalId, dateOfBirth, isActive,
-                    address, donationHistory, assignedTasks, userType, position, department));
-        }
-        return staffMembers;
     }
 }

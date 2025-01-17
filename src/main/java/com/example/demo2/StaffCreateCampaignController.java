@@ -63,7 +63,6 @@ public class StaffCreateCampaignController {
                         new Address("Cairo"),
                         new ArrayList<>(),
                         new ArrayList<>(),
-                        "staff",
                         "Manager",
                         "Human Resources"
                 ) // Will be changed to current loggedIn user through UserLoginContext

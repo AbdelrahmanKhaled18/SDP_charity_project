@@ -3,12 +3,13 @@ package model.DesignPatterns.template;
 import java.sql.*;
 import java.util.Date;
 
+import model.Campaign;
 import model.DatabaseConnection;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 public class MoneyDonation extends Donation {
 
     private double amount;
+    private int campaignId;
 
     public MoneyDonation(Date date, int personId, double amount) {
         super(date, personId);
@@ -17,6 +18,17 @@ public class MoneyDonation extends Donation {
 
     public MoneyDonation(int id, Date date, int personId, double amount) {
         this(date, personId, amount);
+        setId(id);
+    }
+
+    public MoneyDonation(Date date, int personId, double amount, int campaignId) {
+        super(date, personId);
+        this.amount = amount;
+        this.campaignId = campaignId;
+    }
+
+    public MoneyDonation(int id, Date date, int personId, double amount, int campaignId) {
+        this(date, personId, amount, campaignId);
         setId(id);
     }
 
@@ -53,6 +65,12 @@ public class MoneyDonation extends Donation {
     }
 
     private static boolean deleteMoneyDonation(MoneyDonation donation) {
+        if (donation.campaignId != 0) {
+            if (!Campaign.modifyCampaignCollected(donation.campaignId, - donation.amount)) {
+                return false;
+            }
+        }
+
         String deleteMoneyDonationCommand = "DELETE FROM money_donation WHERE donation_id=?";
         String deleteDonationCommand = "DELETE FROM donation WHERE id=?";
         Connection conn = DatabaseConnection.getInstance().getConnection();
@@ -61,6 +79,7 @@ public class MoneyDonation extends Donation {
             moneyDonationStatement.setInt(1, donation.getId());
             moneyDonationStatement.executeUpdate();
             moneyDonationStatement.close();
+
             PreparedStatement donationStatement = conn.prepareStatement(deleteDonationCommand);
             donationStatement.setInt(1, donation.getId());
             donationStatement.executeUpdate();
@@ -73,6 +92,12 @@ public class MoneyDonation extends Donation {
     }
 
     public static boolean createMoneyDonation(MoneyDonation donation) {
+        if (donation.campaignId != 0) {
+            if (!Campaign.modifyCampaignCollected(donation.campaignId, donation.amount)) {
+                return false;
+            }
+        }
+
         if (!Donation.createDonation(donation)){
             return false;
         }
@@ -95,26 +120,6 @@ public class MoneyDonation extends Donation {
             }
             statement.close();
             return success;
-        } catch (SQLException e) {
-            return false;
-        }
-    }
-
-
-    public static boolean updateInKindDonation(MoneyDonation donation) {
-        boolean changesMade = Donation.updateDonation(donation);
-        String command = "UPDATE money_donation SET amount=? WHERE donation_id=?";
-        Connection conn = DatabaseConnection.getInstance().getConnection();
-        try {
-            PreparedStatement donationTypeStatement = conn.prepareStatement("UPDATE donation SET donation_type='money' WHERE id=?");
-            donationTypeStatement.setInt(1, donation.getId());
-            donationTypeStatement.executeUpdate();
-            PreparedStatement statement = conn.prepareStatement(command);
-            statement.setDouble(1, donation.getAmount());
-            statement.setInt(2, donation.getId());
-            changesMade |= statement.executeUpdate() > 0;
-            statement.close();
-            return changesMade;
         } catch (SQLException e) {
             return false;
         }

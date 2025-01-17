@@ -106,6 +106,29 @@ public class Task extends Entity{
         }
     }
 
+    public static ArrayList<Task> retrievePersonTasks(int personId) {
+        String command = "SELECT task.id AS id, task.name AS name, task.description AS description " +
+                "FROM assigned_tasks INNER JOIN task ON assigned_tasks.task_id = task.id " +
+                "WHERE assigned_tasks.person_id = ?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setInt(1, personId);
+            ResultSet rs = statement.executeQuery();
+            ArrayList<Task> tasks = new ArrayList<>();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                tasks.add(new Task(id, name, description));
+            }
+            statement.close();
+            return tasks;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
     public static ArrayList<Task> retrieveAllTasks() {
         String command = "SELECT * FROM task";
         Connection conn = DatabaseConnection.getInstance().getConnection();

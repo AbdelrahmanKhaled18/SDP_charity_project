@@ -1,7 +1,9 @@
 package model.DesignPatterns.strategy;
 
+import model.Person;
+
 public interface ILogin {
-    String login();
+    Person login();
 
     boolean validateUserInput();
 }

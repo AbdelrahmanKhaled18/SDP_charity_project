@@ -54,7 +54,7 @@ public class Beneficiaries {
 
     public void addNeed(String need) {
         String query = "INSERT INTO needs (beneficiary_id, need) VALUES (?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, this.id);
             stmt.setString(2, need);
@@ -66,7 +66,7 @@ public class Beneficiaries {
 
     public void addReceivedAid(Aid aid) {
         String query = "INSERT INTO aids (beneficiary_id, type, value, date, status) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, this.id);
             stmt.setString(2, aid.getType());
@@ -82,7 +82,7 @@ public class Beneficiaries {
     public List<String> getNeeds() {
         List<String> needsList = new ArrayList<>();
         String query = "SELECT need FROM needs WHERE beneficiary_id = ?";
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, this.id);
             ResultSet rs = stmt.executeQuery();

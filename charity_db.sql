@@ -89,7 +89,7 @@ CREATE TABLE `campaign` (
                             PRIMARY KEY (`id`),
                             KEY `campaign_staff_person_id_fk` (`creator`),
                             CONSTRAINT `campaign_staff_person_id_fk` FOREIGN KEY (`creator`) REFERENCES `staff` (`person_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `donation` (
                             `id` int NOT NULL AUTO_INCREMENT,
                             `date` date NOT NULL,
                             `person_id` int NOT NULL,
-                            `donation_type` varchar(255) COLLATE utf8mb4_general_ci,
+                            `donation_type` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
                             PRIMARY KEY (`id`),
                             KEY `person_id` (`person_id`),
                             CONSTRAINT `donation_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`) ON DELETE CASCADE
@@ -143,7 +143,7 @@ CREATE TABLE `in_kind_donation` (
                                     PRIMARY KEY (`donation_id`),
                                     KEY `in_kind_donation_address_id_fk` (`address_id`),
                                     CONSTRAINT `in_kind_donation_address_id_fk` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,8 +165,11 @@ DROP TABLE IF EXISTS `money_donation`;
 CREATE TABLE `money_donation` (
                                   `donation_id` int NOT NULL,
                                   `amount` double DEFAULT NULL,
-                                  PRIMARY KEY (`donation_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                  `campaign_id` int DEFAULT NULL,
+                                  PRIMARY KEY (`donation_id`),
+                                  KEY `money_donation_campaign_id_fk` (`campaign_id`),
+                                  CONSTRAINT `money_donation_campaign_id_fk` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,6 +201,8 @@ CREATE TABLE `person` (
                           `address_id` int DEFAULT NULL,
                           `user_type` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
                           PRIMARY KEY (`id`),
+                          UNIQUE KEY `person_pk` (`email`),
+                          UNIQUE KEY `person_pk_2` (`phone_number`),
                           KEY `address_id` (`address_id`),
                           CONSTRAINT `person_ibfk_1` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -325,4 +330,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-15 15:48:00
+-- Dump completed on 2025-01-17  7:08:39

@@ -72,7 +72,7 @@ public class Aid {
 
     public static boolean addAid(Aid aid) {
         String query = "INSERT INTO aids (type, value, date, campaignId, beneficiaryId, status) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, aid.getType());
             stmt.setDouble(2, aid.getValue());
@@ -91,7 +91,7 @@ public class Aid {
     public static List<Aid> getAidByCampaign(String campaignId) {
         List<Aid> aids = new ArrayList<>();
         String query = "SELECT * FROM aids WHERE campaignId = ?";
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, campaignId);
             ResultSet rs = stmt.executeQuery();
@@ -115,7 +115,7 @@ public class Aid {
     public static List<Aid> getAidByBeneficiary(String beneficiaryId) {
         List<Aid> aids = new ArrayList<>();
         String query = "SELECT * FROM aids WHERE beneficiaryId = ?";
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, beneficiaryId);
             ResultSet rs = stmt.executeQuery();

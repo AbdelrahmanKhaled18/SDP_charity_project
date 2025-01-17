@@ -26,24 +26,8 @@ public class EmailLogin implements ILogin {
     }
 
     @Override
-    public String login() {
-        if (!validateUserInput()) return "failed";
-        ArrayList<Staff> staffMembers = Staff.retrieveAllStaff();
-        ArrayList<Volunteer> volunteers = Volunteer.retrieveAllVolunteers();
-        for (Staff staff : staffMembers) {
-            if (staff.getEmail().equals(email) && staff.getPassword().equals(password)
-                    && staff.getUserType().equals("staff")) {
-                return "staff";
-            }
-        }
-        for (Volunteer volunteer : volunteers) {
-            if (volunteer.getEmail().equals(email) && volunteer.getPassword().equals(password)
-                    && volunteer.getUserType().equals("volunteer")) {
-
-                return "volunteer";
-
-            }
-        }
-        return "failed";
+    public Person login() {
+        if (!validateUserInput()) return null;
+        return Person.retrievePersonByEmailAndPassword(email, password);
     }
 }

@@ -163,6 +163,22 @@ public class Campaign extends Entity implements ISubject {
         };
     }
 
+
+    public static boolean modifyCampaignCollected(int campaignId, double amount) {
+        String command = "UPDATE campaign SET goal_amount= goal_amount + ? WHERE id = ?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setDouble(1, amount);
+            statement.setInt(2, campaignId);
+            boolean success = statement.executeUpdate() > 0;
+            statement.close();
+            return success;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
     public static boolean createCampaign(Campaign campaign) {
         String command = "INSERT INTO campaign (`title`, `description`, `goal_amount`, " +
                 "`collected_amount`, `start_date`, `end_date`, `status`, `creator`) VALUES(?,?,?,?,?,?,?,?)";
