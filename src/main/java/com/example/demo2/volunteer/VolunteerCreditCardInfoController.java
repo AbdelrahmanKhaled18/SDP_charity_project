@@ -35,7 +35,7 @@ public class VolunteerCreditCardInfoController {
 
     @FXML
     private void DonatePage(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/VolunteerDonate.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/MoneyDonation.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage

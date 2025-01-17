@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.volunteer.VolunteerDonateController">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.MoneyDonationController">
    <children>
 
                           <!-- Donation Section -->
@@ -21,7 +21,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#goToVolunteerIntro" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
+            <Button layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#backToMainPage" prefHeight="27.0" prefWidth="45.0" style="-fx-background-color: rgba(0,174,255);" text="Back" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -36,7 +36,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <ComboBox layoutX="225.0" layoutY="206.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="149.0" promptText="Select Campaign" />
+            <ComboBox fx:id="selectcampaignComboBox" layoutX="225.0" layoutY="206.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="149.0" promptText="Select Campaign" />
             <Separator layoutX="187.0" layoutY="46.0" prefWidth="200.0" />
             </children>
         </AnchorPane>

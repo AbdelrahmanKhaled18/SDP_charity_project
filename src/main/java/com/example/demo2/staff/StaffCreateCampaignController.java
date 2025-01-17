@@ -66,7 +66,7 @@ public class StaffCreateCampaignController {
             alert.showAndWait();
         } else {
             Campaign newCampaign = new Campaign(
-                    Staff.retrieveStaff(UserLoginContext.getInstance().getLoggedInUser().getId()),
+                    (Staff) UserLoginContext.getInstance().getLoggedInUser(),
                     campaignTitle.getText(),
                     campaignDescription.getText(),
                     Double.parseDouble(goalAmount.getText()),

@@ -1,12 +1,16 @@
-package com.example.demo2.volunteer;
+package com.example.demo2;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import model.Campaign;
 import model.DesignPatterns.command.DonationInvoker;
 import model.DesignPatterns.command.MakeDonationCommand;
 import model.DesignPatterns.decorator.BasicPayment;
@@ -14,32 +18,54 @@ import model.DesignPatterns.decorator.ExtraFeesDecorator;
 import model.DesignPatterns.strategy.UserLoginContext;
 import model.DesignPatterns.template.Donation;
 import model.DesignPatterns.template.MoneyDonation;
+import model.Person;
+import model.Volunteer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
-public class VolunteerDonateController {
+public class MoneyDonationController {
 
     public javafx.scene.control.TextField donationAmount;
     private DonationInvoker donationInvoker = new DonationInvoker();
-    UserLoginContext instance = UserLoginContext.getInstance();
+    private ArrayList<Campaign> retrievedCampaigns;
+    @FXML
+    private ComboBox<String> selectcampaignComboBox;
+
+    @FXML
+    public void initialize() {
+        retrievedCampaigns = Campaign.retrieveAllCampaigns();
+        ObservableList<String> observableCampaigns = FXCollections.observableArrayList();
+        for (Campaign campaign : retrievedCampaigns) {
+            observableCampaigns.add(campaign.getTitle());
+        }
+        selectcampaignComboBox.setItems(observableCampaigns);
+    }
 
     @FXML
     private void DonateWithFawry(javafx.event.ActionEvent event) throws IOException {
         try {
             // Validate input
+            int selectedCampaignIndex = selectcampaignComboBox.getSelectionModel().getSelectedIndex();
             String amountText = donationAmount.getText();
             if (amountText.isEmpty() || Double.parseDouble(amountText) <= 0) {
                 showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a valid donation amount.");
                 return;
             }
-
             // Parse the amount
             double originalAmount = Double.parseDouble(amountText);
 
             // Create a basic payment instance
             BasicPayment basicPayment = new BasicPayment();
             basicPayment.paymentAmount = originalAmount;
+
+            // Add Donation to Campaign
+            if (selectedCampaignIndex >= 0) {
+                Campaign campaign = retrievedCampaigns.get(selectedCampaignIndex);
+                campaign.addDonation(originalAmount);
+            }
+
 
             // Decorate the payment with extra fees
             ExtraFeesDecorator decoratedPayment = new ExtraFeesDecorator(basicPayment);
@@ -109,8 +135,17 @@ public class VolunteerDonateController {
 
 
     @FXML
-    private void goToVolunteerIntro(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/VolunteerIntroPage.fxml"));
+    private void backToMainPage(javafx.event.ActionEvent event) throws IOException {
+        String pageTitle;
+        FXMLLoader loader;
+        if (UserLoginContext.getInstance().getLoggedInUser() instanceof Volunteer) {
+            loader = new FXMLLoader(getClass().getResource("VolunteerIntroPage.fxml"));
+            pageTitle = "Volunteer";
+        } else {
+            loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
+            pageTitle = "Staff";
+        }
+
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -118,7 +153,7 @@ public class VolunteerDonateController {
 
         // Set the scene to the new page
         stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Volunteering");
+        stage.setTitle(pageTitle);
         stage.show();
     }
 

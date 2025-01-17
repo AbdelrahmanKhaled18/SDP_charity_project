@@ -1,4 +1,4 @@
-package com.example.demo2.volunteer;
+package com.example.demo2;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,11 +15,12 @@ import model.DesignPatterns.command.MakeDonationCommand;
 import model.DesignPatterns.strategy.UserLoginContext;
 import model.DesignPatterns.template.Donation;
 import model.DesignPatterns.template.InKindDonation;
+import model.Volunteer;
 
 import java.io.IOException;
 import java.util.Date;
 
-public class VolunteerInKindDonateController {
+public class InKindDonationController {
 
     @FXML
     private TextField typeOfDonation;
@@ -39,10 +40,18 @@ public class VolunteerInKindDonateController {
     }
 
 
-
     @FXML
-    private void goToVolunteerIntro(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/VolunteerIntroPage.fxml"));
+    private void backToMainPage(javafx.event.ActionEvent event) throws IOException {
+        String pageTitle;
+        FXMLLoader loader;
+        if (UserLoginContext.getInstance().getLoggedInUser() instanceof Volunteer) {
+            loader = new FXMLLoader(getClass().getResource("VolunteerIntroPage.fxml"));
+            pageTitle = "Volunteer";
+        } else {
+            loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
+            pageTitle = "Staff";
+        }
+
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -50,7 +59,7 @@ public class VolunteerInKindDonateController {
 
         // Set the scene to the new page
         stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Volunteering");
+        stage.setTitle(pageTitle);
         stage.show();
     }
 

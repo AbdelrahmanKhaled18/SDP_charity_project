@@ -29,7 +29,7 @@ public class VolunteerIntroController {
 
     @FXML
     private void DonateMoneyPage(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/VolunteerDonate.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/MoneyDonation.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -44,7 +44,7 @@ public class VolunteerIntroController {
 
     @FXML
     private void DonateInKindPage(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/VolunteerInKindDonate.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/InKindDonation.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
