@@ -281,7 +281,7 @@ public abstract class Person extends Entity {
 
 
     public static Person retrievePersonByEmailAndPassword(String email, String password) {
-        String command = "SELECT person.*, staff.position AS staff_position, staff.department AS staff_department "
+        String command = "SELECT person.*, staff.position , staff.department "
                 + "FROM person "
                 + "LEFT JOIN staff ON person.id = staff.person_id "
                 + "WHERE person.email = ? AND person.password = ?";

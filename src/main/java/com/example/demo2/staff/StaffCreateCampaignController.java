@@ -53,33 +53,17 @@ public class StaffCreateCampaignController {
 
     @FXML
     private void createCampaign(javafx.event.ActionEvent event) throws IOException {
-        System.out.println(UserLoginContext.getInstance().getLoggedInUser().getId());
-//        Campaign campaign = new Campaign(
-//                Staff.retrieveStaff()
-//                , campaignTitle.getText(), campaignDescription.getText(),
-//                Double.parseDouble(goalAmount.getText()), sDate, eDate);
-//        Campaign.createCampaign(campaign);
-
+        Campaign campaign = new Campaign(
+                Staff.retrieveStaff(UserLoginContext.getInstance().getLoggedInUser().getId())
+                , campaignTitle.getText(), campaignDescription.getText(),
+                Double.parseDouble(goalAmount.getText()), sDate, eDate);
+        Campaign.createCampaign(campaign);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Campaign Confirmation");
         alert.setHeaderText(null);
         alert.setContentText("Campaign Created!");
         alert.showAndWait();
 
-    }
-
-    @FXML
-    private void assignTaskButton(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/StaffCreateTask.fxml"));
-        Parent nextPageRoot = loader.load();
-
-        // Get the current stage
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Set the scene to the new page
-        stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Volunteering");
-        stage.show();
     }
 
     @FXML

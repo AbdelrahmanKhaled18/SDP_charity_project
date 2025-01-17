@@ -56,8 +56,8 @@ public class PersonRSIterator implements Iterator<Person> {
             // Determine if the person is a staff or volunteer
             if (userType.equals("staff")) {
                 // Fetch staff-specific fields
-                String position = resultSet.getString("staff_position");
-                String department = resultSet.getString("staff_department");
+                String position = resultSet.getString("position");
+                String department = resultSet.getString("department");
                 pf.setPosition(position);
                 pf.setDepartment(department);
 
