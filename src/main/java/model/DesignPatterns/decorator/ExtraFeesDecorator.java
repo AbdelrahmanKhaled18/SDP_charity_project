@@ -15,8 +15,5 @@ public class ExtraFeesDecorator extends PaymentDecorator{
         this.serviceFee = serviceFee;
     }
 
-    // Getter for serviceFee (optional, if needed)
-    public double getServiceFee() {
-        return serviceFee;
-    }
+
 }

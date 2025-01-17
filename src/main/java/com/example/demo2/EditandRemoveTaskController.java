@@ -71,7 +71,6 @@ public class EditandRemoveTaskController implements Initializable {
         try {
             ArrayList<Task> tasks = Task.retrieveAllTasks();
             if (tasks != null) {
-                System.out.println("Retrieved tasks: " + tasks.size());
                 tasks.forEach(task -> System.out.println(task.getName() + ": " + task.getDescription()));
                 taskList.clear();
                 taskList.addAll(tasks);
@@ -92,7 +91,11 @@ public class EditandRemoveTaskController implements Initializable {
             tasksTable.getItems().remove(selectedTask);
             Task.deleteTask(selectedTask.getId());
         } else {
-            System.out.println("Please select a task to delete.");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Task Selected");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a task to delete.");
+            alert.showAndWait();
         }
     }
 
