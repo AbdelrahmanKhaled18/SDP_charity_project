@@ -26,11 +26,6 @@
          </font>
       </Label>
       <Label fx:id="totalAmount" layoutX="235.0" layoutY="166.0" prefHeight="21.0" prefWidth="161.0" text="0" />
-      <Button fx:id="refreshButton" layoutX="241.0" layoutY="253.0" mnemonicParsing="false" onAction="#refreshButton" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: rgba(0,174,255);" text="Refresh" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
       <ComboBox fx:id="campaignToView" layoutX="241.0" layoutY="210.0" prefWidth="150.0" promptText="Select Campaign" />
    </children>
 </AnchorPane>

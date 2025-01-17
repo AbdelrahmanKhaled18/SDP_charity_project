@@ -36,9 +36,4 @@ public class CampaignTotalAmountController {
         stage.show();
     }
 
-    @FXML
-    private void refreshButton(javafx.event.ActionEvent event) throws IOException {
-        //retrieving current amount from database
-    }
-
 }
