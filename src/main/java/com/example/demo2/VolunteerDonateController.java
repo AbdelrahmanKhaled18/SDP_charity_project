@@ -6,11 +6,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.DesignPatterns.command.DonationInvoker;
+import model.DesignPatterns.command.MakeDonationCommand;
 import model.DesignPatterns.template.Donation;
 import model.DesignPatterns.template.MoneyDonation;
 
@@ -20,19 +18,31 @@ import java.util.Date;
 public class VolunteerDonateController {
 
     public javafx.scene.control.TextField donationAmount;
+    private DonationInvoker donationInvoker = new DonationInvoker();
 
     @FXML
     private void DonateWithFawry(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerPaymentConfirmation.fxml"));
-        Parent nextPageRoot = loader.load();
+        try {
+            // Validate input
+            String amountText = donationAmount.getText();
+            if (amountText.isEmpty() || Double.parseDouble(amountText) <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a valid donation amount.");
+                return;
+            }
 
-        // Get the current stage
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // Create a donation instance
+            double amount = Double.parseDouble(amountText);
+            Donation donation = new MoneyDonation(new Date(), 3, amount);
 
-        // Set the scene to the new page
-        stage.setScene(new Scene(nextPageRoot));
-        stage.setTitle("Volunteering");
-        stage.show();
+            // Create and execute the donation command
+            MakeDonationCommand donationCommand = new MakeDonationCommand(donation);
+
+            donationInvoker.executeCommand(donationCommand);
+
+            showAlert(Alert.AlertType.INFORMATION, "Donation Success", "Thank you for your donation of $" + amount + "!");
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a numeric donation amount.");
+        }
     }
 
 
@@ -69,6 +79,14 @@ public class VolunteerDonateController {
         stage.setScene(new Scene(nextPageRoot));
         stage.setTitle("Volunteering");
         stage.show();
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

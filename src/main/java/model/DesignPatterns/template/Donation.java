@@ -80,6 +80,7 @@ public abstract class Donation extends Entity {
             statement.close();
             return success;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }

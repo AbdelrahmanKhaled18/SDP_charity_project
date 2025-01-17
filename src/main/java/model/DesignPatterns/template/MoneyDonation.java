@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.Date;
 
 import model.DatabaseConnection;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 public class MoneyDonation extends Donation {
 
@@ -32,9 +33,7 @@ public class MoneyDonation extends Donation {
         if (!(donation instanceof MoneyDonation)) {
             return false;
         }
-
         MoneyDonation moneyDonation = (MoneyDonation) donation;
-
         return moneyDonation.getAmount() > 1;
     }
 
@@ -74,12 +73,16 @@ public class MoneyDonation extends Donation {
     }
 
     public static boolean createMoneyDonation(MoneyDonation donation) {
-        if (!Donation.createDonation(donation))
+        if (!Donation.createDonation(donation)){
             return false;
+        }
 
         String command = "INSERT INTO money_donation (`donation_id`, `amount`) VALUES(?,?)";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
+            PreparedStatement donationTypeStatement = conn.prepareStatement("UPDATE donation SET donation_type='money' WHERE id=?");
+            donationTypeStatement.setInt(1, donation.getId());
+            donationTypeStatement.executeUpdate();
             PreparedStatement statement = conn.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, donation.getId());
             statement.setDouble(2, donation.getAmount());
