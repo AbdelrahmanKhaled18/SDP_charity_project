@@ -40,6 +40,14 @@ public class MoneyDonation extends Donation {
         this.amount = amount;
     }
 
+    public int getCampaignId() {
+        return campaignId;
+    }
+
+    public void setCampaignId(int campaignId) {
+        this.campaignId = campaignId;
+    }
+
     @Override
     boolean validateDonation(Donation donation) {
         if (!(donation instanceof MoneyDonation)) {
@@ -66,7 +74,7 @@ public class MoneyDonation extends Donation {
 
     private static boolean deleteMoneyDonation(MoneyDonation donation) {
         if (donation.campaignId != 0) {
-            if (!Campaign.modifyCampaignCollected(donation.campaignId, - donation.amount)) {
+            if (!Campaign.modifyCampaignCollectedAmountAndNotify(donation.campaignId, - donation.amount)) {
                 return false;
             }
         }
@@ -93,7 +101,7 @@ public class MoneyDonation extends Donation {
 
     public static boolean createMoneyDonation(MoneyDonation donation) {
         if (donation.campaignId != 0) {
-            if (!Campaign.modifyCampaignCollected(donation.campaignId, donation.amount)) {
+            if (!Campaign.modifyCampaignCollectedAmountAndNotify(donation.campaignId, donation.amount)) {
                 return false;
             }
         }
@@ -102,7 +110,7 @@ public class MoneyDonation extends Donation {
             return false;
         }
 
-        String command = "INSERT INTO money_donation (`donation_id`, `amount`) VALUES(?,?)";
+        String command = "INSERT INTO money_donation (`donation_id`, `amount`, campaign_id) VALUES(?,?,?)";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement donationTypeStatement = conn.prepareStatement("UPDATE donation SET donation_type='money' WHERE id=?");
@@ -111,6 +119,7 @@ public class MoneyDonation extends Donation {
             PreparedStatement statement = conn.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, donation.getId());
             statement.setDouble(2, donation.getAmount());
+            statement.setInt(3, donation.getCampaignId());
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
             boolean success = false;

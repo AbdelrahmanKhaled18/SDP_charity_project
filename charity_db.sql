@@ -86,10 +86,11 @@ CREATE TABLE `campaign` (
                             `end_date` date NOT NULL,
                             `status` varchar(255) NOT NULL,
                             `creator` int NOT NULL,
+                            `notification_sent` tinyint(1) NOT NULL DEFAULT '0',
                             PRIMARY KEY (`id`),
                             KEY `campaign_staff_person_id_fk` (`creator`),
                             CONSTRAINT `campaign_staff_person_id_fk` FOREIGN KEY (`creator`) REFERENCES `staff` (`person_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +99,35 @@ CREATE TABLE `campaign` (
 
 LOCK TABLES `campaign` WRITE;
 /*!40000 ALTER TABLE `campaign` DISABLE KEYS */;
+INSERT INTO `campaign` VALUES (1,'Title','Description',1500,800,'2025-01-17','2025-01-17','InitiateCampaignState',1,0),(2,'Title','Description',1700,2800,'2025-01-17','2025-01-17','InitiateCampaignState',1,1);
 /*!40000 ALTER TABLE `campaign` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `campaign_volunteers`
+--
+
+DROP TABLE IF EXISTS `campaign_volunteers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `campaign_volunteers` (
+                                       `campaign_id` int NOT NULL,
+                                       `volunteer_id` int NOT NULL,
+                                       PRIMARY KEY (`campaign_id`,`volunteer_id`),
+                                       KEY `campaignVolunteers_person_id_fk` (`volunteer_id`),
+                                       CONSTRAINT `campaignVolunteers_campaign_id_fk` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`id`),
+                                       CONSTRAINT `campaignVolunteers_person_id_fk` FOREIGN KEY (`volunteer_id`) REFERENCES `person` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `campaign_volunteers`
+--
+
+LOCK TABLES `campaign_volunteers` WRITE;
+/*!40000 ALTER TABLE `campaign_volunteers` DISABLE KEYS */;
+INSERT INTO `campaign_volunteers` VALUES (2,4);
+/*!40000 ALTER TABLE `campaign_volunteers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -116,7 +145,7 @@ CREATE TABLE `donation` (
                             PRIMARY KEY (`id`),
                             KEY `person_id` (`person_id`),
                             CONSTRAINT `donation_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +154,7 @@ CREATE TABLE `donation` (
 
 LOCK TABLES `donation` WRITE;
 /*!40000 ALTER TABLE `donation` DISABLE KEYS */;
+INSERT INTO `donation` VALUES (1,'2025-01-17',4,'money'),(2,'2025-01-17',4,'money'),(3,'2025-01-17',4,'money'),(4,'2025-01-17',4,'money'),(5,'2025-01-17',3,'money');
 /*!40000 ALTER TABLE `donation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,6 +208,7 @@ CREATE TABLE `money_donation` (
 
 LOCK TABLES `money_donation` WRITE;
 /*!40000 ALTER TABLE `money_donation` DISABLE KEYS */;
+INSERT INTO `money_donation` VALUES (1,800,NULL),(2,800,NULL),(3,800,NULL),(4,800,1),(5,2000,2);
 /*!40000 ALTER TABLE `money_donation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +245,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'John Doe','Male','1234567890','john.doe@example.com','password123','12345678901234','1985-05-15',1,13,'staff'),(2,'Jane Smith','Female','9876543210','jane.smith@example.com','password456','23456789012345','1990-03-22',1,18,'staff'),(3,'Alice Johnson','Female','1122334455','alice.johnson@example.com','password789','34567890123456','1995-07-10',1,9,'volunteer'),(4,'Bob Williams','Male','5566778899','bob.williams@example.com','password012','45678901234567','1988-11-30',1,7,'volunteer');
+INSERT INTO `person` VALUES (1,'John Doe','Male','1234567890','john.doe@example.com','password123','12345678901234','1985-05-15',1,13,'staff'),(2,'Jane Smith','Female','9876543210','jane.smith@example.com','password456','23456789012345','1990-03-22',1,18,'staff'),(3,'Alice Johnson','Female','1122334455','alice.johnson@example.com','password789','34567890123456','1995-07-10',1,9,'volunteer'),(4,'Bob Williams','Male','5566778899','ahmed.taha.ss24@gmail.com','password012','45678901234567','1988-11-30',1,7,'volunteer');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,4 +361,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-17  7:08:39
+-- Dump completed on 2025-01-17 19:54:06

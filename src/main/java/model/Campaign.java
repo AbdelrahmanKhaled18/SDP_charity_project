@@ -1,9 +1,13 @@
 package model;
 
+import model.DesignPatterns.adapter.EmailAdapter;
+import model.DesignPatterns.adapter.EmailInterface;
 import model.DesignPatterns.observer.IObserver;
 import model.DesignPatterns.observer.ISubject;
 import model.DesignPatterns.state.*;
 
+import java.util.concurrent.*;
+import java.util.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +25,8 @@ public class Campaign extends Entity implements ISubject {
     private ArrayList<IObserver> observers;
     private Staff creator;
 
+    private ScheduledExecutorService scheduler;
+
     public Campaign(Staff creator, String title, String description, double goalAmount, Date startDate, Date endDate) {
         observers = new ArrayList<>();
         this.creator = creator;
@@ -31,6 +37,7 @@ public class Campaign extends Entity implements ISubject {
         this.startDate = startDate;
         this.endDate = endDate;
         this.campaignState = new InitiateCampaignState();
+        scheduler = Executors.newScheduledThreadPool(1);
     }
 
     public Campaign(int id, Staff creator, String title, String description, double goalAmount, Date startDate, Date endDate) {
@@ -94,9 +101,13 @@ public class Campaign extends Entity implements ISubject {
         this.endDate = endDate;
     }
 
-    public String getCampaignState() {return map(campaignState);}
+    public String getCampaignState() {
+        return map(campaignState);
+    }
 
-    public void setCampaignState(CampaignState campaignState) {this.campaignState = campaignState;}
+    public void setCampaignState(CampaignState campaignState) {
+        this.campaignState = campaignState;
+    }
 
     public ArrayList<IObserver> getObservers() {
         return observers;
@@ -164,7 +175,110 @@ public class Campaign extends Entity implements ISubject {
     }
 
 
-    public static boolean modifyCampaignCollected(int campaignId, double amount) {
+    public void start() {
+        scheduler.scheduleAtFixedRate(this::run, 0, 1, TimeUnit.SECONDS);
+    }
+
+    public void stop() {
+        scheduler.shutdown();
+    }
+
+    // This function continuously updates the collectedAmount variable from the database
+    // Then it updates observers with the collected amount
+    public void run() {
+        String command = "SELECT collected_amount FROM campaign WHERE id = ?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setInt(1, this.getId());
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                this.collectedAmount = rs.getDouble("collected_amount");
+                notifyObservers();
+            }
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private static boolean setNotificationSent(int campaignId) {
+        String command = "UPDATE campaign SET notification_sent=? WHERE id = ?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setBoolean(1, true);
+            statement.setInt(2, campaignId);
+            boolean success = statement.executeUpdate() > 0;
+            statement.close();
+            return success;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+
+    private static boolean sendMailToVolunteers(int campaignId) {
+        String command = "SELECT email, title, goal_amount FROM campaign_volunteers " +
+                "INNER JOIN person ON person.id = volunteer_id " +
+                "INNER JOIN campaign ON campaign.id = campaign_id " +
+                "WHERE campaign_id = ?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setInt(1, campaignId);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                String title = rs.getString("title");
+                double goalAmount = rs.getDouble("goal_amount");
+
+                String emailTo = rs.getString("email");
+                String subject = "Campaign Target Reached";
+                String body = "We would like to notify you that campaign " + title +
+                        " has reached its target amount of " + goalAmount +
+                        ". Thank you for your contributions.";
+
+                EmailInterface emailInterface = new EmailAdapter();
+                emailInterface.sendEmail(emailTo, subject, body);
+            }
+            statement.close();
+            return setNotificationSent(campaignId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    private static void checkCampaignGoalReachedAndNotify(int campaignId) {
+        String command = "SELECT collected_amount >= goal_amount AS target_reached, notification_sent FROM campaign WHERE id = ?";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setInt(1, campaignId);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                boolean notificationSent = rs.getBoolean("notification_sent");
+                boolean targetReached = rs.getBoolean("target_reached");
+                if (targetReached && !notificationSent) {
+                    Campaign.sendMailToVolunteers(campaignId);
+                }
+            }
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static boolean modifyCampaignCollectedAmountAndNotify(int campaignId, double amount) {
         String command = "UPDATE campaign SET collected_amount= collected_amount + ? WHERE id = ?";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
@@ -172,9 +286,29 @@ public class Campaign extends Entity implements ISubject {
             statement.setDouble(1, amount);
             statement.setInt(2, campaignId);
             boolean success = statement.executeUpdate() > 0;
+            if (success) {
+                Campaign.checkCampaignGoalReachedAndNotify(campaignId);
+            }
             statement.close();
             return success;
         } catch (SQLException e) {
+            return false;
+        }
+    }
+
+
+    public static boolean addCampaignVolunteer(int campaignId, int personId) {
+        String command = "INSERT INTO campaign_volunteers (campaign_id, volunteer_id) VALUES (?, ?)";
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            PreparedStatement statement = conn.prepareStatement(command);
+            statement.setInt(1, campaignId);
+            statement.setInt(2, personId);
+            boolean success = statement.executeUpdate() > 0;
+            statement.close();
+            return success;
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
