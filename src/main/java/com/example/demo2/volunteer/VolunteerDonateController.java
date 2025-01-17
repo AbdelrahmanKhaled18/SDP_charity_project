@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import model.DesignPatterns.command.DonationInvoker;
 import model.DesignPatterns.command.MakeDonationCommand;
+import model.DesignPatterns.decorator.BasicPayment;
+import model.DesignPatterns.decorator.ExtraFeesDecorator;
 import model.DesignPatterns.strategy.UserLoginContext;
 import model.DesignPatterns.template.Donation;
 import model.DesignPatterns.template.MoneyDonation;
@@ -32,17 +34,33 @@ public class VolunteerDonateController {
                 return;
             }
 
-            // Create a donation instance
-            double amount = Double.parseDouble(amountText);
-            Donation donation = new MoneyDonation(new Date(), instance.getLoggedInUser().getId(), amount);
+            // Parse the amount
+            double originalAmount = Double.parseDouble(amountText);
+
+            // Create a basic payment instance
+            BasicPayment basicPayment = new BasicPayment();
+            basicPayment.paymentAmount = originalAmount;
+
+            // Decorate the payment with extra fees
+            ExtraFeesDecorator decoratedPayment = new ExtraFeesDecorator(basicPayment);
+            decoratedPayment.setServiceFee(originalAmount * 0.05);
+
+            // Calculate the final amount
+            double finalAmount = decoratedPayment.pay();
+
+            // Show donation details in a dialog
+            showDonationDetailsDialog(originalAmount, finalAmount);
+
+            // Create a donation instance with the decorated amount
+            Donation donation = new MoneyDonation(new Date(), UserLoginContext.getInstance().getLoggedInUser().getId(), finalAmount);
 
             // Create and execute the donation command
             MakeDonationCommand donationCommand = new MakeDonationCommand(donation);
-
             donationInvoker.executeCommand(donationCommand);
 
-            showAlert(Alert.AlertType.INFORMATION, "Donation Success", "Thank you for your donation of $" + amount + "!");
-            donationAmount.setText("");
+            // Show success message
+            showAlert(Alert.AlertType.INFORMATION, "Donation Success", "Thank you for your donation of $" + finalAmount + "!");
+            donationAmount.setText(""); // Clear the text field
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a numeric donation amount.");
         }
@@ -90,8 +108,6 @@ public class VolunteerDonateController {
     }
 
 
-
-
     @FXML
     private void goToVolunteerIntro(javafx.event.ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo2/VolunteerIntroPage.fxml"));
@@ -113,5 +129,18 @@ public class VolunteerDonateController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void showDonationDetailsDialog(double originalAmount, double finalAmount) {
+        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+        dialog.setTitle("Donation Details");
+        dialog.setHeaderText("Review Your Donation Details");
+        dialog.setContentText(
+                "Original Donation Amount: $" + originalAmount + "\n" +
+                        "Extra Fees (5%): $" + (finalAmount - originalAmount) + "\n" +
+                        "Final Donation Amount: $" + finalAmount
+        );
+        dialog.showAndWait();
+    }
+
 
 }
