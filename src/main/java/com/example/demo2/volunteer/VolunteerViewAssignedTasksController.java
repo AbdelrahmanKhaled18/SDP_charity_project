@@ -1,4 +1,4 @@
-package com.example.demo2;
+package com.example.demo2.volunteer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

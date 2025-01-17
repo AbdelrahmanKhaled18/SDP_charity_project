@@ -1,4 +1,4 @@
-package com.example.demo2;
+package com.example.demo2.staff;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
-import java.awt.event.ActionEvent;
+
 import java.io.IOException;
 
 public class StaffIntroController {

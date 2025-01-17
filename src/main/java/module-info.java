@@ -20,4 +20,8 @@ module com.example.demo2 {
     opens model to javafx.base;
 
     exports com.example.demo2;
+    exports com.example.demo2.staff;
+    opens com.example.demo2.staff to javafx.fxml;
+    exports com.example.demo2.volunteer;
+    opens com.example.demo2.volunteer to javafx.fxml;
 }

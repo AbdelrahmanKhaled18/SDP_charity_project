@@ -1,16 +1,16 @@
-package com.example.demo2;
+package com.example.demo2.staff;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StaffCampaignListController {
-
+public class StaffAssignVolunteerController {
 
     @FXML
     private void goToStaffIntro(javafx.event.ActionEvent event) throws IOException {
@@ -27,8 +27,19 @@ public class StaffCampaignListController {
     }
 
     @FXML
-    private void editRemoveCampaign(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Edit_RemoveCampaigns.fxml"));
+    private void assignVolunteer(javafx.event.ActionEvent event) throws IOException{
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Volunteer Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText("Volunteer Assigned!");
+        alert.showAndWait();
+
+    }
+
+    @FXML
+    private void viewVolunteersPage(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffVolunteersList.fxml"));
         Parent nextPageRoot = loader.load();
 
         // Get the current stage
@@ -39,5 +50,6 @@ public class StaffCampaignListController {
         stage.setTitle("Volunteering");
         stage.show();
     }
+
 
 }

@@ -281,7 +281,10 @@ public abstract class Person extends Entity {
 
 
     public static Person retrievePersonByEmailAndPassword(String email, String password) {
-        String command = "SELECT * FROM person WHERE email=? AND password=?";
+        String command = "SELECT person.*, staff.position AS staff_position, staff.department AS staff_department "
+                + "FROM person "
+                + "LEFT JOIN staff ON person.id = staff.person_id "
+                + "WHERE person.email = ? AND person.password = ?";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(command);
@@ -290,15 +293,17 @@ public abstract class Person extends Entity {
             ResultSet rs = statement.executeQuery();
             PersonRSIterator rsIterator = new PersonRSIterator(rs);
             if (!rsIterator.hasNext()) {
-                return null;
+                return null; // No matching user found
             }
             Person person = rsIterator.next();
             statement.close();
-            return person;
+            return person; // Return the retrieved person
         } catch (SQLException e) {
-            return null;
+            e.printStackTrace();
+            return null; // Return null if an error occurs
         }
     }
+
 
 
     public static Person retrievePersonByPhoneAndPassword(String phone, String password) {
