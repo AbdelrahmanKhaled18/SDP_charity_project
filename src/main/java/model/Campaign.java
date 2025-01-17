@@ -94,13 +94,9 @@ public class Campaign extends Entity implements ISubject {
         this.endDate = endDate;
     }
 
-    public String getCampaignState() {
-        return map(campaignState);
-    }
+    public String getCampaignState() {return map(campaignState);}
 
-    public void setCampaignState(CampaignState campaignState) {
-        this.campaignState = campaignState;
-    }
+    public void setCampaignState(CampaignState campaignState) {this.campaignState = campaignState;}
 
     public ArrayList<IObserver> getObservers() {
         return observers;
@@ -134,6 +130,7 @@ public class Campaign extends Entity implements ISubject {
             observer.update(collectedAmount);
         }
     }
+
 
     public void addDonation(double amount) {
         this.collectedAmount += amount;

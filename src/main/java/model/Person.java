@@ -1,6 +1,7 @@
 package model;
 
 import model.DesignPatterns.template.Donation;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -114,11 +115,11 @@ public abstract class Person extends Entity {
     }
 
     public String getUserType() {
-        return userType; // Getter for enum
+        return userType;
     }
 
     public void setUserType(String userType) {
-        this.userType = userType; // Setter for enum
+        this.userType = userType;
     }
 
     public void setAddress(Address address) {
@@ -161,7 +162,7 @@ public abstract class Person extends Entity {
 
     public static boolean createPerson(Person person) {
         String command = "INSERT INTO person (`name`, `gender`, `phone_number`, `email`, `password`, `national_id`," +
-                "`date_of_birth`, `is_active`, `address_id`) VALUES(?,?,?,?,?,?,?,?,?)";
+                "`date_of_birth`, `is_active`, `address_id` , `user_type`) VALUES(?,?,?,?,?,?,?,?,?,?)";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
@@ -174,6 +175,7 @@ public abstract class Person extends Entity {
             statement.setDate(7, new java.sql.Date(person.getDateOfBirth().getTime()));
             statement.setBoolean(8, person.isActive());
             statement.setInt(9, person.getAddress().getId());
+            statement.setString(10, person.getUserType());
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
             boolean success = false;
@@ -191,7 +193,7 @@ public abstract class Person extends Entity {
 
     public static boolean updatePerson(Person person) {
         String command = "UPDATE person SET name=?, gender=?, phone_number=?, email=?, password=?, " +
-                "national_id=?, date_of_birth=?, is_active=?, address_id=? WHERE id=?";
+                "national_id=?, date_of_birth=?, is_active=?, address_id=?, user_type=? WHERE id=?";
         Connection conn = DatabaseConnection.getInstance().getConnection();
         try {
             PreparedStatement statement = conn.prepareStatement(command);
@@ -204,7 +206,8 @@ public abstract class Person extends Entity {
             statement.setDate(7, new java.sql.Date(person.getDateOfBirth().getTime()));
             statement.setBoolean(8, person.isActive());
             statement.setInt(9, person.getAddress().getId());
-            statement.setInt(10, person.getId());
+            statement.setString(10, person.getUserType());
+            statement.setInt(11, person.getId());
             boolean success = statement.executeUpdate() > 0;
             statement.close();
             return success;
