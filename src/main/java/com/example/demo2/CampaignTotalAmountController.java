@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Campaign;
+import model.DesignPatterns.observer.CampaignTargetObserver;
 import model.DesignPatterns.observer.IObserver;
 import model.DesignPatterns.strategy.UserLoginContext;
 import model.Volunteer;
@@ -19,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CampaignTotalAmountController implements IObserver {
-    private Campaign currentCampaign;
+    private CampaignTargetObserver campaignTargetObserver;
     private ArrayList<Campaign> retrievedCampaigns;
 
     @FXML
@@ -30,7 +31,7 @@ public class CampaignTotalAmountController implements IObserver {
 
     @FXML
     public void initialize() {
-        currentCampaign = null;
+        campaignTargetObserver = null;
         retrievedCampaigns = Campaign.retrieveAllCampaigns();
         ObservableList<String> observableCampaigns = FXCollections.observableArrayList();
         for (Campaign campaign : retrievedCampaigns) {
@@ -42,14 +43,13 @@ public class CampaignTotalAmountController implements IObserver {
 
     @FXML
     private void viewCampaign(javafx.event.ActionEvent event) throws IOException {
-        if (currentCampaign != null) {
-            currentCampaign.stop();
-            currentCampaign.removeObservers(this);
+        if (campaignTargetObserver != null) {
+            campaignTargetObserver.removeObservers(this);
         }
         int selectedCampaignIndex = campaignToView.getSelectionModel().getSelectedIndex();
         Campaign campaign = retrievedCampaigns.get(selectedCampaignIndex);
-        campaign.registerObservers(this);
-        campaign.start();
+        campaignTargetObserver = new CampaignTargetObserver(campaign);
+        campaignTargetObserver.registerObservers(this);
     }
 
 
