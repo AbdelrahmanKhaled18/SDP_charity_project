@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import model.DesignPatterns.command.DonationInvoker;
 import model.DesignPatterns.command.MakeDonationCommand;
+import model.DesignPatterns.strategy.UserLoginContext;
 import model.DesignPatterns.template.Donation;
 import model.DesignPatterns.template.MoneyDonation;
 
@@ -19,6 +20,7 @@ public class VolunteerDonateController {
 
     public javafx.scene.control.TextField donationAmount;
     private DonationInvoker donationInvoker = new DonationInvoker();
+    UserLoginContext instance = UserLoginContext.getInstance();
 
     @FXML
     private void DonateWithFawry(javafx.event.ActionEvent event) throws IOException {
@@ -32,7 +34,7 @@ public class VolunteerDonateController {
 
             // Create a donation instance
             double amount = Double.parseDouble(amountText);
-            Donation donation = new MoneyDonation(new Date(), 3, amount);
+            Donation donation = new MoneyDonation(new Date(), instance.getLoggedInUser().getId(), amount);
 
             // Create and execute the donation command
             MakeDonationCommand donationCommand = new MakeDonationCommand(donation);
