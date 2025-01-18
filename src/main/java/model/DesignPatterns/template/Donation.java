@@ -62,7 +62,6 @@ public abstract class Donation extends Entity {
     public abstract boolean undoDonation(Donation donation);
 
     public void notifyDonor() {
-        System.out.println();
         EmailAdapter emailAdapter = new EmailAdapter();
         emailAdapter.sendEmail(UserLoginContext.getInstance().getLoggedInUser().getEmail(),
                 "Donation Confirmation", "Your donation has been received.");

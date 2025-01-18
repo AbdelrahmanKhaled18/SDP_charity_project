@@ -41,7 +41,6 @@ public class StaffReviewPendingCampaigns {
         ObservableList<String> observableCampaigns = FXCollections.observableArrayList();
         for (int i = 0; i < campaigns.size(); i++) {
             Campaign campaign = campaigns.get(i);
-            campaign.executeHandleState();
             if ("PendingAcceptanceState".equals(campaign.getCampaignState())) {
                 observableCampaigns.add(campaign.getTitle() + " (" + campaign.getCampaignState() + ")");
                 originalIndices.add(i);
@@ -63,6 +62,7 @@ public class StaffReviewPendingCampaigns {
         int originalIndex = originalIndices.get(selectedCampaign);
         System.out.println(originalIndex + 1);
         Campaign campaign = Campaign.retrieveCampaign(originalIndex + 1);
+        campaign.executeHandleState();
         campaign.executeHandleState();
     }
 

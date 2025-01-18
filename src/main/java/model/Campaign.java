@@ -7,7 +7,6 @@ import model.DesignPatterns.observer.ISubject;
 import model.DesignPatterns.state.*;
 
 import java.util.concurrent.*;
-import java.util.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -178,7 +177,6 @@ public class Campaign extends Entity implements ISubject {
 
     public void start() {
         scheduler.scheduleAtFixedRate(this::run, 0, 1, TimeUnit.SECONDS);
-        this.executeHandleState();
     }
 
     public void stop() {

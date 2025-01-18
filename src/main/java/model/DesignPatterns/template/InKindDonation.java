@@ -62,7 +62,7 @@ public class InKindDonation extends Donation {
         }
 
         String type = inKindDonation.getType();
-        if (type == null || type.isEmpty() || type.matches("\\d+")) {
+        if (type == null || type.isEmpty()) {
             return false;
         }
 

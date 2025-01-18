@@ -1,7 +1,10 @@
 package model.DesignPatterns.proxy;
 
+import model.Person;
 import model.Staff;
 
 public interface IProxy {
-    public boolean manageCampaigns(Staff staff);
+    boolean manageCampaigns();
+
+    boolean manageCampaigns(Person person);
 }

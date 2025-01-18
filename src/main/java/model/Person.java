@@ -236,8 +236,8 @@ public abstract class Person extends Entity {
 
     public static ArrayList<Person> retrievePersonsByTaskId(int taskId) {
         String query = "SELECT p.id, p.name, p.gender, p.phone_number, p.email, p.national_id, p.date_of_birth, " +
-                "p.is_active, p.user_type, p.address_id, " +
-                "s.position AS staff_position, s.department AS staff_department " +
+                "p.is_active, p.user_type, p.address_id,p.password, " +
+                "s.position, s.department " +
                 "FROM person p " +
                 "LEFT JOIN staff s ON p.id = s.person_id " +
                 "INNER JOIN assigned_tasks at ON p.id = at.person_id " +
