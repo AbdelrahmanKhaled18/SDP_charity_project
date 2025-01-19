@@ -160,6 +160,14 @@ The Charity Management System is designed to streamline the management of volunt
 - **Use Case**:
    - Allows efficient traversal of a volunteer's assigned tasks.
 
+### **11. Singleton Pattern**
+- **Purpose**: Ensures a class has only one instance and provides a global point of access to it.
+- **Implementation**:
+   - `DatabaseConnection` class uses the singleton pattern to manage the database connection.
+   - `UserLoginContext` class uses the singleton pattern to manage the login context and get the logged-in user.
+- **Use Case**:
+   - Ensures that there is only one instance of the database connection and login context throughout the application, providing a global point of access to these instances.
+
 ---
 
 ## Project Structure
@@ -197,8 +205,3 @@ Contributions are welcome! Please follow these steps:
    git push origin feature/your-feature
    ```
 5. Create a pull request.
-
-
-
-
-
