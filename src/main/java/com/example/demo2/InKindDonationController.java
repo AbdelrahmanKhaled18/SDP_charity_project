@@ -33,7 +33,6 @@ public class InKindDonationController {
 
     @FXML
     public void initialize() {
-        // Initialize the Spinner with a value factory starting at 0
         SpinnerValueFactory<Integer> valueFactory = new
                 SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
         amountofDonation.setValueFactory(valueFactory);
@@ -79,22 +78,22 @@ public class InKindDonationController {
             return;
         }
 
-        // Get the logged-in user ID
+
         int personId = UserLoginContext.getInstance().getLoggedInUser().getId();
         if (personId == 0) {
             showAlert(Alert.AlertType.ERROR, "Error", "Unable to identify the logged-in user. Please log in again.");
             return;
         }
 
-        // Create InKindDonation object
+
         Donation donation = new InKindDonation(new Date(), personId, type, quantity,
                 UserLoginContext.getInstance().getLoggedInUser().getAddress());
 
-        // Execute the donation using the command pattern
+
         MakeDonationCommand command = new MakeDonationCommand(donation);
         donationInvoker.executeCommand(command);
 
-        // Show success message
+
         showAlert(Alert.AlertType.INFORMATION, "Success", "In-kind donation has been recorded successfully!");
         amountofDonation.getValueFactory().setValue(0);
         typeOfDonation.setText("");
@@ -105,21 +104,21 @@ public class InKindDonationController {
     @FXML
     private void UndoinKindDonation(javafx.event.ActionEvent event) {
         try {
-            // Check if there are any commands in the history
+
             if (!donationInvoker.hasCommands()) {
                 showAlert(Alert.AlertType.ERROR, "Error", "No donations found to undo.");
                 return;
             }
 
-            // Retrieve the last command (the last executed in-kind donation)
-            MakeDonationCommand lastCommand = (MakeDonationCommand) donationInvoker.getLastCommand();
-            Donation lastDonation = lastCommand.getDonation(); // Get the donation from the command
 
-            // Ensure the donation is of type InKindDonation
+            MakeDonationCommand lastCommand = (MakeDonationCommand) donationInvoker.getLastCommand();
+            Donation lastDonation = lastCommand.getDonation();
+
+
             if (lastDonation instanceof InKindDonation) {
                 InKindDonation inKindDonation = (InKindDonation) lastDonation;
 
-                // Set the type and quantity fields with the details of the undone donation
+
                 typeOfDonation.setText(inKindDonation.getType());
                 amountofDonation.getValueFactory().setValue(inKindDonation.getQuantity());
             } else {
@@ -127,10 +126,10 @@ public class InKindDonationController {
                 return;
             }
 
-            // Undo the last command
+
             donationInvoker.unExecuteLastCommand();
 
-            // Notify the user
+
             showAlert(Alert.AlertType.INFORMATION, "Success", "In-kind donation successfully undone.");
         } catch (Exception e) {
             e.printStackTrace();

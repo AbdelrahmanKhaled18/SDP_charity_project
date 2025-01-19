@@ -108,7 +108,7 @@ public class RegisterController {
                     new ArrayList<>(),
                     new ArrayList<>(),
                     selectedRole,
-                    "Operations" //Default Staff Department
+                    "Operations"
             );
             Staff.createStaff(staff);
         } else {

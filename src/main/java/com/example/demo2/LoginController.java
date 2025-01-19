@@ -27,10 +27,10 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        // Default strategy: EmailLogin
+
         userLoginContext = UserLoginContext.getInstance();
         userLoginContext.setLoginStrategyRef(new EmailLogin("", ""));
-        LoginEmail.setPromptText("Enter your email address"); // Default placeholder
+        LoginEmail.setPromptText("Enter your email address");
     }
 
 
@@ -47,7 +47,7 @@ public class LoginController {
 
     @FXML
     private void setPhoneNumberStrategy(ActionEvent event) {
-        // Change to PhoneNumberLogin strategy
+
         currentStrategy = "MobileNumberLogin";
         LoginEmail.setPromptText("Enter your phone number");
     }
@@ -58,11 +58,11 @@ public class LoginController {
     @FXML
     private void performLogin(ActionEvent event) throws IOException {
 
-        // Dynamically set the strategy based on the current input
+
         if (currentStrategy.equals("MobileNumberLogin")) {
             userLoginContext.setLoginStrategyRef(new MobileNumberLogin(LoginEmail.getText(), LoginPassword.getText()));
         } else {
-            // Default to EmailLogin if no button was pressed
+
             userLoginContext.setLoginStrategyRef(new EmailLogin(LoginEmail.getText(), LoginPassword.getText()));
         }
 
@@ -71,10 +71,10 @@ public class LoginController {
         if (answer.equals("staff")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffIntroPage.fxml"));
             Parent nextPageRoot = loader.load();
-            // Get the current stage
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Set the scene to the new page
+
             stage.setScene(new Scene(nextPageRoot));
             stage.setTitle("Staff Page");
             stage.show();
@@ -82,9 +82,9 @@ public class LoginController {
         } else if (answer.equals("volunteer")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteerIntroPage.fxml"));
             Parent nextPageRoot = loader.load();
-            // Get the current stage
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            // Set the scene to the new page
+
             stage.setScene(new Scene(nextPageRoot));
             stage.setTitle("Volunteer Page");
             stage.show();

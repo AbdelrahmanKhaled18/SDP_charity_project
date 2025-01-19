@@ -35,22 +35,22 @@ public class EditandRemoveTaskController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Initialize the table and load tasks
+
         initializeTable();
         loadTasks();
     }
 
     private void initializeTable() {
-        // Set up the columns
+
         taskColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        // Make columns editable
+
         tasksTable.setEditable(true);
         taskColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         descriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        // Edit event handling
+
         taskColumn.setOnEditCommit(event -> {
             Task task = event.getRowValue();
             task.setName(event.getNewValue());
@@ -63,7 +63,7 @@ public class EditandRemoveTaskController implements Initializable {
             Task.updateTask(task);
         });
 
-        // Bind task list to the table
+
         tasksTable.setItems(taskList);
     }
 
@@ -104,10 +104,10 @@ public class EditandRemoveTaskController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffVolunteersList.fxml"));
         Parent nextPageRoot = loader.load();
 
-        // Get the current stage
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        // Set the scene to the new page
+
         stage.setScene(new Scene(nextPageRoot));
         stage.setTitle("Volunteers List");
         stage.show();

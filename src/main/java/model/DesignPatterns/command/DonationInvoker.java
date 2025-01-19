@@ -20,12 +20,12 @@ public class DonationInvoker {
 
     public ICommand getLastCommand() {
         if (!commandHistory.isEmpty()) {
-            return commandHistory.peek(); // Returns the last command without removing it
+            return commandHistory.peek();
         }
-        return null; // Returns null if the history is empty
+        return null;
     }
 
-    // Check if there are any commands in the history
+
     public boolean hasCommands() {
         return !commandHistory.isEmpty();
     }
