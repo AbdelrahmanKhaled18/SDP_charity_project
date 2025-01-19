@@ -59,8 +59,8 @@ The Charity Management System is designed to streamline the management of volunt
 
 2. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/charity-management-system.git
-   cd charity-management-system
+   git clone https://github.com/AbdelrahmanKhaled18/SDP_charity_project
+   cd SDP_charity_project
    ```
 
 3. **Build the Project**:
@@ -198,11 +198,7 @@ Contributions are welcome! Please follow these steps:
    ```
 5. Create a pull request.
 
----
 
-## License
 
-This project is licensed under the [MIT License](LICENSE).
 
----
 
